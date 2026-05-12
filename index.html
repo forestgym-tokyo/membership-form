@@ -216,6 +216,35 @@ h1{font-size:29px;margin:0 0 8px}
 .modal .btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
 .btn.secondary{background:#26312d;color:#fff}
 
+/* ↓ ここに追加 */
+
+.plan-line{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.plan-period{
+  width:120px;
+  color:#d9dfdc;
+  font-size:16px;
+  line-height:1.5;
+  flex-shrink:0;
+}
+
+.plan-price{
+  flex:1;
+  text-align:right;
+  font-size:19px;
+  font-weight:800;
+  line-height:1.45;
+  color:#fff;
+}
+
+/* ↑ ここまで追加 */
+
 @media(max-width:640px){
   .logo-img{height:42px;max-width:190px}
   .wrap{padding:22px 14px}
