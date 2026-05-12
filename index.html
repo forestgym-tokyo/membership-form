@@ -671,7 +671,39 @@ function closeConfirm(){
 }
 
 function goPayment(){
-  alert("次工程でGASまたは決済サービスのURLへ接続します。");
+
+  let url = "";
+
+  if(state.campaign){
+
+    if(state.plan === "regular"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17643";
+    }
+
+    else if(state.plan === "day"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17677";
+    }
+
+    else if(state.plan === "night"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17678";
+    }
+
+  }else{
+
+    if(state.plan === "regular"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17679";
+    }
+
+    else if(state.plan === "day"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17680";
+    }
+
+    else if(state.plan === "night"){
+      url = "https://getsugaku-panda.jp/subscription/apply/17681";
+    }
+  }
+
+  window.location.href = url;
 }
 
 (function init(){
