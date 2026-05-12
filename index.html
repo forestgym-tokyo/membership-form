@@ -522,7 +522,10 @@ function updateFreeSecondMonthText(){
 
 function recalc(){
 
-  const p = currentPlan();
+ const p = currentPlan();
+  const campaignEnd = getCampaignEndMonthLabel();
+  const platinumStart = getPlatinumStartMonthLabel();
+  const cancelableMonth = getCancelableMonthLabel();
 
   document.getElementById("monthlyPlanText").innerHTML =
     getMonthlyDisplay();
