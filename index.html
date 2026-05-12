@@ -506,6 +506,8 @@ function recalc(){
   const dim = daysInMonth(date);
 
   state.firstTotal = total;
+  document.getElementById("monthlyPlanText").innerHTML =
+  getMonthlyDisplay(state.plan, state.campaign);
 
   document.getElementById("joinFee").textContent = yen(joinFee);
   document.getElementById("adminFee").textContent = yen(adminFee);
