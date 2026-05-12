@@ -491,10 +491,18 @@ function updateFreeSecondMonthText(){
 }
 
 function recalc(){
-  updatePlanPrices();
-  updateFreeSecondMonthText();
 
   const p = currentPlan();
+
+  document.getElementById("monthlyPlanText").innerHTML =
+    getMonthlyDisplay();
+
+  updatePlanPrices();
+
+  if(state.campaign){
+    updateFreeSecondMonthText();
+  }
+
   const date = parseLocalDate(state.startDate);
   const monthly = currentMonthly();
 
@@ -517,10 +525,8 @@ function recalc(){
   document.getElementById("firstTotal").textContent = yen(total);
   document.getElementById("bottomTotal").textContent = yen(total);
 
-  document.getElementById("monthlyPlanText").innerHTML =
-    getMonthlyDisplay();
-
   if(state.campaign){
+
     document.getElementById("monthlyDiscountRow").classList.remove("hidden");
     document.getElementById("monthlyDiscount").textContent =
       `毎月 ${yen(p.discount)} 値引き`;
@@ -541,6 +547,7 @@ function recalc(){
        ※ 2026年8月以降退会可能です。`;
 
   }else{
+
     document.getElementById("monthlyDiscountRow").classList.add("hidden");
     document.getElementById("monthlyDiscount").textContent = "";
 
