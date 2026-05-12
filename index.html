@@ -488,7 +488,7 @@ function updatePlanPrices(){
   const platinumStart = getPlatinumStartMonthLabel();
 
   document.getElementById("planNote").textContent = campaign
-    ? `キャンペーン適用後の料金で表示しています。${campaignEnd}まで特別価格、${platinumStart}以降はプラチナ会員価格となります。`
+    ? `キャンペーン適用後の料金で表示しています。${campaignEnd}まで特別価格、${platinumStart}以降は長期継続割引（プラチナ会員価格）となります。`
     : "通常入会の料金で表示しています。キャンペーン特典・月会費値引きは適用されません。";
 
   for(const [key,p] of Object.entries(PLANS)){
@@ -501,7 +501,7 @@ function updatePlanPrices(){
          ${yen(p.campaign)}<small> / 月</small>
          <div class="campaign-note">
            ${campaignEnd}まで毎月${yen(p.discount)}値引き<br>
-           ${platinumStart}以降 ${yen(p.platinum)} / 月
+           ${platinumStart}以降 ${yen(p.platinum)} / 月（永久値引き）
          </div>`
       : `${yen(p.normal)}<small> / 月</small>
          <div class="campaign-note">通常月会費でのご利用</div>`;
