@@ -506,12 +506,14 @@ function recalc(){
   const dim = daysInMonth(date);
 
   state.firstTotal = total;
+
   document.getElementById("monthlyPlanText").innerHTML =
-  getMonthlyDisplay(state.plan, state.campaign);
+    getMonthlyDisplay(state.plan, state.campaign);
 
   document.getElementById("joinFee").textContent = yen(joinFee);
   document.getElementById("adminFee").textContent = yen(adminFee);
   document.getElementById("firstMonthFee").textContent = yen(firstMonth);
+
   document.getElementById("dateRange").textContent =
     `${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分（${remain}日/${dim}日）`;
 
@@ -519,11 +521,15 @@ function recalc(){
   document.getElementById("bottomTotal").textContent = yen(total);
 
   if(state.campaign){
-    document.getElementById("monthlyDiscountRow").classList.remove("hidden");
-    document.getElementById("monthlyDiscount").textContent = `毎月 ${yen(p.discount)} 値引き`;
-    document.getElementById("untilMay2027").textContent = `${p.name} ${yen(p.campaign)} / 月`;
-    document.getElementById("fromJune2027").textContent = `${p.name} ${yen(p.platinum)} / 月`;
-    document.getElementById("benefitSection").classList.remove("hidden");
+
+    document.getElementById("monthlyDiscountRow")
+      .classList.remove("hidden");
+
+    document.getElementById("monthlyDiscount").textContent =
+      `毎月 ${yen(p.discount)} 値引き`;
+
+    document.getElementById("benefitSection")
+      .classList.remove("hidden");
 
     document.getElementById("benefitText").textContent =
       state.benefit === "free2"
@@ -537,13 +543,19 @@ function recalc(){
        ※ 初期費用無料はWEB入会または見学当日入会のみ対象です。<br>
        ※ 見学後日のWEB入会は対象外です。<br>
        ※ 2026年8月以降退会可能です。`;
+
   }else{
-    document.getElementById("monthlyDiscountRow").classList.add("hidden");
+
+    document.getElementById("monthlyDiscountRow")
+      .classList.add("hidden");
+
     document.getElementById("monthlyDiscount").textContent = "";
-    document.getElementById("untilMay2027").textContent = `${p.name} ${yen(p.normal)} / 月`;
-    document.getElementById("fromJune2027").textContent = `${p.name} ${yen(p.normal)} / 月`;
-    document.getElementById("benefitSection").classList.add("hidden");
-    document.getElementById("benefitText").textContent = "通常入会のためキャンペーン特典は適用されません。";
+
+    document.getElementById("benefitSection")
+      .classList.add("hidden");
+
+    document.getElementById("benefitText").textContent =
+      "通常入会のためキャンペーン特典は適用されません。";
 
     document.getElementById("conditionText").innerHTML =
       `<strong>通常入会</strong><br>
@@ -551,7 +563,6 @@ function recalc(){
        ※ 月会費値引き・選べる特典は適用されません。`;
   }
 }
-
 document.querySelectorAll("[data-campaign]").forEach(card=>{
   card.addEventListener("click",()=>{
     document.querySelectorAll("[data-campaign]").forEach(c=>c.classList.remove("active"));
