@@ -12,11 +12,8 @@
   --panel2:#151c1a;
   --line:#2a3632;
   --green:#7ed957;
-  --green2:#4caf32;
   --text:#f4f7f5;
-  --sub:#aeb8b3;
   --yellow:#ffd966;
-  --danger:#ff8a65;
 }
 
 *{box-sizing:border-box}
@@ -30,99 +27,37 @@ body{
 }
 
 .header{
-  padding:18px 18px 14px;
+  padding:14px 16px;
   border-bottom:1px solid var(--line);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:rgba(5,8,7,.9);
+  background:rgba(5,8,7,.92);
   position:sticky;
   top:0;
   z-index:20;
   backdrop-filter:blur(10px);
 }
 
-.logo{
-  font-size:20px;
-  font-weight:900;
-  letter-spacing:.04em;
+.logo-img{
+  height:48px;
+  max-width:220px;
+  object-fit:contain;
 }
 
-.logo span{
-  color:var(--green);
-  font-size:11px;
-  display:block;
-  margin-top:2px;
-}
+.menu{font-size:26px;color:#ccc}
 
-.menu{
-  font-size:26px;
-  color:#ccc;
-}
+.wrap{padding:24px 16px;max-width:860px;margin:auto}
 
-.wrap{
-  padding:24px 16px;
-  max-width:860px;
-  margin:auto;
-}
+.steps{display:flex;justify-content:space-between;margin-bottom:26px}
+.step{text-align:center;color:#8f9994;font-size:12px;flex:1;position:relative}
+.step:not(:last-child)::after{content:"";height:1px;background:#3a4540;position:absolute;top:13px;right:-35%;width:70%}
+.step b{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;border:1px solid #6a746f;margin-bottom:6px}
+.step.active{color:#fff}
+.step.active b{background:var(--green);color:#061006;border-color:var(--green)}
 
-.steps{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:26px;
-}
-
-.step{
-  text-align:center;
-  color:#8f9994;
-  font-size:12px;
-  flex:1;
-  position:relative;
-}
-
-.step:not(:last-child)::after{
-  content:"";
-  height:1px;
-  background:#3a4540;
-  position:absolute;
-  top:13px;
-  right:-35%;
-  width:70%;
-}
-
-.step b{
-  display:inline-flex;
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  align-items:center;
-  justify-content:center;
-  border:1px solid #6a746f;
-  margin-bottom:6px;
-}
-
-.step.active{
-  color:#fff;
-}
-
-.step.active b{
-  background:var(--green);
-  color:#061006;
-  border-color:var(--green);
-}
-
-h1{
-  font-size:29px;
-  margin:0 0 8px;
-  line-height:1.25;
-}
-
-.lead{
-  color:#d5ddd9;
-  margin:0 0 22px;
-  font-size:15px;
-  line-height:1.7;
-}
+h1{font-size:29px;margin:0 0 8px}
+.lead{color:#d5ddd9;margin:0 0 22px;font-size:15px;line-height:1.7}
 
 .campaign-head{
   background:linear-gradient(135deg,rgba(126,217,87,.18),rgba(255,255,255,.04));
@@ -131,69 +66,17 @@ h1{
   padding:16px;
   margin-bottom:24px;
 }
+.campaign-head strong{display:block;font-size:19px;color:var(--green);margin-bottom:6px}
+.campaign-head p{margin:0;color:#e2e9e5;font-size:14px;line-height:1.7}
 
-.campaign-head strong{
-  display:block;
-  font-size:19px;
-  color:var(--green);
-  margin-bottom:6px;
-}
+.section{margin:30px 0}
+.sec-title{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;margin-bottom:14px;flex-wrap:wrap}
+.num{width:24px;height:24px;border:1px solid var(--green);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--green);font-size:14px}
+.badge{background:#193816;color:var(--green);font-size:12px;padding:3px 10px;border-radius:999px;font-weight:700}
 
-.campaign-head p{
-  margin:0;
-  color:#e2e9e5;
-  font-size:14px;
-  line-height:1.7;
-}
-
-.section{
-  margin:30px 0;
-}
-
-.sec-title{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:20px;
-  font-weight:800;
-  margin-bottom:14px;
-  flex-wrap:wrap;
-}
-
-.num{
-  width:24px;
-  height:24px;
-  border:1px solid var(--green);
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--green);
-  font-size:14px;
-  flex:none;
-}
-
-.badge{
-  background:#193816;
-  color:var(--green);
-  font-size:12px;
-  padding:3px 10px;
-  border-radius:999px;
-  font-weight:700;
-}
-
-.grid{
-  display:grid;
-  gap:14px;
-}
-
-.grid.two{
-  grid-template-columns:1fr 1fr;
-}
-
-.grid.three{
-  grid-template-columns:repeat(3,1fr);
-}
+.grid{display:grid;gap:14px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
 
 .card{
   background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.018));
@@ -205,106 +88,67 @@ h1{
   min-height:112px;
   transition:.15s;
 }
-
-.card:active{
-  transform:scale(.985);
-}
-
+.card:active{transform:scale(.985)}
 .card.active{
   border-color:var(--green);
   box-shadow:0 0 0 1px rgba(126,217,87,.28), inset 0 0 28px rgba(126,217,87,.09);
 }
+.radio{width:22px;height:22px;border:2px solid #78827d;border-radius:50%;display:inline-block;margin-right:10px;vertical-align:-5px}
+.card.active .radio{border-color:var(--green);box-shadow:inset 0 0 0 5px #101614;background:var(--green)}
 
-.radio{
-  width:22px;
-  height:22px;
-  border:2px solid #78827d;
-  border-radius:50%;
-  display:inline-block;
-  margin-right:10px;
-  vertical-align:-5px;
-}
+.card h3{margin:0 0 10px;font-size:20px}
+.card p{margin:0;color:#c1cbc6;font-size:14px;line-height:1.65}
 
-.card.active .radio{
-  border-color:var(--green);
-  box-shadow:inset 0 0 0 5px #101614;
-  background:var(--green);
-}
+.price{font-size:28px;font-weight:900;margin-top:12px;line-height:1.25}
+.price small{font-size:14px}
+.old{text-decoration:line-through;color:#8b958f;font-size:13px;margin-right:6px}
 
-.card h3{
-  margin:0 0 10px;
-  font-size:20px;
-  line-height:1.35;
-}
+.tag{position:absolute;top:12px;right:12px;background:var(--green);color:#061006;font-size:12px;font-weight:900;padding:4px 9px;border-radius:7px}
+.tag.yellow{background:var(--yellow);color:#1b1600}
 
-.card p{
-  margin:0;
-  color:#c1cbc6;
-  font-size:14px;
-  line-height:1.65;
-}
+.campaign-note{margin-top:10px;font-size:12px;color:#b7c3bc;line-height:1.6}
 
-.price{
-  font-size:28px;
-  font-weight:900;
-  margin-top:12px;
-  line-height:1.25;
-}
-
-.price small{
-  font-size:14px;
-}
-
-.old{
-  text-decoration:line-through;
-  color:#8b958f;
-  font-size:13px;
-  margin-right:6px;
-}
-
-.tag{
-  position:absolute;
-  top:12px;
-  right:12px;
-  background:var(--green);
-  color:#061006;
-  font-size:12px;
-  font-weight:900;
-  padding:4px 9px;
-  border-radius:7px;
-}
-
-.tag.yellow{
-  background:var(--yellow);
-  color:#1b1600;
-}
-
-.campaign-note{
-  margin-top:10px;
-  font-size:12px;
-  color:#b7c3bc;
-  line-height:1.6;
-  font-weight:500;
-}
-
-.note{
+.note,.terms{
   border:1px solid var(--line);
   border-radius:10px;
   padding:14px;
   color:#cbd5d0;
   font-size:14px;
-  line-height:1.7;
+  line-height:1.8;
   background:rgba(255,255,255,.035);
 }
+.terms{margin-top:16px}
+.terms strong{color:var(--yellow)}
 
 .selectbox{
   width:100%;
-  background:var(--panel2);
+  background:#151c1a;
   border:1px solid var(--line);
   color:#fff;
   font-size:22px;
   padding:18px;
   border-radius:10px;
+}
+
+.photo-box{
+  border:1px dashed rgba(126,217,87,.65);
+  border-radius:14px;
+  padding:18px;
+  background:rgba(255,255,255,.035);
+}
+.photo-box input{
+  width:100%;
+  color:#dce5e0;
+  font-size:15px;
+}
+.preview{
+  margin-top:14px;
+  width:132px;
+  height:132px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  object-fit:cover;
+  display:none;
 }
 
 .summary{
@@ -314,66 +158,16 @@ h1{
   padding:18px;
   margin-top:28px;
 }
-
-.summary h2{
-  font-size:19px;
-  margin:0 0 18px;
-}
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  padding:8px 0;
-  color:#e8eeeb;
-}
-
-.row.sub{
-  color:#aeb8b3;
-  font-size:14px;
-}
-
-.row.discount strong{
-  color:var(--green);
-}
-
-.total{
-  border-top:1px dashed #56605b;
-  margin-top:12px;
-  padding-top:14px;
-  font-size:20px;
-  font-weight:900;
-}
-
-.total strong{
-  font-size:32px;
-  color:var(--green);
-}
-
-.terms{
-  font-size:13px;
-  color:#b8c2bd;
-  line-height:1.8;
-  margin-top:16px;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:14px;
-}
-
-.terms strong{
-  color:var(--yellow);
-}
-
-.warning{
-  color:var(--yellow);
-}
+.summary h2{font-size:19px;margin:0 0 18px}
+.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;color:#e8eeeb}
+.row.sub{color:#aeb8b3;font-size:14px}
+.row.discount strong{color:var(--green)}
+.total{border-top:1px dashed #56605b;margin-top:12px;padding-top:14px;font-size:20px;font-weight:900}
+.total strong{font-size:32px;color:var(--green)}
 
 .bottom{
   position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
+  left:0;right:0;bottom:0;
   background:rgba(5,8,7,.97);
   border-top:1px solid var(--line);
   padding:13px 16px;
@@ -383,21 +177,9 @@ h1{
   z-index:50;
   backdrop-filter:blur(10px);
 }
-
-.bottom-price{
-  flex:1;
-}
-
-.bottom-price div{
-  font-size:13px;
-  color:#d0d8d4;
-}
-
-.bottom-price strong{
-  font-size:30px;
-  color:var(--green);
-}
-
+.bottom-price{flex:1}
+.bottom-price div{font-size:13px;color:#d0d8d4}
+.bottom-price strong{font-size:30px;color:var(--green)}
 .btn{
   border:none;
   border-radius:10px;
@@ -409,10 +191,7 @@ h1{
   min-width:180px;
   cursor:pointer;
 }
-
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 .modal-bg{
   position:fixed;
@@ -423,7 +202,6 @@ h1{
   align-items:flex-end;
   justify-content:center;
 }
-
 .modal{
   width:100%;
   max-width:720px;
@@ -434,71 +212,20 @@ h1{
   max-height:86vh;
   overflow:auto;
 }
-
-.modal h2{
-  margin:0 0 14px;
-}
-
-.modal .btns{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:18px;
-}
-
-.btn.secondary{
-  background:#26312d;
-  color:#fff;
-}
+.modal h2{margin:0 0 14px}
+.modal .btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.btn.secondary{background:#26312d;color:#fff}
 
 @media(max-width:640px){
-  .header{
-    padding:15px;
-  }
-
-  .logo{
-    font-size:18px;
-  }
-
-  .wrap{
-    padding:22px 14px;
-  }
-
-  h1{
-    font-size:27px;
-  }
-
-  .grid.two,
-  .grid.three{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    padding:17px;
-    min-height:96px;
-  }
-
-  .price{
-    font-size:26px;
-  }
-
-  .bottom{
-    padding:12px;
-  }
-
-  .btn{
-    min-width:145px;
-    font-size:15px;
-    padding:16px 12px;
-  }
-
-  .bottom-price strong{
-    font-size:27px;
-  }
-
-  .step{
-    font-size:11px;
-  }
+  .logo-img{height:42px;max-width:190px}
+  .wrap{padding:22px 14px}
+  h1{font-size:27px}
+  .grid.two,.grid.three{grid-template-columns:1fr}
+  .card{padding:17px;min-height:96px}
+  .price{font-size:26px}
+  .bottom{padding:12px}
+  .btn{min-width:145px;font-size:15px;padding:16px 12px}
+  .bottom-price strong{font-size:27px}
 }
 </style>
 </head>
@@ -506,7 +233,7 @@ h1{
 <body>
 
 <header class="header">
-  <div class="logo">🌲 THE FOREST GYM <span>MEMBERSHIP REGISTRATION</span></div>
+  <img src="logo.png" alt="THE FOREST GYM" class="logo-img">
   <div class="menu">☰</div>
 </header>
 
@@ -520,43 +247,28 @@ h1{
   </div>
 
   <h1>会員登録フォーム</h1>
-  <p class="lead">
-    キャンペーン利用・会員種別・利用開始日・特典を選択すると、料金がリアルタイムで更新されます。
-  </p>
+  <p class="lead">キャンペーン利用・会員種別・利用開始日・特典を選択すると、料金がリアルタイムで更新されます。</p>
 
   <div class="campaign-head">
     <strong>期間限定キャンペーン実施中</strong>
-    <p>
-      初期費用無料＋2027年5月まで月会費値引き＋選べる特典。<br>
-      2027年6月以降は長期継続割引のプラチナ会員価格が適用されます。
-    </p>
+    <p>初期費用無料＋2027年5月まで月会費値引き＋選べる特典。<br>2027年6月以降は長期継続割引のプラチナ会員価格が適用されます。</p>
   </div>
 
   <section class="section">
-    <div class="sec-title">
-      <span class="num">1</span>
-      キャンペーンの利用を選択
-      <span class="badge">必須</span>
-    </div>
+    <div class="sec-title"><span class="num">1</span>キャンペーンの利用を選択 <span class="badge">必須</span></div>
 
     <div class="grid two">
       <label class="card active" data-campaign="yes">
         <span class="tag">おすすめ</span>
         <span class="radio"></span>
         <h3>キャンペーンを利用する</h3>
-        <p>
-          入会金5,500円＋事務手数料3,300円が無料。<br>
-          月会費値引きと選べる特典が適用されます。
-        </p>
+        <p>入会金5,500円＋事務手数料3,300円が無料。<br>月会費値引きと選べる特典が適用されます。</p>
       </label>
 
       <label class="card" data-campaign="no">
         <span class="radio"></span>
         <h3>通常入会</h3>
-        <p>
-          通常料金でのご入会となります。<br>
-          初期費用・通常月会費が発生します。
-        </p>
+        <p>通常料金でのご入会となります。<br>初期費用・通常月会費が発生します。</p>
       </label>
     </div>
 
@@ -570,15 +282,9 @@ h1{
   </section>
 
   <section class="section">
-    <div class="sec-title">
-      <span class="num">2</span>
-      会員種別を選択
-      <span class="badge">必須</span>
-    </div>
+    <div class="sec-title"><span class="num">2</span>会員種別を選択 <span class="badge">必須</span></div>
 
-    <div class="note" id="planNote">
-      キャンペーン適用後の料金で表示しています。
-    </div>
+    <div class="note" id="planNote"></div>
 
     <div class="grid three" style="margin-top:14px">
       <label class="card active" data-plan="regular">
@@ -606,104 +312,54 @@ h1{
   </section>
 
   <section class="section">
-    <div class="sec-title">
-      <span class="num">3</span>
-      利用開始日を選択
-      <span class="badge">必須</span>
-    </div>
-
+    <div class="sec-title"><span class="num">3</span>利用開始日を選択 <span class="badge">必須</span></div>
     <input type="date" id="startDate" class="selectbox">
-
-    <div class="terms">
-      ※ 本日から当月末まで選択可能です。<br>
-      ※ 初月会費は利用開始日から当月末までの日割りで自動計算します。
-    </div>
+    <div class="terms">※ 本日から当月末まで選択可能です。<br>※ 初月会費は利用開始日を含めた残り日数で日割り計算します。</div>
   </section>
 
   <section class="section" id="benefitSection">
-    <div class="sec-title">
-      <span class="num">4</span>
-      選べる特典を選択
-      <span class="badge">キャンペーン利用時のみ</span>
-    </div>
+    <div class="sec-title"><span class="num">4</span>選べる特典を選択 <span class="badge">キャンペーン利用時のみ</span></div>
 
     <div class="grid">
       <label class="card active" data-benefit="personal">
         <span class="tag">おすすめ</span>
         <span class="radio"></span>
         <h3>無料体験パーソナル 60分</h3>
-        <p>
-          プロトレーナーによるマンツーマンサポート。<br>
-          初回の不安解消・フォーム確認・メニュー作成におすすめです。
-        </p>
+        <p>プロトレーナーによるマンツーマンサポート。<br>初回の不安解消・フォーム確認・メニュー作成におすすめです。</p>
       </label>
 
       <label class="card" data-benefit="free2">
         <span class="radio"></span>
         <h3>2か月目会費無料</h3>
-        <p id="freeSecondMonthText">
-          2か月目の月会費が無料になります。
-        </p>
+        <p id="freeSecondMonthText">2か月目の月会費が無料になります。</p>
       </label>
     </div>
+  </section>
 
-    <div class="terms">
-      <strong>選べる特典について</strong><br>
-      ※ 2か月目会費無料を選択した場合、選択プランのキャンペーン月会費が無料になります。<br>
-      ※ REGULAR：4,950円、平日DAY：4,180円、NIGHT365：3,300円が対象です。
+  <section class="section">
+    <div class="sec-title"><span class="num">5</span>顔写真をアップロード <span class="badge">必須</span></div>
+    <div class="photo-box">
+      <input type="file" id="facePhoto" accept="image/*">
+      <img id="photoPreview" class="preview" alt="顔写真プレビュー">
+      <div class="terms">※ 会員証・本人確認用の顔写真です。正面から顔が分かる写真を選択してください。</div>
     </div>
   </section>
 
   <section class="summary">
     <h2>お支払い予定（リアルタイム更新）</h2>
 
-    <div class="row">
-      <span>入会金</span>
-      <strong id="joinFee"></strong>
-    </div>
-
-    <div class="row">
-      <span>事務手数料</span>
-      <strong id="adminFee"></strong>
-    </div>
-
-    <div class="row">
-      <span>初月会費（日割り）</span>
-      <strong id="firstMonthFee"></strong>
-    </div>
-
-    <div class="row sub">
-      <span id="dateRange"></span>
-      <span></span>
-    </div>
-
-    <div class="row discount" id="monthlyDiscountRow">
-      <span>月会費値引き</span>
-      <strong id="monthlyDiscount"></strong>
-    </div>
-
-    <div class="row total">
-      <span>初回合計（税込）</span>
-      <strong id="firstTotal"></strong>
-    </div>
+    <div class="row"><span>入会金</span><strong id="joinFee"></strong></div>
+    <div class="row"><span>事務手数料</span><strong id="adminFee"></strong></div>
+    <div class="row"><span>初月会費（日割り）</span><strong id="firstMonthFee"></strong></div>
+    <div class="row sub"><span id="dateRange"></span><span></span></div>
+    <div class="row discount" id="monthlyDiscountRow"><span>月会費値引き</span><strong id="monthlyDiscount"></strong></div>
+    <div class="row total"><span>初回合計（税込）</span><strong id="firstTotal"></strong></div>
 
     <hr style="border-color:#2a3632;border-style:solid;border-width:1px 0 0;margin:18px 0">
 
-    <div class="row">
-      <span>2027年5月まで</span>
-      <strong id="untilMay2027"></strong>
-    </div>
-
-    <div class="row">
-      <span>2027年6月以降</span>
-      <strong id="fromJune2027"></strong>
-    </div>
-
-    <div class="row sub">
-      <span id="benefitText"></span>
-      <span></span>
-    </div>
-
+    <div class="row"><span>2027年5月まで</span><strong id="untilMay2027"></strong></div>
+    <div class="row"><span>2027年6月以降</span><strong id="fromJune2027"></strong></div>
+    <div class="row sub"><span id="benefitText"></span><span></span></div>
     <div class="terms" id="conditionText"></div>
   </section>
 
@@ -725,6 +381,7 @@ h1{
       <div class="row"><span>キャンペーン</span><strong id="modalCampaign"></strong></div>
       <div class="row"><span>会員種別</span><strong id="modalPlan"></strong></div>
       <div class="row"><span>利用開始日</span><strong id="modalStart"></strong></div>
+      <div class="row"><span>顔写真</span><strong id="modalPhoto"></strong></div>
       <div class="row"><span>特典</span><strong id="modalBenefit"></strong></div>
       <div class="row total"><span>初回合計</span><strong id="modalTotal"></strong></div>
     </div>
@@ -744,62 +401,55 @@ h1{
 
 <script>
 const PLANS = {
-  regular: {
-    name: "REGULAR",
-    normal: 7480,
-    campaign: 4950,
-    platinum: 5940,
-    discount: 2530
-  },
-  day: {
-    name: "平日DAY",
-    normal: 6050,
-    campaign: 4180,
-    platinum: 4510,
-    discount: 1870
-  },
-  night: {
-    name: "NIGHT365",
-    normal: 4950,
-    campaign: 3300,
-    platinum: 3960,
-    discount: 1650
-  }
+  regular:{name:"REGULAR",normal:7480,campaign:4950,platinum:5940,discount:2530},
+  day:{name:"平日DAY",normal:6050,campaign:4180,platinum:4510,discount:1870},
+  night:{name:"NIGHT365",normal:4950,campaign:3300,platinum:3960,discount:1650}
 };
 
 const state = {
-  campaign: true,
-  plan: "regular",
-  benefit: "personal",
-  startDate: null,
-  firstTotal: 0
+  campaign:true,
+  plan:"regular",
+  benefit:"personal",
+  startDate:null,
+  firstTotal:0,
+  facePhotoSelected:false
 };
 
 const yen = n => Number(n).toLocaleString("ja-JP") + "円";
 
+function parseLocalDate(iso){
+  const [y,m,d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function toISODateLocal(date){
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2,"0");
+  const d = String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
 function todayISO(){
-  const d = new Date();
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-  return d.toISOString().slice(0,10);
+  return toISODateLocal(new Date());
 }
 
 function endOfMonthISO(){
   const d = new Date();
-  const e = new Date(d.getFullYear(), d.getMonth()+1, 0);
-  e.setMinutes(e.getMinutes() - e.getTimezoneOffset());
-  return e.toISOString().slice(0,10);
+  return toISODateLocal(new Date(d.getFullYear(), d.getMonth() + 1, 0));
 }
 
 function daysInMonth(date){
-  return new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 }
 
-function remainingDays(date){
+function remainingDaysIncludingStart(date){
   return daysInMonth(date) - date.getDate() + 1;
 }
 
 function calcProrated(monthly, date){
-  return Math.ceil(monthly / daysInMonth(date) * remainingDays(date));
+  const days = daysInMonth(date);
+  const remain = remainingDaysIncludingStart(date);
+  return Math.ceil(monthly * remain / days);
 }
 
 function currentPlan(){
@@ -818,30 +468,20 @@ function updatePlanPrices(){
     ? "キャンペーン適用後の料金で表示しています。2027年5月まで特別価格、2027年6月以降はプラチナ会員価格となります。"
     : "通常入会の料金で表示しています。キャンペーン特典・月会費値引きは適用されません。";
 
-  for(const [key, p] of Object.entries(PLANS)){
+  for(const [key,p] of Object.entries(PLANS)){
     const el = document.getElementById(
-      key === "regular" ? "priceRegular" :
-      key === "day" ? "priceDay" :
-      "priceNight"
+      key === "regular" ? "priceRegular" : key === "day" ? "priceDay" : "priceNight"
     );
 
-    if(campaign){
-      el.innerHTML = `
-        <span class="old">通常 ${yen(p.normal)}/月</span><br>
-        ${yen(p.campaign)}<small> / 月</small>
-        <div class="campaign-note">
-          2027年5月まで毎月${yen(p.discount)}値引き<br>
-          2027年6月以降 ${yen(p.platinum)}/月
-        </div>
-      `;
-    }else{
-      el.innerHTML = `
-        ${yen(p.normal)}<small> / 月</small>
-        <div class="campaign-note">
-          通常月会費でのご利用
-        </div>
-      `;
-    }
+    el.innerHTML = campaign
+      ? `<span class="old">通常 ${yen(p.normal)}/月</span><br>
+         ${yen(p.campaign)}<small> / 月</small>
+         <div class="campaign-note">
+           2027年5月まで毎月${yen(p.discount)}値引き<br>
+           2027年6月以降 ${yen(p.platinum)}/月
+         </div>`
+      : `${yen(p.normal)}<small> / 月</small>
+         <div class="campaign-note">通常月会費でのご利用</div>`;
   }
 }
 
@@ -856,37 +496,32 @@ function recalc(){
   updateFreeSecondMonthText();
 
   const p = currentPlan();
-  const date = new Date(state.startDate + "T00:00:00");
+  const date = parseLocalDate(state.startDate);
   const monthly = currentMonthly();
 
   const joinFee = state.campaign ? 0 : 5500;
   const adminFee = state.campaign ? 0 : 3300;
   const firstMonth = calcProrated(monthly, date);
   const total = joinFee + adminFee + firstMonth;
+  const remain = remainingDaysIncludingStart(date);
+  const dim = daysInMonth(date);
 
   state.firstTotal = total;
 
   document.getElementById("joinFee").textContent = yen(joinFee);
   document.getElementById("adminFee").textContent = yen(adminFee);
   document.getElementById("firstMonthFee").textContent = yen(firstMonth);
-
   document.getElementById("dateRange").textContent =
-    `${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分`;
+    `${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分（${remain}日/${dim}日）`;
 
   document.getElementById("firstTotal").textContent = yen(total);
   document.getElementById("bottomTotal").textContent = yen(total);
 
   if(state.campaign){
     document.getElementById("monthlyDiscountRow").classList.remove("hidden");
-    document.getElementById("monthlyDiscount").textContent =
-      `毎月 ${yen(p.discount)} 値引き`;
-
-    document.getElementById("untilMay2027").textContent =
-      `${p.name} ${yen(p.campaign)} / 月`;
-
-    document.getElementById("fromJune2027").textContent =
-      `${p.name} ${yen(p.platinum)} / 月`;
-
+    document.getElementById("monthlyDiscount").textContent = `毎月 ${yen(p.discount)} 値引き`;
+    document.getElementById("untilMay2027").textContent = `${p.name} ${yen(p.campaign)} / 月`;
+    document.getElementById("fromJune2027").textContent = `${p.name} ${yen(p.platinum)} / 月`;
     document.getElementById("benefitSection").classList.remove("hidden");
 
     document.getElementById("benefitText").textContent =
@@ -894,34 +529,25 @@ function recalc(){
         ? `適用特典：2か月目会費無料（${yen(p.campaign)}相当）`
         : "適用特典：無料体験パーソナル60分";
 
-    document.getElementById("conditionText").innerHTML = `
-      <strong>キャンペーン条件</strong><br>
-      ※ 初期費用無料・月会費値引き・選べる特典は2027年5月までの継続条件付き値引きです。<br>
-      ※ 2027年5月より前に退会の場合、キャンペーン値引き分を退会時に精算します。<br>
-      ※ 初期費用無料はWEB入会または見学当日入会のみ対象です。<br>
-      ※ 見学後日のWEB入会は対象外です。<br>
-      ※ 2026年8月以降退会可能です。
-    `;
+    document.getElementById("conditionText").innerHTML =
+      `<strong>キャンペーン条件</strong><br>
+       ※ 初期費用無料・月会費値引き・選べる特典は2027年5月までの継続条件付き値引きです。<br>
+       ※ 2027年5月より前に退会の場合、キャンペーン値引き分を退会時に精算します。<br>
+       ※ 初期費用無料はWEB入会または見学当日入会のみ対象です。<br>
+       ※ 見学後日のWEB入会は対象外です。<br>
+       ※ 2026年8月以降退会可能です。`;
   }else{
     document.getElementById("monthlyDiscountRow").classList.add("hidden");
     document.getElementById("monthlyDiscount").textContent = "";
-
-    document.getElementById("untilMay2027").textContent =
-      `${p.name} ${yen(p.normal)} / 月`;
-
-    document.getElementById("fromJune2027").textContent =
-      `${p.name} ${yen(p.normal)} / 月`;
-
+    document.getElementById("untilMay2027").textContent = `${p.name} ${yen(p.normal)} / 月`;
+    document.getElementById("fromJune2027").textContent = `${p.name} ${yen(p.normal)} / 月`;
     document.getElementById("benefitSection").classList.add("hidden");
+    document.getElementById("benefitText").textContent = "通常入会のためキャンペーン特典は適用されません。";
 
-    document.getElementById("benefitText").textContent =
-      "通常入会のためキャンペーン特典は適用されません。";
-
-    document.getElementById("conditionText").innerHTML = `
-      <strong>通常入会</strong><br>
-      ※ 入会金5,500円、事務手数料3,300円が発生します。<br>
-      ※ 月会費値引き・選べる特典は適用されません。
-    `;
+    document.getElementById("conditionText").innerHTML =
+      `<strong>通常入会</strong><br>
+       ※ 入会金5,500円、事務手数料3,300円が発生します。<br>
+       ※ 月会費値引き・選べる特典は適用されません。`;
   }
 }
 
@@ -957,26 +583,41 @@ document.getElementById("startDate").addEventListener("change", e=>{
   recalc();
 });
 
+document.getElementById("facePhoto").addEventListener("change", e=>{
+  const file = e.target.files[0];
+  const preview = document.getElementById("photoPreview");
+
+  if(!file){
+    state.facePhotoSelected = false;
+    preview.style.display = "none";
+    preview.src = "";
+    return;
+  }
+
+  state.facePhotoSelected = true;
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+});
+
 function openConfirm(){
+  if(!state.facePhotoSelected){
+    alert("顔写真をアップロードしてください。");
+    return;
+  }
+
   const p = currentPlan();
 
-  document.getElementById("modalCampaign").textContent =
-    state.campaign ? "キャンペーン利用" : "通常入会";
-
+  document.getElementById("modalCampaign").textContent = state.campaign ? "キャンペーン利用" : "通常入会";
   document.getElementById("modalPlan").textContent = p.name;
-
-  document.getElementById("modalStart").textContent =
-    state.startDate.replaceAll("-","/");
-
+  document.getElementById("modalStart").textContent = state.startDate.replaceAll("-","/");
+  document.getElementById("modalPhoto").textContent = "アップロード済み";
   document.getElementById("modalBenefit").textContent =
     state.campaign
       ? state.benefit === "free2"
         ? `2か月目会費無料（${yen(p.campaign)}相当）`
         : "無料体験パーソナル60分"
       : "なし";
-
   document.getElementById("modalTotal").textContent = yen(state.firstTotal);
-
   document.getElementById("confirmModal").style.display = "flex";
 }
 
