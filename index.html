@@ -684,10 +684,13 @@ function goPayment(){
 function getMonthlyDisplay(){
   const p = currentPlan();
 
+  const campaignEnd = getCampaignEndMonthLabel();
+  const platinumStart = getPlatinumStartMonthLabel();
+
   if(state.campaign){
     return `
       <div class="plan-line">
-        <div class="plan-period">2027年5月まで</div>
+        <div class="plan-period">${campaignEnd}まで</div>
         <div class="plan-price">
           キャンペーン${p.name}<br>
           ${yen(p.campaign)} / 月
@@ -695,7 +698,7 @@ function getMonthlyDisplay(){
       </div>
 
       <div class="plan-line">
-        <div class="plan-period">2027年6月以降</div>
+        <div class="plan-period">${platinumStart}以降</div>
         <div class="plan-price">
           永久値引き${p.name}<br>
           ${yen(p.platinum)} / 月
@@ -703,6 +706,17 @@ function getMonthlyDisplay(){
       </div>
     `;
   }
+
+  return `
+    <div class="plan-line">
+      <div class="plan-period">通常月会費</div>
+      <div class="plan-price">
+        ${p.name}<br>
+        ${yen(p.normal)} / 月
+      </div>
+    </div>
+  `;
+}
 
   return `
     <div class="plan-line">
