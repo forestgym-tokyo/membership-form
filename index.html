@@ -521,7 +521,10 @@ function recalc(){
   const cancelableMonth = getCancelableMonthLabel();
 
   document.getElementById("campaignHeadText").innerHTML =
-    `初期費用無料＋${campaignEnd}まで月会費値引き＋選べる特典。<br>${platinumStart}以降は長期継続割引のプラチナ会員価格が適用されます。`;
+  `1．初期費用（通常8,800円→0円）<br>
+   2．月会費（通常7,480円→4,950円）<br>
+   ${campaignEnd}分会費まで毎月値引<br>
+   3．選べる特典でさらにお得！`;
   document.getElementById("campaignTerms").innerHTML =
   `<strong>キャンペーン適用条件</strong><br>
    ※ 初期費用無料はWEB入会または見学当日入会のみ対象。見学後日のWEB入会は対象外です。<br>
