@@ -651,66 +651,43 @@ function goPayment(){
 })();
 function getMonthlyDisplay(planKey, campaignApplied) {
 
-  const plans = {
-    regular: {
-      label: 'REGULAR',
-      campaignPrice: 4950,
-      afterPrice: 5940,
-      normalPrice: 7480,
-    },
-
-    day: {
-      label: '平日DAY',
-      campaignPrice: 4180,
-      afterPrice: 5060,
-      normalPrice: 6050,
-    },
-
-    night: {
-      label: 'NIGHT365',
-      campaignPrice: 3300,
-      afterPrice: 3960,
-      normalPrice: 4950,
-    },
-  };
-
-  const p = plans[planKey] || plans.regular;
+  const p = currentPlan();
 
   if (campaignApplied) {
 
     return `
-      <div class="price-row">
+      <div class="row">
         <span>2027年5月まで<br></span>
         <strong>
-          キャンペーン${p.label}
-          ${p.campaignPrice.toLocaleString()}円 / 月
+          キャンペーン${p.name}
+          ${yen(p.campaign)} / 月
         </strong>
       </div>
 
-      <div class="price-row">
+      <div class="row">
         <span>2027年6月以降<br></span>
         <strong>
-          永久値引き${p.label}
-          ${p.afterPrice.toLocaleString()}円 / 月
+          永久値引き${p.name}
+          ${yen(p.platinum)} / 月
         </strong>
       </div>
     `;
   }
 
   return `
-    <div class="price-row">
+    <div class="row">
       <span>2027年5月まで<br></span>
       <strong>
-        ${p.label}
-        ${p.normalPrice.toLocaleString()}円 / 月
+        ${p.name}
+        ${yen(p.normal)} / 月
       </strong>
     </div>
 
-    <div class="price-row">
+    <div class="row">
       <span>2027年6月以降<br></span>
       <strong>
-        永久値引き${p.label}
-        ${p.afterPrice.toLocaleString()}円 / 月
+        永久値引き${p.name}
+        ${yen(p.platinum)} / 月
       </strong>
     </div>
   `;
