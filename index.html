@@ -670,32 +670,6 @@ function getMonthlyDisplay(){
     </div>
   `;
 }
-
-  return `
-    <div class="row">
-      <span>2027年5月まで<br></span>
-      <strong>
-        ${p.name}
-        ${yen(p.normal)} / 月
-      </strong>
-    </div>
-
-    <div class="row">
-      <span>2027年6月以降<br></span>
-      <strong>
-        永久値引き${p.name}
-        ${yen(p.platinum)} / 月
-      </strong>
-    </div>
-  `;
-}
-  return `
-    <div class="price-row">
-      <span>通常月会費<br></span>
-      <strong>${p.label} ${p.normalPrice.toLocaleString()}円 / 月</strong>
-    </div>
-  `;
-}
 </script>
 
 </body>
