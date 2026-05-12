@@ -491,9 +491,11 @@ function currentMonthly(){
 
 function updatePlanPrices(){
   const campaign = state.campaign;
+  const campaignEnd = getCampaignEndMonthLabel();
+  const platinumStart = getPlatinumStartMonthLabel();
 
   document.getElementById("planNote").textContent = campaign
-    ? "キャンペーン適用後の料金で表示しています。2027年5月まで特別価格、2027年6月以降はプラチナ会員価格となります。"
+    ? `キャンペーン適用後の料金で表示しています。${campaignEnd}まで特別価格、${platinumStart}以降はプラチナ会員価格となります。`
     : "通常入会の料金で表示しています。キャンペーン特典・月会費値引きは適用されません。";
 
   for(const [key,p] of Object.entries(PLANS)){
@@ -505,14 +507,13 @@ function updatePlanPrices(){
       ? `<span class="old">通常 ${yen(p.normal)}/月</span><br>
          ${yen(p.campaign)}<small> / 月</small>
          <div class="campaign-note">
-           2027年5月まで毎月${yen(p.discount)}値引き<br>
-           2027年6月以降 ${yen(p.platinum)}/月
+           ${campaignEnd}まで毎月${yen(p.discount)}値引き<br>
+           ${platinumStart}以降 ${yen(p.platinum)} / 月
          </div>`
       : `${yen(p.normal)}<small> / 月</small>
          <div class="campaign-note">通常月会費でのご利用</div>`;
   }
 }
-
 function updateFreeSecondMonthText(){
   const p = currentPlan();
   document.getElementById("freeSecondMonthText").textContent =
