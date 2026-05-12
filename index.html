@@ -471,7 +471,7 @@ function remainingDaysIncludingStart(date){
 function calcProrated(monthly, date){
   const days = daysInMonth(date);
   const remain = remainingDaysIncludingStart(date);
-  return Math.ceil(monthly * remain / days);
+  return Math.floor(monthly * remain / days);
 }
 
 function currentPlan(){
