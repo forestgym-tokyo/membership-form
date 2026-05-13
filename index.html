@@ -724,20 +724,29 @@ function mainAction(){
 
 function validateMemberInfo(){
 
-  const name=document.getElementById("memberName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const firstName = document.getElementById("firstName").value.trim();
 
-  const birthYear=document.getElementById("birthYear").value;
-  const birthMonth=document.getElementById("birthMonth").value;
-  const birthDay=document.getElementById("birthDay").value;
+  const lastKana = document.getElementById("lastKana").value.trim();
+  const firstKana = document.getElementById("firstKana").value.trim();
 
-  const postal=document.getElementById("postalCode").value.trim();
-  const address=document.getElementById("addressAuto").value.trim();
-  const detail=document.getElementById("addressDetail").value.trim();
+  const birthYear = document.getElementById("birthYear").value;
+  const birthMonth = document.getElementById("birthMonth").value;
+  const birthDay = document.getElementById("birthDay").value;
 
-  const agree=document.getElementById("agreeRules").checked;
+  const postal = document.getElementById("postalCode").value.trim();
+  const address = document.getElementById("addressAuto").value.trim();
+  const detail = document.getElementById("addressDetail").value.trim();
 
-  if(!name){
+  const agree = document.getElementById("agreeRules").checked;
+
+  if(!lastName || !firstName){
     alert("氏名を入力してください。");
+    return false;
+  }
+
+  if(!lastKana || !firstKana){
+    alert("フリガナを入力してください。");
     return false;
   }
 
@@ -773,7 +782,6 @@ function validateMemberInfo(){
 
   return true;
 }
-
 function goPayment(){
   if(!validateMemberInfo()) return;
 
