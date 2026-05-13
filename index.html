@@ -877,7 +877,7 @@ async function goPayment(){
     paymentUrl:paymentUrl
   };
 
-  try{
+
    await fetch(
   "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
   {
@@ -889,10 +889,6 @@ async function goPayment(){
 
 window.location.href=paymentUrl;
 
-  }catch(err){
-    alert("送信エラーが発生しました。");
-    console.error(err);
-  }
 }
 
 document.querySelectorAll("[data-campaign]").forEach(card=>{
