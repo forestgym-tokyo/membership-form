@@ -926,12 +926,34 @@ document.getElementById("startDate").addEventListener("change",e=>{
 });
 
 document.getElementById("facePhoto").addEventListener("change",e=>{
+
   const file=e.target.files[0];
   const preview=document.getElementById("photoPreview");
-  if(!file){state.facePhotoSelected=false;preview.style.display="none";preview.src="";return;}
+
+  if(!file){
+    state.facePhotoSelected=false;
+    state.facePhotoBase64="";
+    state.facePhotoName="";
+    preview.style.display="none";
+    preview.src="";
+    return;
+  }
+
   state.facePhotoSelected=true;
-  preview.src=URL.createObjectURL(file);
-  preview.style.display="block";
+  state.facePhotoName=file.name;
+
+  const reader=new FileReader();
+
+  reader.onload=function(event){
+
+    state.facePhotoBase64=event.target.result;
+
+    preview.src=event.target.result;
+
+    preview.style.display="block";
+  };
+
+  reader.readAsDataURL(file);
 });
 
 document.getElementById("rulesBox").addEventListener("scroll",e=>{
