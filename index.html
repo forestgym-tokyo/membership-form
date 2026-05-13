@@ -957,6 +957,9 @@ d.innerHTML = `<option value="">日</option>`;
     el.value = toZenkakuKana(el.value).trim();
   });
 });
+  document.getElementById("phone").addEventListener("input", e=>{
+  e.target.value = e.target.value.replace(/[^0-9]/g,"");
+});
 </script>
 
 </body>
