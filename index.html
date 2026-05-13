@@ -421,22 +421,54 @@ function mainAction(){
 }
 
 function validateMemberInfo(){
+
   const name=document.getElementById("memberName").value.trim();
- const birthYear=document.getElementById("birthYear").value;
-const birthMonth=document.getElementById("birthMonth").value;
-const birthDay=document.getElementById("birthDay").value;
+
+  const birthYear=document.getElementById("birthYear").value;
+  const birthMonth=document.getElementById("birthMonth").value;
+  const birthDay=document.getElementById("birthDay").value;
+
   const postal=document.getElementById("postalCode").value.trim();
   const address=document.getElementById("addressAuto").value.trim();
   const detail=document.getElementById("addressDetail").value.trim();
+
   const agree=document.getElementById("agreeRules").checked;
 
-  if(!name){alert("氏名を入力してください。");return false;}
-  if(!birth){alert("生年月日を入力してください。");return false;}
-  if(!postal){alert("郵便番号を入力してください。");return false;}
-  if(!address){alert("住所を入力してください。");return false;}
-  if(!detail){alert("番地・建物名・部屋番号を入力してください。");return false;}
-  if(!state.facePhotoSelected){alert("顔写真をアップロードしてください。");return false;}
-  if(!agree){alert("会則を最後まで確認し、同意チェックを入れてください。");return false;}
+  if(!name){
+    alert("氏名を入力してください。");
+    return false;
+  }
+
+  if(!birthYear || !birthMonth || !birthDay){
+    alert("生年月日を選択してください。");
+    return false;
+  }
+
+  if(!postal){
+    alert("郵便番号を入力してください。");
+    return false;
+  }
+
+  if(!address){
+    alert("住所を入力してください。");
+    return false;
+  }
+
+  if(!detail){
+    alert("番地・建物名・部屋番号を入力してください。");
+    return false;
+  }
+
+  if(!state.facePhotoSelected){
+    alert("顔写真をアップロードしてください。");
+    return false;
+  }
+
+  if(!agree){
+    alert("会則を最後まで確認し、同意チェックを入れてください。");
+    return false;
+  }
+
   return true;
 }
 
