@@ -196,11 +196,20 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
 <div class="field">
   <label>生年月日</label>
 
-  <div class="grid three">
-    <select id="birthYear" class="field-input"></select>
-    <select id="birthMonth" class="field-input"></select>
-    <select id="birthDay" class="field-input"></select>
-  </div>
+<div class="field">
+  <label>生年月日</label>
+
+  <select id="birthYear" class="field-input">
+    <option value="">西暦を選択（例：2000年）</option>
+  </select>
+
+  <select id="birthMonth" class="field-input" style="margin-top:10px;">
+    <option value="">月を選択（例：1月）</option>
+  </select>
+
+  <select id="birthDay" class="field-input" style="margin-top:10px;">
+    <option value="">日にちを選択（例：1日）</option>
+  </select>
 </div>
 
       <div class="field">
