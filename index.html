@@ -878,18 +878,16 @@ async function goPayment(){
   };
 
   try{
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify(payload)
-      }
-    );
+   await fetch(
+  "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
+  {
+    method:"POST",
+    mode:"no-cors",
+    body:JSON.stringify(payload)
+  }
+);
 
-    window.location.href=paymentUrl;
+window.location.href=paymentUrl;
 
   }catch(err){
     alert("送信エラーが発生しました。");
