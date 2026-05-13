@@ -340,11 +340,42 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
     <option value="">日</option>
   </select>
 </div>
-      <div class="field">
-        <label>郵便番号</label>
-        <input id="postalCode" class="field-input p-postal-code" type="text" inputmode="numeric" placeholder="例：2760049">
-      </div>
 
+<div class="field">
+  <label>電話番号</label>
+
+  <input
+    id="phone"
+    class="field-input"
+    type="tel"
+    inputmode="tel"
+    placeholder="例：09012345678"
+  >
+</div>
+
+<div class="field">
+  <label>メールアドレス</label>
+
+  <input
+    id="email"
+    class="field-input"
+    type="email"
+    inputmode="email"
+    placeholder="例：sample@example.com"
+  >
+</div>
+
+<div class="field">
+  <label>郵便番号</label>
+
+  <input
+    id="postalCode"
+    class="field-input p-postal-code"
+    type="text"
+    inputmode="numeric"
+    placeholder="例：2760049"
+  >
+</div>
       <div class="field">
         <label>住所</label>
         <input id="addressAuto" class="field-input p-region p-locality p-street-address p-extended-address" type="text" placeholder="郵便番号入力で自動入力">
