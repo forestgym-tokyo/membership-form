@@ -944,6 +944,19 @@ d.innerHTML = `<option value="">日</option>`;
     d.innerHTML += `<option value="${v}">${day}日</option>`;
   }
 }
+  function toZenkakuKana(str){
+  return str.replace(/[ｦ-ﾟ]/g, function(s){
+    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+  }).replace(/ﾞ/g, "゛").replace(/ﾟ/g, "゜");
+}
+
+["lastKana", "firstKana"].forEach(id=>{
+  const el = document.getElementById(id);
+
+  el.addEventListener("blur", ()=>{
+    el.value = toZenkakuKana(el.value).trim();
+  });
+});
 </script>
 
 </body>
