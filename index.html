@@ -505,12 +505,47 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
 
 (function init(){
   const input=document.getElementById("startDate");
+
   input.min=todayISO();
   input.max=endOfMonthISO();
   input.value=todayISO();
+
   state.startDate=todayISO();
+
+  initBirthdaySelects();
+
   recalc();
+
 })();
+
+function initBirthdaySelects(){
+
+  const y = document.getElementById("birthYear");
+  const m = document.getElementById("birthMonth");
+  const d = document.getElementById("birthDay");
+
+  y.innerHTML = `<option value="">西暦を選択（例：2000年）</option>`;
+  m.innerHTML = `<option value="">月を選択（例：1月）</option>`;
+  d.innerHTML = `<option value="">日にちを選択（例：1日）</option>`;
+
+  const now = new Date().getFullYear();
+
+  for(let year = now - 15; year >= 1920; year--){
+    y.innerHTML += `<option value="${year}">${year}年</option>`;
+  }
+
+  for(let month = 1; month <= 12; month++){
+    const v = String(month).padStart(2,"0");
+
+    m.innerHTML += `<option value="${v}">${month}月</option>`;
+  }
+
+  for(let day = 1; day <= 31; day++){
+    const v = String(day).padStart(2,"0");
+
+    d.innerHTML += `<option value="${v}">${day}日</option>`;
+  }
+}
 </script>
 
 </body>
