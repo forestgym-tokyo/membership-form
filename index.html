@@ -836,20 +836,65 @@ if(!postal){
 
   return true;
 }
-function goPayment(){
-  if(!validateMemberInfo()) return;
+async function goPayment(){
 
-  let url="";
-  if(state.campaign){
-    if(state.plan==="regular") url="https://getsugaku-panda.jp/subscription/apply/17643";
-    else if(state.plan==="day") url="https://getsugaku-panda.jp/subscription/apply/17677";
-    else if(state.plan==="night") url="https://getsugaku-panda.jp/subscription/apply/17678";
-  }else{
-    if(state.plan==="regular") url="https://getsugaku-panda.jp/subscription/apply/17679";
-    else if(state.plan==="day") url="https://getsugaku-panda.jp/subscription/apply/17680";
-    else if(state.plan==="night") url="https://getsugaku-panda.jp/subscription/apply/17681";
+  if(!validateMemberInfo()){
+    return;
   }
-  window.location.href=url;
+
+  let paymentUrl="";
+
+  if(state.campaign){
+    if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17643";
+    else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17677";
+    else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17678";
+  }else{
+    if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17679";
+    else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17680";
+    else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17681";
+  }
+
+  const birthYear=document.getElementById("birthYear").value;
+  const birthMonth=document.getElementById("birthMonth").value;
+  const birthDay=document.getElementById("birthDay").value;
+
+  const payload={
+    lastName:document.getElementById("lastName").value.trim(),
+    firstName:document.getElementById("firstName").value.trim(),
+    lastKana:document.getElementById("lastKana").value.trim(),
+    firstKana:document.getElementById("firstKana").value.trim(),
+    birthDate:`${birthYear}-${birthMonth}-${birthDay}`,
+    phone:document.getElementById("phone").value.trim(),
+    email:document.getElementById("email").value.trim(),
+    postal:document.getElementById("postalCode").value.trim(),
+    address:document.getElementById("addressAuto").value.trim(),
+    addressDetail:document.getElementById("addressDetail").value.trim(),
+    campaign:state.campaign ? "利用する" : "利用しない",
+    plan:currentPlan().name,
+    startDate:state.startDate,
+    benefit:state.benefit==="free2" ? "2か月目会費無料" : "無料パーソナル60分",
+    firstTotal:yen(state.firstTotal),
+    paymentUrl:paymentUrl
+  };
+
+  try{
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+    window.location.href=paymentUrl;
+
+  }catch(err){
+    alert("送信エラーが発生しました。");
+    console.error(err);
+  }
 }
 
 document.querySelectorAll("[data-campaign]").forEach(card=>{
