@@ -765,11 +765,14 @@ function validateMemberInfo(){
   const birthMonth = document.getElementById("birthMonth").value;
   const birthDay = document.getElementById("birthDay").value;
 
-  const postal = document.getElementById("postalCode").value.trim();
-  const address = document.getElementById("addressAuto").value.trim();
-  const detail = document.getElementById("addressDetail").value.trim();
+ const postal = document.getElementById("postalCode").value.trim();
+const address = document.getElementById("addressAuto").value.trim();
+const detail = document.getElementById("addressDetail").value.trim();
 
-  const agree = document.getElementById("agreeRules").checked;
+const phone = document.getElementById("phone").value.trim();
+const email = document.getElementById("email").value.trim();
+
+const agree = document.getElementById("agreeRules").checked; 
 
   if(!lastName || !firstName){
     alert("氏名を入力してください。");
@@ -786,7 +789,27 @@ function validateMemberInfo(){
     return false;
   }
 
-  if(!postal){
+ if(!phone){
+  alert("電話番号を入力してください。");
+  return false;
+}
+
+if(!email){
+  alert("メールアドレスを入力してください。");
+  return false;
+}
+
+if(!/^[0-9\-]+$/.test(phone)){
+  alert("電話番号の形式が正しくありません。");
+  return false;
+}
+
+if(!/^\S+@\S+\.\S+$/.test(email)){
+  alert("メールアドレスの形式が正しくありません。");
+  return false;
+}
+
+if(!postal){
     alert("郵便番号を入力してください。");
     return false;
   }
