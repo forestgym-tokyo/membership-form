@@ -188,9 +188,26 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
     <section class="section">
       <div class="sec-title"><span class="num">1</span>基本情報 <span class="badge">必須</span></div>
 
-  <div class="field">
+ <div class="field">
   <label>氏名</label>
-  <input id="memberName" class="field-input" type="text" placeholder="例：山田 太郎">
+
+  <div class="grid two">
+    <input id="lastName" class="field-input" type="text" placeholder="姓">
+
+    <input id="firstName" class="field-input" type="text" placeholder="名">
+  </div>
+</div>
+
+<div class="field">
+  <label>フリガナ</label>
+
+  <div class="grid two">
+    <input id="lastKana" class="field-input" type="text" placeholder="セイ">
+
+    <input id="firstKana" class="field-input" type="text" placeholder="メイ">
+  </div>
+</div>
+
 <div class="field">
   <label>生年月日</label>
 
@@ -206,7 +223,6 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
     <option value="">日</option>
   </select>
 </div>
-
       <div class="field">
         <label>郵便番号</label>
         <input id="postalCode" class="field-input p-postal-code" type="text" inputmode="numeric" placeholder="例：2760049">
