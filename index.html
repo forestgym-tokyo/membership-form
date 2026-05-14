@@ -929,68 +929,46 @@ document.getElementById("startDate").addEventListener("change",e=>{
   recalc();
 });
 
-document.getElementById("facePhoto").addEventListener("change",e=>{
+document.getElementById("facePhoto").addEventListener("change", async e=>{
 
-  const file=e.target.files[0];
-  const preview=document.getElementById("photoPreview");
+  const file = e.target.files[0];
+  const preview = document.getElementById("photoPreview");
 
   if(!file){
-    state.facePhotoSelected=false;
-    state.facePhotoBase64="";
-    state.facePhotoName="";
-    preview.style.display="none";
-    preview.src="";
+    state.facePhotoSelected = false;
+    state.facePhotoUrl = "";
+    preview.style.display = "none";
+    preview.src = "";
     return;
   }
 
-  const img = new Image();
-  const reader = new FileReader();
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "tfg_member_upload");
+  formData.append("folder", "tfg_member_faces");
 
-  reader.onload = function(ev){
-
-    img.onload = function(){
-
-      const canvas = document.createElement("canvas");
-
-      let w = img.width;
-      let h = img.height;
-
-      const maxSize = 800;
-
-      if(w > h){
-        if(w > maxSize){
-          h *= maxSize / w;
-          w = maxSize;
-        }
-      }else{
-        if(h > maxSize){
-          w *= maxSize / h;
-          h = maxSize;
-        }
+  try{
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/djr8c6czv/image/upload",
+      {
+        method: "POST",
+        body: formData
       }
+    );
 
-      canvas.width = w;
-      canvas.height = h;
+    const json = await res.json();
 
-      const ctx = canvas.getContext("2d");
+    state.facePhotoSelected = true;
+    state.facePhotoUrl = json.secure_url;
 
-      ctx.drawImage(img,0,0,w,h);
+    preview.src = json.secure_url;
+    preview.style.display = "block";
 
-      const compressed =
-        canvas.toDataURL("image/jpeg",0.7);
-
-      state.facePhotoSelected=true;
-      state.facePhotoBase64=compressed;
-      state.facePhotoName=file.name;
-
-      preview.src=compressed;
-      preview.style.display="block";
-    };
-
-    img.src = ev.target.result;
-  };
-
-  reader.readAsDataURL(file);
+  }catch(err){
+    state.facePhotoSelected = false;
+    state.facePhotoUrl = "";
+    alert("顔写真のアップロードに失敗しました。");
+  }
 });
 
 document.getElementById("rulesBox").addEventListener("scroll",e=>{
