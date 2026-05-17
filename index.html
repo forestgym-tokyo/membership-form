@@ -708,7 +708,21 @@ function recalc(){
   const joinFee=state.campaign?0:5500;
   const adminFee=state.campaign?0:3300;
   const firstMonth=calcProrated(monthly,date);
-  const total=joinFee+adminFee+firstMonth;
+
+  const today=new Date();
+  const isAfter27=today.getDate()>=27;
+
+  let secondMonthFee=0;
+
+  if(isAfter27){
+    if(state.campaign && state.benefit==="free2"){
+      secondMonthFee=0;
+    }else{
+      secondMonthFee=monthly;
+    }
+  }
+
+  const total=joinFee+adminFee+firstMonth+secondMonthFee;
   const remain=remainingDaysIncludingStart(date);
   const dim=daysInMonth(date);
   state.firstTotal=total;
@@ -716,6 +730,19 @@ function recalc(){
   document.getElementById("joinFee").textContent=yen(joinFee);
   document.getElementById("adminFee").textContent=yen(adminFee);
   document.getElementById("firstMonthFee").textContent=yen(firstMonth);
+
+  if(document.getElementById("secondMonthFee")){
+    document.getElementById("secondMonthFee").textContent=yen(secondMonthFee);
+  }
+
+  if(document.getElementById("secondMonthRow")){
+    document.getElementById("secondMonthRow").classList.toggle("hidden",!isAfter27);
+  }
+
+  if(document.getElementById("cycleNote")){
+    document.getElementById("cycleNote").classList.toggle("hidden",!isAfter27);
+  }
+
   document.getElementById("dateRange").textContent=`${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分（${remain}日/${dim}日）`;
   document.getElementById("firstTotal").textContent=yen(total);
   document.getElementById("bottomTotal").textContent=yen(total);
