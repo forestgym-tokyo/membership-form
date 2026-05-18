@@ -741,11 +741,11 @@ function recalc(){
   }
 
   if(document.getElementById("secondMonthRow")){
-    document.getElementById("secondMonthRow").classList.toggle("hidden",!isAfter27);
+    document.getElementById("secondMonthRow").classList.toggle("hidden",!isAfter26);
   }
 
   if(document.getElementById("cycleNote")){
-    document.getElementById("cycleNote").classList.toggle("hidden",!isAfter27);
+    document.getElementById("cycleNote").classList.toggle("hidden",!isAfter26);
   }
 
   document.getElementById("dateRange").textContent=`${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分（${remain}日/${dim}日）`;
