@@ -715,11 +715,11 @@ function recalc(){
   const firstMonth=calcProrated(monthly,date);
 
   const today=new Date();
-  const isAfter27=today.getDate()>=27;
+  const isAfter26=today.getDate()>=2⑥;
 
   let secondMonthFee=0;
 
-  if(isAfter27){
+  if(isAfter26){
     if(state.campaign && state.benefit==="free2"){
       secondMonthFee=0;
     }else{
