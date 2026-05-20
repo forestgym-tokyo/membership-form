@@ -385,17 +385,18 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
 <div class="field">
   <label>生年月日</label>
 
-  <select id="birthYear" class="field-input">
-    <option value="">西暦</option>
-  </select>
+  <input
+    type="text"
+    id="birthDateText"
+    class="field-input"
+    inputmode="numeric"
+    maxlength="8"
+    placeholder="例：19980520"
+  >
 
-  <select id="birthMonth" class="field-input" style="margin-top:10px;">
-    <option value="">月</option>
-  </select>
-
-  <select id="birthDay" class="field-input" style="margin-top:10px;">
-    <option value="">日</option>
-  </select>
+  <div class="terms">
+    ※ 半角数字8桁で入力してください
+  </div>
 </div>
 
 <div class="field">
