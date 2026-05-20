@@ -687,6 +687,9 @@ function updateFreeSecondMonthText(){
 }
 
 function recalc(){
+  if(!state.startDate){
+  return;
+}
   const p=currentPlan();
   const campaignEnd=getCampaignEndMonthLabel();
   const platinumStart=getPlatinumStartMonthLabel();
