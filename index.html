@@ -1021,17 +1021,22 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
 });
 
 (function init(){
+
   const input=document.getElementById("startDate");
 
-  input.min=todayISO();
-  input.max=endOfMonthISO();
-  input.value=todayISO();
+  const today=todayISO();
 
-  state.startDate=todayISO();
+  input.min=today;
+  input.max=endOfMonthISO();
+  input.value=today;
+
+  state.startDate=today;
 
   initBirthdaySelects();
 
-  recalc();
+  setTimeout(()=>{
+    recalc();
+  },0);
 
 })();
 
