@@ -1,1 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>THE FOREST GYM 会員登録フォーム</title>
+<script src="https://yubinbango.github.io/yubinbango/yubinbango.js"></script>
 
+<style>
+:root{
+  --bg:#050807;--line:#2a3632;--green:#7ed957;--text:#f4f7f5;--yellow:#ffd966;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:radial-gradient(circle at top,#18251d 0,#050807 42%,#020302 100%);
+  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  padding-bottom:138px;
+}
+.header{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,7,.92);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+.logo-img{height:48px;max-width:220px;object-fit:contain}
+.menu{font-size:26px;color:#ccc}
+.wrap{padding:24px 16px;max-width:860px;margin:auto}
+.steps{display:flex;justify-content:space-between;margin-bottom:26px}
+.step{text-align:center;color:#8f9994;font-size:12px;flex:1;position:relative}
+.step:not(:last-child)::after{content:"";height:1px;background:#3a4540;position:absolute;top:13px;right:-35%;width:70%}
+.step b{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;border:1px solid #6a746f;margin-bottom:6px}
+.step.active{color:#fff}.step.active b{background:var(--green);color:#061006;border-color:var(--green)}
+h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:15px;line-height:1.7}
+.campaign-head{background:linear-gradient(135deg,rgba(126,217,87,.18),rgba(255,255,255,.04));border:1px solid rgba(126,217,87,.45);border-radius:14px;padding:16px;margin-bottom:24px}
+.campaign-head strong{display:block;font-size:19px;color:var(--green);margin-bottom:6px}
+.campaign-head p{margin:0;color:#e2e9e5;font-size:14px;line-height:1.8}
+.section{margin:30px 0}
+.sec-title{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;margin-bottom:14px;flex-wrap:wrap}
+.num{width:24px;height:24px;border:1px solid var(--green);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--green);font-size:14px}
+.badge{background:#193816;color:var(--green);font-size:12px;padding:3px 10px;border-radius:999px;font-weight:700}
+.grid{display:grid;gap:14px}.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:repeat(3,1fr)}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:13px;padding:18px;cursor:pointer;position:relative;min-height:112px;transition:.15s}
+.card.active{border-color:var(--green);box-shadow:0 0 0 1px rgba(126,217,87,.28), inset 0 0 28px rgba(126,217,87,.09)}
+.radio{width:22px;height:22px;border:2px solid #78827d;border-radius:50%;display:inline-block;margin-right:10px;vertical-align:-5px}
+.card.active .radio{border-color:var(--green);box-shadow:inset 0 0 0 5px #101614;background:var(--green)}
+.card h3{margin:0 0 10px;font-size:20px}.card p{margin:0;color:#c1cbc6;font-size:14px;line-height:1.65}
+.price{font-size:28px;font-weight:900;margin-top:12px;line-height:1.25}.price small{font-size:14px}
+.old{text-decoration:line-through;color:#8b958f;font-size:13px;margin-right:6px}
+.tag{position:absolute;top:12px;right:12px;background:var(--green);color:#061006;font-size:12px;font-weight:900;padding:4px 9px;border-radius:7px}
+.tag.yellow{background:var(--yellow);color:#1b1600}
+.campaign-note{margin-top:10px;font-size:12px;color:#b7c3bc;line-height:1.6}
+.note,.terms{border:1px solid var(--line);border-radius:10px;padding:14px;color:#cbd5d0;font-size:14px;line-height:1.8;background:rgba(255,255,255,.035)}
+.terms{margin-top:16px}.terms strong{color:var(--yellow)}
+.selectbox,.field-input{
+  width:100%;background:#151c1a;border:1px solid var(--line);color:#fff;
+  font-size:18px;padding:16px;border-radius:10px;
+}
+.field{margin-bottom:16px}.field label{display:block;font-weight:800;margin-bottom:8px;color:#e7eee9}
+.photo-box{border:1px dashed rgba(126,217,87,.65);border-radius:14px;padding:18px;background:rgba(255,255,255,.035)}
+.photo-box input{width:100%;color:#dce5e0;font-size:15px}
+.preview{margin-top:14px;width:132px;height:132px;border-radius:12px;border:1px solid var(--line);object-fit:cover;display:none}
+.summary{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:28px}
+.summary h2{font-size:19px;margin:0 0 18px}
+.row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;color:#e8eeeb}
+.row.sub{color:#aeb8b3;font-size:14px}.row.discount strong{color:var(--green)}
+.total{border-top:1px dashed #56605b;margin-top:12px;padding-top:14px;font-size:20px;font-weight:900}
+.total strong{font-size:32px;color:var(--green)}
+.plan-line{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.plan-period{width:120px;color:#d9dfdc;font-size:16px;line-height:1.5;flex-shrink:0}
+.plan-price{flex:1;text-align:right;font-size:19px;font-weight:800;line-height:1.45;color:#fff}
+.rules-box{
+  height:270px;
+  overflow:auto;
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:12px;
+  background:#111816;
+  line-height:1.85;
+  color:#dce5e0;
+  font-size:14px
+}
+
+.rules-pre{
+  white-space:pre-wrap;
+  margin:0;
+  font-family:inherit;
+  line-height:1.85;
+  color:#dce5e0;
+}
+
+.check-row{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-top:14px;
+  font-weight:800;
+  line-height:1.6
+}
+
+.check-row input{
+  width:22px;
+  height:22px;
+  margin-top:2px
+}
+
+.check-row.disabled{
+  opacity:.45
+}
+
+.hidden{
+  display:none!important
+}
+
+.bottom{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(5,8,7,.97);
+  border-top:1px solid var(--line);
+  padding:13px 16px;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  z-index:50;
+  backdrop-filter:blur(10px)
+}
+
+.bottom-price{
+  flex:1
+}
+
+.bottom-price div{
+  font-size:13px;
+  color:#d0d8d4
+}
+
+.bottom-price strong{
+  font-size:30px;
+  color:var(--green)
+}
+
+.btn{
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#8ee75d,#62c832);
+  color:#061006;
+  font-weight:900;
+  font-size:17px;
+  padding:18px 22px;
+  min-width:180px;
+  cursor:pointer
+}
+
+.btn.secondary{
+  background:#26312d;
+  color:#fff
+}
+
+@media(max-width:640px){
+
+  .logo-img{
+    height:42px;
+    max-width:190px
+  }
+
+  .wrap{
+    padding:22px 14px
+  }
+
+  h1{
+    font-size:27px
+  }
+
+  .grid.two,
+  .grid.three{
+    grid-template-columns:1fr
+  }
+
+  .card{
+    padding:17px;
+    min-height:96px
+  }
+
+  .price{
+    font-size:26px
+  }
+
+  .bottom{
+    padding:12px
+  }
+
+  .btn{
+    min-width:145px;
+    font-size:15px;
+    padding:16px 12px
+  }
+
+  .bottom-price strong{
+    font-size:27px
+  }
+}
+  input[type="date"]{
+  -webkit-appearance:auto;
+  appearance:auto;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <img src="logo.png" alt="THE FOREST GYM" class="logo-img">
+  <div class="menu">☰</div>
+</header>
+
+<main class="wrap h-adr">
+  <span class="p-country-name" style="display:none;">Japan</span>
+
+  <div class="steps">
+    <div class="step active" id="step1tab"><b>1</b><br>料金確認</div>
+    <div class="step" id="step2tab"><b>2</b><br>入会情報</div>
+    <div class="step"><b>3</b><br>決済</div>
+  </div>
+
+  <section id="step1">
+
+    <h1>会員登録フォーム</h1>
+    <p class="lead">キャンペーン利用・会員種別・利用開始日・特典を選択すると、料金がリアルタイムで更新されます。</p>
+
+    <div class="campaign-head">
+      <strong>期間限定キャンペーン実施中</strong>
+      <p id="campaignHeadText"></p>
+    </div>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">1</span>キャンペーンの利用を選択 <span class="badge">必須</span></div>
+      <div class="grid two">
+        <label class="card active" data-campaign="yes">
+          <span class="tag">おすすめ</span><span class="radio"></span>
+          <h3>キャンペーンを利用する</h3>
+          <p>入会金5,500円＋事務手数料3,300円が無料。<br>月会費値引きと選べる特典が適用されます。</p>
+        </label>
+        <label class="card" data-campaign="no">
+          <span class="radio"></span>
+          <h3>通常入会</h3>
+          <p>通常料金でのご入会となります。<br>初期費用・通常月会費が発生します。</p>
+        </label>
+      </div>
+      <div class="terms" id="campaignTerms"></div>
+    </section>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">2</span>会員種別を選択 <span class="badge">必須</span></div>
+      <div class="note" id="planNote"></div>
+
+      <div class="grid three" style="margin-top:14px">
+        <label class="card active" data-plan="regular">
+          <span class="tag yellow">人気No.1</span><span class="radio"></span>
+          <h3>REGULAR</h3><p>365日24時間利用可能</p><div class="price" id="priceRegular"></div>
+        </label>
+        <label class="card" data-plan="day">
+          <span class="radio"></span>
+          <h3>平日DAY</h3><p>平日10:00～16:00利用可能</p><div class="price" id="priceDay"></div>
+        </label>
+        <label class="card" data-plan="night">
+          <span class="radio"></span>
+          <h3>NIGHT365</h3><p>365日22:00～05:00利用可能</p><div class="price" id="priceNight"></div>
+        </label>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">3</span>利用開始日を選択 <span class="badge">必須</span></div>
+     <div class="field">
+  <label id="startMonthLabel"></label>
+  <select id="startDaySelect" class="selectbox"></select>
+</div>
+      <div class="terms">※ 本日から当月末まで選択可能です。<br>※ 初月会費は利用開始日を含めた残り日数で日割り計算します。</div>
+    </section>
+
+    <section class="section" id="benefitSection">
+      <div class="sec-title"><span class="num">4</span>選べる特典を選択 <span class="badge">キャンペーン利用時のみ</span></div>
+      <div class="grid">
+        <label class="card active" data-benefit="personal">
+          <span class="tag">おすすめ</span><span class="radio"></span>
+          <h3>無料体験パーソナル 60分</h3>
+          <p>プロトレーナーによるマンツーマンサポート。<br>初回の不安解消・フォーム確認・メニュー作成におすすめです。（通常6,600円）</p>
+        </label>
+        <label class="card" data-benefit="free2">
+          <span class="radio"></span>
+          <h3>2か月目会費無料</h3>
+          <p id="freeSecondMonthText">2か月目の月会費が無料になります。</p>
+        </label>
+      </div>
+    </section>
+
+    <section class="summary">
+      <h2>お支払い予定（リアルタイム更新）</h2>
+      <div class="row"><span>入会金</span><strong id="joinFee"></strong></div>
+      <div class="row"><span>事務手数料</span><strong id="adminFee"></strong></div>
+      <div class="row"><span>初月会費（日割り）</span><strong id="firstMonthFee"></strong></div>
+      <div class="row sub"><span id="dateRange"></span><span></span></div>
+       <div class="row hidden" id="secondMonthRow"><span>2か月目</span><strong id="secondMonthFee"></strong></div>
+      <div class="row discount" id="monthlyDiscountRow"><span>月会費値引き</span><strong id="monthlyDiscount"></strong></div>
+      <div class="row total"><span>初回合計（税込）</span><strong id="firstTotal"></strong></div>
+      <div class="row sub hidden" id="cycleNote">
+  <span>26日以降は決済サイクルの関係で2か月目の会費も同日決済となります。</span>
+  <span></span>
+</div>
+      <hr style="border-color:#2a3632;border-style:solid;border-width:1px 0 0;margin:18px 0">
+      <div id="monthlyPlanText"></div>
+      <div class="row sub"><span id="benefitText"></span><span></span></div>
+      <div class="terms" id="conditionText"></div>
+    </section>
+  </section>
+
+  <section id="step2" class="hidden">
+    <h1>入会者情報</h1>
+    <p class="lead">以下の情報を入力し、会則確認後に決済入力へお進みください。</p>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">1</span>基本情報 <span class="badge">必須</span></div>
+
+ <div class="field">
+  <label>氏名</label>
+
+  <div class="grid two">
+    <input id="lastName" class="field-input" type="text" placeholder="姓">
+
+    <input id="firstName" class="field-input" type="text" placeholder="名">
+  </div>
+</div>
+
+<div class="field">
+  <label>フリガナ</label>
+
+  <div class="grid two">
+    <input id="lastKana" class="field-input" type="text" placeholder="セイ">
+
+    <input id="firstKana" class="field-input" type="text" placeholder="メイ">
+  </div>
+</div>
+
+<div class="field">
+  <label>生年月日</label>
+
+  <select id="birthYear" class="field-input">
+    <option value="">西暦</option>
+  </select>
+
+  <select id="birthMonth" class="field-input" style="margin-top:10px;">
+    <option value="">月</option>
+  </select>
+
+  <select id="birthDay" class="field-input" style="margin-top:10px;">
+    <option value="">日</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>電話番号</label>
+
+  <input
+    id="phone"
+    class="field-input"
+    type="tel"
+    inputmode="tel"
+    placeholder="例：09012345678"
+  >
+</div>
+
+<div class="field">
+  <label>メールアドレス</label>
+
+  <input
+    id="email"
+    class="field-input"
+    type="email"
+    inputmode="email"
+    placeholder="例：sample@example.com"
+  >
+</div>
+
+<div class="field">
+  <label>郵便番号</label>
+
+  <input
+    id="postalCode"
+    class="field-input p-postal-code"
+    type="text"
+    inputmode="numeric"
+    placeholder="例：2760049"
+  >
+</div>
+      <div class="field">
+        <label>住所</label>
+        <input id="addressAuto" class="field-input p-region p-locality p-street-address p-extended-address" type="text" placeholder="郵便番号入力で自動入力">
+      </div>
+
+      <div class="field">
+        <label>番地・建物名・部屋番号</label>
+        <input id="addressDetail" class="field-input" type="text" placeholder="例：1-2-3 フォレストビル101">
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">2</span>顔写真をアップロード <span class="badge">必須</span></div>
+      <div class="photo-box">
+        <input type="file" id="facePhoto" accept="image/*">
+        <img id="photoPreview" class="preview" alt="顔写真プレビュー">
+        <div class="terms">※ 会員証・本人確認用の顔写真です。正面から顔が分かる写真を選択してください。</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="sec-title"><span class="num">3</span>会則確認 <span class="badge">必須</span></div>
+
+     <div class="rules-box" id="rulesBox">
+<pre class="rules-pre">
+1．総則
+第1条（定義）
+本会則によって定める条項はA-nauts株式会社（以下「本部」という）、本部が承認する法人、個人（以下「パートナー」という。本部及びパートナーを以下「運営者」という）が運営するThe Forest Gym（フォレストジム、以下｢本クラブ｣という）に適用されるものとします。
+第2条（目的）
+本クラブの会員が、本クラブの施設を利用することにより、心身の健康維持・増進を図ることを目的とします。
+2．会員
+第3条（会員）
+会員の契約期間は、月単位で本部が別途定めた期間とし本部所定の退会手続きが完了するまでは自動更新とします。
+第4条（入会資格）
+本クラブの入会資格を有する方は、以下の項目を全て満たす方とします。
+①15才（高校生）以上の男女で、本会則を承認し、諸規則を遵守する方。
+②暴力団・暴力団員その他これに準ずる者等反社会的勢力でない方。また、将来にわたりこれに該当しないことを自ら保証する方。
+③入会に先立って、本クラブの実施するメディカルチェック等の結果により施設の利用に差し支えがないと判断された方。
+④他の会員に対する迷惑行為、本クラブの運営に支障を来す行為を行わないことを保証する方。
+⑤過去に本クラブを含む運営者が運営するクラブで除名処分となったことがない（除名処分に該当する行為を行い、結果的に自ら退会した方を含む）、または会員制スポーツクラブ等で除名処分となったことがない方。また、過去の除名原因が明確であり、本部が別途定める基準に応じて再度入会資格を認めた方。
+⑥次のいずれかに該当した場合、本クラブが別途定める審査において入会資格が認められ、入会条件に同意した方。
+・刺青がある方。
+・集団感染するおそれのある疾病に罹患している方。
+・施設を一人で利用できない方。
+・妊娠している方。
+・上記の他、本部が審査を必要と判断した方。
+第5条（入会手続き）
+①本クラブを利用する方は、本会則を承認の上、入会手続きを行い所定の料金等を納入し本部の承認を得、契約を行う事により会員となります。未成年者が入会を希望する場合は、本人とその親権者が連署の上入会手続きを行うものとします。この場合、親権者は本会則に基づく責任を本人と連帯して負うものとします。
+②会員となる方は入会手続きの際、氏名、生年月日、性別、連絡先電話番号・Ｅメールアドレス、現住所、緊急連絡先と電話番号、会費決済に必要な情報を登録するものとします。また、会員となる方は登録内容が正確であることを保証します。
+③本クラブは会員の顔写真付き身分証をコピーした上で入会手続きによって付与された会員番号を付したデジタル情報として保有し、本人確認等やサービスを提供する上での照合、サービス利用いただくための資格等の確認に利用します。
+④会員資格を喪失した方が、本クラブに入会を希望する場合、本部は資格喪失理由により、入会金・月会費・諸料金の割引を適用しない場合があります。また、本クラブは、第4条⑥により再度入会資格を認めた方について、月会費・諸料金の支払方法を指定する場合があります。
+第6条（会員証）
+①会員証は会員が本クラブの施設を利用するときの本人認証を行なうためのカードであり、本部は会員に対して会員証を発行します。会員は、会員証を必ず携帯し入退室するものとし、携帯していない場合は施設内に立ち入ることができません。また、会員証は諸手続きの際に提示いただきます。
+②会員が会員資格を喪失し、無効となった会員証は、返却の必要はありません。
+③会員は会員証を紛失したとき、盗難にあったとき、破損や読み取り不良等で利用できなくなったときは速やかにその旨を本クラブに連絡いただきます。その際、必ず会員本人がスタッフ勤務時間内に電話、WEB当の方法により予約の上、来店し、所定の再発行料を支払った上で再発行手続きをお取りいただきます。
+④会員証を他人に貸与、譲渡することはできません。会員証は会員本人のみが使用できるものとし、万一他人に貸与した場合は第12条⑧により除名とします。
+第7条（月会費・諸料金）
+①会員は本部が定めた月会費・諸料金を所定の方法で、所定の期日に本部に納入していただきます。本クラブは未成年の会員の親権者、または会員資格のある会員の家族を会員の代理人として、月会費・諸料金のお支払いを認める場合があります。この場合、会員の代理人は本会則に基づく責任を本人と連帯して負うものとします。
+②月会費・諸料金にかかる消費税は会員の負担とします。尚、消費税法の改正等により消費税率が変更される場合、適用日以降に該当する期間の月会費・諸料金に係る消費税について、前払金を含め法改正の内容に従い、会員は本部が定めた方法で差額を負担するものとします。
+③納入いただいた月会費・諸料金は、ご利用の有無に関係なく返金いたしません。
+④月会費・諸料金の金額、支払時期、支払方法等は本部がこれを定めます。
+⑤利用回数の有無にかかわらず、WEBにて退会手続きを完了した退会月迄は月会費・諸料金のお支払いが必要となります。
+⑥本部は本クラブの運営上必要と判断した場合または経済情勢等の変動に応じて、会員種類の改廃もしくは月会費・諸料金等の金額を変更することができ、本部が定めた方法により告知するものとします。
+⑦月会費・諸料金を滞納している会員は、施設のご利用をお断りすることがあります。また未払い分の月会費・諸料金は納入いただきます。会員が自己都合により会費を滞納した場合、本部が指定する方法で入金いただきます。その際必要な催促状に係る通信費として1回あたり110円（税込）、遅延損害金、振込手数料等の費用はすべて会員本人が負担するものとします。
+⑧一旦納入いただいた諸費用に過払金が生じた場合、本部所定の退会手続きが完了するまでの間、本部が適当と認める順序、方法によりいずれかの債務にも充当することが出来るものとします。または、法令の定めまたは本部が認める理由がある場合のみ返金いたします。尚、返金先は、会員本人または本条①で予め本部が認めている会員の代理人とします。
+⑧やむを得ない事情を除き、平日DAY会員が月間2回以上利用時間を延長して施設を利用した場合、次月よりレギュラー会員に種別変更頂きます。また、高校生会員が利用時間を延長して施設を利用した場合1回につき440円（税込）をご負担いただきます。また、いずれの場合も退出に費用が発生する場合はその費用を全額ご負担いただきます。
+第8条（退会・再入会）
+①会員本人の都合による退会は、ご本人が退会希望月の9日20時迄にWEBにて所定の手続きを完了する事により、その月末で退会となります。また、９日を過ぎた場合、翌月以降の月末日の退会となります。未払い料金のある場合は退会届を提出した時期から最短の決済日にて全額決済するものとします。万が一決済できない場合、完納するまで退会処理は行われないことに同意いただきます。
+②退会手続き、再入会手続きは店頭にてWEBを用いて行うものとします。
+③所定の手続きは、本部にデータが送信いただいたもののみ手続きの依頼を受け付けます。
+④入会キャンペーンでご入会いただいた場合、定めた最低継続期間中は退会はできません。また入会キャンペーンであらかじめ定めた期間内に退会された場合はキャンペーン値引き分の精算金が発生いたします。なお、キャンペーン特典の一部について行使しなかったことを理由に精算金対象から差し引くことは致しません。
+⑤入会した会員が再入会する際は、入会金は発生しません。また、退会前の会員証をお持ち頂き使用できる場合は事務手数料も発生しません。
+第9条（会員資格の譲渡、相続、貸与）
+会員は、如何なる場合も、その会員資格を他に譲渡・相続または貸与することはできません。
+第10条（会員の休会）
+①会員本人の都合により1ヶ月以上の長期にわたり本クラブを利用できない場合、本人が休会希望前月の9日20時までにWEBにて所定の手続きを完了した場合、当月より月額550円（税込）の休会月会費を支払うことにより休会できます。また、休会手続きが休会希望前月の９日20時を過ぎた場合、翌々月以降の休会となり、翌月の月会費は全額お支払いただきます。
+②所定の手続きは、本部にデータが送信いただいたもののみ手続きの依頼を受け付けます。
+③継続利用期間(もしくは最低継続利用期限日)が条件に付された入会キャンペーン等を利用してご入会いただいている場合、休会期間は継続利用期間に含めないものとし、最低継続利用期限日は休会期間相当分延長されるものとします。ただし、無料期間中の休会、および行政からの要請その他の事由により本クラブの営業休止期間は除く。
+④休会会員は、本人が本クラブの受付時間に来店し所定の手続きをすることにより随時復会できます。復会月より所定の月会費をいただきます。また、1ヶ月以内の復会は休会の取り消しとなり、復会月の月会費は全額お支払いただきます。復会手続きが９日を過ぎた場合、復会月の翌月は休会できないものとし、翌月の月会費は全額お支払いただきます。
+⑤本人来店による所定の手続きができない場合は、代理人または郵送による所定の手続きができるものとし、手続期日などは①と同様です。
+第11条（諸手続き）
+①8条に定める内容を除き、会員本人が本クラブのスタッフ勤務時間内で電話、WEB等の方法で来店予約の上、来店し諸手続きを行なうものとします。
+②会員は会員種類・プライベートロッカー・オプション・サービスに関する変更等の手続きを、別途定める所定の方法で完了しなければなりません。なお、継続利用期間が条件に付された入会キャンペーン等を利用してご入会いただいている場合、当該期間中にレギュラー会員及び高校生会員から平日DAY会員への変更は行えません。
+③会員は入会手続きの際に登録した内容に変更があった場合、速やかに変更手続きを行わなくてはなりません。また、その後に変更があった場合も同様とします。
+④本クラブが第5条②の内容に関して変更の事実を確認した場合は、本人の同意をもって登録内容を変更できるものとし、届出書の取り交わしを省略する場合があります。
+⑤運営者が会員あてに郵便物で通知する場合、会員から届出のあった最新の住所あてに行い、発送をもって効力を有するものとし、不到達等以後の責を負いません。
+⑥運営者が会員あてにLINE、Eメールで通知する場合、会員から届出のあった登録内容に基いて行い、発信をもって効力を有するものとし、未確認または不到達等以後の責を負いません。
+⑦会員が連絡先の変更を怠った場合、郵便物を希望しない場合は、運営者からの通知が不到達となっても、通常到達すべきときに到達したものとみなすことに異議はないものとします。
+⑧本クラブは、本人確認等やサービスを提供する上での照合、サービスを利用いただくための資格等の確認のため、入会手続きの際に登録した顔写真の更新が必要と判断した場合、会員の顔写真を撮影できるものとします。
+第12条（会員除名）
+会員が次のいずれかに該当した場合は、本部は、資格停止処分あるいは除名処分等の処分をなすことができます。また、各項に該当し除名を受けた会員は、その後運営者の運営する全ての施設に入会および立ち入ることができないものとします。（但し、本部が別途定める基準に準じて認めた場合は除く）除名処分を受けた会員は除名処分を受けた日に退会処理を行うこととする。その際、未払い会費、キャンペーン条件等満たしていないなどの理由により精算金が発生する場合は最終決済日をもって清算する。
+①本会則、その他本部が定める諸規則に違反したとき。
+②本クラブの名誉を傷つけ、秩序を乱したとき。
+③月会費・諸料金の遅延など支払いを怠ったとき。月会費・諸料金を滞納し、本クラブの催告に応じないとき。月会費・諸料金を3ヶ月以上滞納したとき。
+④入会に際して本部に虚偽の申告をしたとき。
+⑤本部が会員としてふさわしくないと判断したとき。
+⑥暴力団・暴力団員その他これに準ずる者等反社会的勢力であることが判明した時。
+⑦他の会員に対する迷惑行為、本クラブの運営に支障を与えるような行為をしたとき。
+⑧第22条各号の禁止行為を行ったとき。
+⑨その他、本条各号に準ずる行為をしたとき。
+第13条（会員資格喪失）
+会員は次の場合に会員資格を喪失します。また、会員資格を喪失した会員証は直ちに無効となり、以後の本クラブへの入室、施設利用はできません。
+退会したとき。
+①会員が株式会社もぐらへ申し込んだ集金代行・保証委託契約について、集金代行会社より契約不成立、解除または無効の通知を受理したとき。（理由の如何に関わらず、会員へ事前通知連絡することはありません。）
+②除名されたとき。
+③死亡したとき。
+④本クラブが廃止されたとき。
+第14条（健康管理）
+①会員は各自の責任において健康管理を行うものとします。
+②会員は疾病により医師に運動や入浴を控えるように指示された場合、または施設およびサービスの利用にあたり治療中の疾病もしくは疾患の疑いが生じた場合には本クラブへ申告するものとします。本クラブは会員からの申告または施設およびサービスの利用中に疾病もしくは疾患の可能性が生じた場合には医療機関による検診を実施し、その結果により施設の利用に差し支えがないことを確認するものとします。
+3．施設・サービス利用
+第15条（会員外利用者）
+本部は、特に必要と認めた場合、会員以外の方（以下会員外利用者という）に本クラブの立ち入り、見学、施設・サービスを利用させることができます。会員外利用者についても施設・サービス利用のための資格確認、運営や緊急時の対応に必要な情報を登録するものとします。また、会員と同様に本会則を適用します。
+第16条（諸規則の厳守）
+会員は本クラブ施設・サービス利用に際して、本会則および本部が別途定める規則と注意事項を厳守し、本クラブでは従業員の指示に従っていただきます。
+第17条（入室禁止、退室）
+運営者は下記の項に該当する方に入室禁止、退室を命じることができます。
+①本会則および諸規則を遵守しない方。
+②暴力団・暴力団員その他これに準ずる者等反社会的勢力。
+③刺青を露出した方。
+④酒気を帯びている方。
+⑤集団感染するおそれのある疾病に罹患している方。
+⑥運営者が、他の施設利用者に迷惑をかけると判断した方。
+⑦正当な理由なく本クラブの従業員の指示に従わない方。
+⑧過去に本クラブを含む運営者が運営するクラブで除名処分となったことがある（除名処分に該当する行為を行い、結果的に自ら退会した方を含む）、または会員制スポーツクラブ等で禁止行為を行ったことにより除名処分となったことがある方。
+⑨第22条で禁止されている行為を行った方。
+第18条（施設・サービス利用制限）
+運営者は下記の項に該当する方に施設・サービス利用の制限を命じることができます。
+①健康状態により、医師から運動や入浴を禁じられている方。
+②運営者が運動や入浴、サービス利用することが好ましくないと判断した方。
+第19条（損害賠償）
+①本クラブの施設利用に際して本人または第三者に人的・物的事故が生じ、その事故について運営者に明らかな帰責事由が認められる場合に限り、運営者は適正な範囲の賠償をするものとします。
+②会員が本クラブの施設利用に際して運営者、運営者の従業員または第三者に損害を与えた場合、速やかにその賠償の責に応じるものとします。
+③会員が本クラブを利用する際に生じた怪我、事故等に対して、運営者に明らかな故意または重大な過失がある場合を除き、会員各自の自己責任とし、運営者は一切損害賠償・補償等の責を負いません。
+第20条（盗難）
+会員は、本クラブに設置されているロッカー等を会員自身の責任と負担により使用するものとします。収納物の盗難・毀損その他本クラブの利用に際して生じた盗難・毀損等については、運営者に帰責事由が認められる場合に限り、運営者は適正な範囲の賠償をするものとします。
+第21条（紛失物・忘れ物・放置物）
+①会員が本クラブの利用に際して生じた紛失については、運営者は一切損害賠償・補償等の責を負いません。
+②忘れ物・放置物について、本クラブは速やかに施設近隣の警察署へ届け出るものとします。但し、劣化のおそれがあるなど衛生安全管理上、保管は不適切と判断したものは、適宜処理させていただきます。
+第22条（禁止事項）
+本クラブ施設内および本クラブ周辺において、会員による次の行為を禁止します。
+①会員証を他人に貸与すること。
+②会員の入室と同時に施設の利用資格がない同伴者を施設内へ入室させること。
+③運動に不適切な服装、装飾品、履物を着用して施設を利用すること。
+④動物を施設内に持ち込むこと。（身体障害者補助犬法で定められた盲導犬、介助犬及び聴導犬を除く）
+⑤刃物等の危険物を施設内に持ち込むこと。
+⑥施設内で喫煙すること。（電子タバコ・無煙タバコを含む）
+⑦許可なく施設内で撮影・録音すること。
+⑧本クラブの諸施設・器具・備品その他運営者が管理する物品の損壊や持ち出し、落書きや造作をすること。
+⑨所定の場所以外での排泄行為。
+⑩他人や従業員、本クラブ、運営者を誹謗、中傷すること
+⑪許可なく本クラブにおいて物品の売買やパーソナルトレーニング等の営業行為や勧誘をすること。営利・非営利を問わず勧誘行為（団体加入の勧誘を含む）や政治活動、署名活動をすること。
+⑫他人や従業員の身体を押す、拘束する、殴打する、蹴り上げる等の暴力行為。暴言、恫喝、大声、奇声を発したり、他人を睨む、行く手を遮る、襲いかかろうとする等の威嚇行為。物を叩く、投げる、壊すなど、他人が恐怖を感じる危険な行為。
+⑬痴漢、覗き、露出等の公序良俗に反する行為。
+⑭他人や従業員を待ち伏せたり、尾行、執拗な話しかけ等のストーカー行為。
+⑮正当な理由なく、面談、電話、その他の方法で従業員を拘束する等、従業員の業務を妨げる行為。
+⑯支払うべき月会費、諸料金、諸費用を支払うことなく不正に施設・サービスを利用する行為。
+⑰他人の施設利用を妨げる行為。
+⑱施設のエアコン、照明、換気扇などの入・切・変更などを従業員の了解をとらずに行う行為
+⑲その他、本クラブの秩序を乱す行為。本条各号に準じる行為。
+第23条（利用案内）
+本会則に定めないクラブ運営事項については、施設内掲示あるいは利用案内または本部が別途定める規則に準じます。
+第24条（営業日・営業時間・受付時間）
+①本クラブの施設の営業日・営業時間・受付時間は別途定めます。
+②気象、災害、警報、注意報その他諸事情等により、本部が受付時間の変更が必要と判断した場合は、事前告知することなく受付時間を変更することがあります。
+4．施設営業
+第25条（施設の利用制限と休業）
+①本クラブは次の理由により、施設の全部または一部、または一定の時間について、利用制限または臨時休業することがあります。
+（1）気象、災害、警報、注意報等により、安全に営業を行う事ができないと運営者が判断したとき。
+（2）行政指導、法令等重大な事由により、止むを得ないと運営者が判断したとき。
+（3）入居している複合施設が休館するとき。
+（4）施設点検、施設の改装または修理、その他の工事により営業ができないと運営者が判断したとき。
+（5）突発的なシステム・機器障害等により正常に入退室管理を行えないと判断したとき。
+（6）その他、運営者が休業を必要と判断したとき。
+②予定されている休業は、あらかじめ原則2週間前までに告知します。但し、緊急の際は事前告知できない場合があります。
+③施設の一部分の利用制限ないし利用停止の措置にとどまる場合には、運営者は会員に会費を返還しないものとします。また、①（1）～（6）の事由により施設の全部を休館する場合、休館店舗のみ利用できる会員種類の会員の会費については、以下のとおりとします。但し、休館店舗以外の他店舗も利用することができる会員種類の会員は対象外とします。
+（1）月間10営業日以上（2月は9営業日以上）施設の全部を休館した場合は、休館した日数分を日割り計算し返金いたします。
+第26条（本クラブおよび施設の廃止・統合）
+運営者は次の理由により、本クラブおよび施設の全部または一部を廃止・統合をすることがあります。
+①気象、災害等により施設を休業し、再開業が困難と判断したとき。
+②経営上、営業の継続が困難と判断したとき。
+本クラブおよび施設の廃止や統合が行われた場合、運営者はその旨を会員に告知し、本クラブの会員契約の全部または一部を終了させることができるものとします。
+5．その他
+第27条（個人情報保護）
+運営者は、個人情報の取扱いに関するプライバシーポリシーを策定し、本プライバシーポリシーを遵守するとともに、お客様の個人情報をはじめとする全ての個人情報をより安全かつ適切に取り扱うことを宣言いたします。プライバシーポリシーは、本クラブのホームページに掲示いたします。
+第28条（会則の改定）
+本部は本会則を改定することができ、改定された会則は、改定日より全会員に適用されるものとします。また、本部が本会則を改定する場合には、改定日の2ヶ月以上前に第29条（告知方法）および別途本部が告知方法を定めた場合にはその方法に従って会員に告知するものとします。
+第29条（告知方法）
+本会則の改定にあたっては、施設内に掲示し、かつ、本クラブのウェブサイトへ掲載することにより、これを会員に告知するものとします。また、本クラブの諸事情に関する予告、通知は、本部のウェブサイトへ掲載・施設内掲示・施設内放送などにより通知することにより、これを会員に告知するものとします。
+
+附則
+本会則は、2020年５月1日より施行いたします。
+2023年 06月29日改定
+2025年　１月　 1日改定
+法人月会費制会員 会則における特則
+法人月会費制会員は、The Forest Gym会則に次の事項を追加いたします。
+第1条The Forest Gym会則第8条（退会）について以下の通り追加いたします。
+①契約法人が本クラブを退会した場合は、各登録会員も自動的に退会となります。（会員による退会の手続きは不要です。）
+②お勤め先、所属先を退職または脱退した場合は、会員本人が退職または脱退月の9日迄に来店し所定の手続きを完了しなければなりません。
+第2条The Forest Gym会則第13条（会員資格喪失）について以下の通り追加いたします。
+会員は次の場合に会員資格を喪失します。
+①契約法人が本クラブを退会したとき、または契約法人たる資格を喪失したとき。
+②お勤め先、所属先を退職または脱退したとき。
+第3条（効力）
+本特則は2020年4月1日より適用します。本特則に定めのない事項は、全てThe Forest Gym会則に従うものとします。
+以上
+
+</pre>
+</div> 
+
+      <label class="check-row disabled" id="agreeWrap">
+        <input type="checkbox" id="agreeRules" disabled>
+        <span>会則・キャンペーン適用条件・退会時精算条件を確認し、同意しました。</span>
+      </label>
+
+      <div class="terms">※ 会則を最後までスクロールすると、同意チェックが可能になります。</div>
+    </section>
+  </section>
+
+</main>
+
+<div class="bottom">
+  <div class="bottom-price">
+    <div id="bottomLabel">初回お支払い予定（税込）</div>
+    <strong id="bottomTotal"></strong>
+  </div>
+  <button class="btn" id="mainButton" onclick="mainAction()">この内容で入会へ進む ＞</button>
+</div>
+
+<script>
+const PLANS = {
+  regular:{name:"REGULAR",normal:7480,campaign:4950,platinum:5940,discount:2530},
+  day:{name:"平日DAY",normal:6050,campaign:4180,platinum:4510,discount:1870},
+  night:{name:"NIGHT365",normal:4950,campaign:3300,platinum:3960,discount:1650}
+};
+
+const state = {
+  step:1,
+  campaign:true,
+  plan:"regular",
+  benefit:"personal",
+  startDate:null,
+  firstTotal:0,
+  facePhotoSelected:false,
+  facePhotoBase64:"",
+  facePhotoName:"",
+  facePhotoUrl:""
+};
+
+const yen = n => Number(n).toLocaleString("ja-JP") + "円";
+
+function parseLocalDate(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(y,m-1,d);}
+function toISODateLocal(date){const y=date.getFullYear();const m=String(date.getMonth()+1).padStart(2,"0");const d=String(date.getDate()).padStart(2,"0");return `${y}-${m}-${d}`;}
+function todayISO(){return toISODateLocal(new Date());}
+function endOfMonthISO(){const d=new Date();return toISODateLocal(new Date(d.getFullYear(),d.getMonth()+1,0));}
+function daysInMonth(date){return new Date(date.getFullYear(),date.getMonth()+1,0).getDate();}
+function remainingDaysIncludingStart(date){return daysInMonth(date)-date.getDate()+1;}
+function calcProrated(monthly,date){return Math.floor(monthly*remainingDaysIncludingStart(date)/daysInMonth(date));}
+function currentPlan(){return PLANS[state.plan];}
+function currentMonthly(){const p=currentPlan();return state.campaign?p.campaign:p.normal;}
+function getEnrollmentDate(){return new Date();}
+function addMonthsFromEnrollment(months){const d=getEnrollmentDate();return new Date(d.getFullYear(),d.getMonth()+months,1);}
+function ymLabel(date){return `${date.getFullYear()}年${date.getMonth()+1}月`;}
+function getCampaignEndMonthLabel(){return ymLabel(addMonthsFromEnrollment(12));}
+function getPlatinumStartMonthLabel(){return ymLabel(addMonthsFromEnrollment(13));}
+function getCancelableMonthLabel(){return ymLabel(addMonthsFromEnrollment(3));}
+
+function updatePlanPrices(){
+  const campaignEnd=getCampaignEndMonthLabel();
+  const platinumStart=getPlatinumStartMonthLabel();
+
+  document.getElementById("planNote").textContent = state.campaign
+    ? `キャンペーン適用後の料金で表示しています。${campaignEnd}まで特別価格、${platinumStart}以降は長期継続割引（プラチナ会員価格）となります。`
+    : "通常入会の料金で表示しています。キャンペーン特典・月会費値引きは適用されません。";
+
+  for(const [key,p] of Object.entries(PLANS)){
+    const el=document.getElementById(key==="regular"?"priceRegular":key==="day"?"priceDay":"priceNight");
+    el.innerHTML = state.campaign
+      ? `<span class="old">通常 ${yen(p.normal)}/月</span><br>
+         ${yen(p.campaign)}<small> / 月</small>
+         <div class="campaign-note">${campaignEnd}まで毎月${yen(p.discount)}値引き<br>${platinumStart}以降 ${yen(p.platinum)} / 月（永久値引き）</div>`
+      : `${yen(p.normal)}<small> / 月</small><div class="campaign-note">通常月会費でのご利用</div>`;
+  }
+}
+
+function getMonthlyDisplay(){
+  const p=currentPlan();
+  const campaignEnd=getCampaignEndMonthLabel();
+  const platinumStart=getPlatinumStartMonthLabel();
+
+  if(state.campaign){
+    return `
+      <div class="plan-line"><div class="plan-period">${campaignEnd}まで</div><div class="plan-price">キャンペーン${p.name}<br>${yen(p.campaign)} / 月</div></div>
+      <div class="plan-line"><div class="plan-period">${platinumStart}以降</div><div class="plan-price">永久値引き${p.name}<br>${yen(p.platinum)} / 月</div></div>
+    `;
+  }
+
+  return `<div class="plan-line"><div class="plan-period">通常月会費</div><div class="plan-price">${p.name}<br>${yen(p.normal)} / 月</div></div>`;
+}
+
+function updateFreeSecondMonthText(){
+  const p=currentPlan();
+  document.getElementById("freeSecondMonthText").textContent=`2か月目の月会費 ${yen(p.campaign)} が無料になります。`;
+}
+
+function recalc(){
+  if(!state.startDate){
+  return;
+}
+  const p=currentPlan();
+  const campaignEnd=getCampaignEndMonthLabel();
+  const platinumStart=getPlatinumStartMonthLabel();
+  const cancelableMonth=getCancelableMonthLabel();
+
+  document.getElementById("campaignHeadText").innerHTML =
+    `1．初期費用（通常8,800円→0円）<br>
+     2．月会費（通常7,480円→4,950円）<br>
+     &nbsp;&nbsp;&nbsp;&nbsp;${campaignEnd}分会費まで毎月値引<br>
+     3．選べる特典でさらにお得！`;
+
+  document.getElementById("campaignTerms").innerHTML =
+    `<strong>キャンペーン適用条件</strong><br>
+     ※ 初期費用無料はWEB入会または見学当日入会のみ対象。見学後日のWEB入会は対象外です。<br>
+     ※ ${cancelableMonth}以降退会可能です。<br>
+     ※ ${campaignEnd}より前に退会の場合、キャンペーン値引き分を退会時に精算します。`;
+
+  document.getElementById("monthlyPlanText").innerHTML=getMonthlyDisplay();
+  updatePlanPrices();
+  if(state.campaign) updateFreeSecondMonthText();
+
+  const date=parseLocalDate(state.startDate);
+  const monthly=currentMonthly();
+  const joinFee=state.campaign?0:5500;
+  const adminFee=state.campaign?0:3300;
+  const firstMonth=calcProrated(monthly,date);
+
+  const today=new Date();
+  const isAfter26=today.getDate()>=26;
+
+  let secondMonthFee=0;
+
+  if(isAfter26){
+    if(state.campaign && state.benefit==="free2"){
+      secondMonthFee=0;
+    }else{
+      secondMonthFee=monthly;
+    }
+  }
+
+  const total=joinFee+adminFee+firstMonth+secondMonthFee;
+  const remain=remainingDaysIncludingStart(date);
+  const dim=daysInMonth(date);
+  state.firstTotal=total;
+
+  document.getElementById("joinFee").textContent=yen(joinFee);
+  document.getElementById("adminFee").textContent=yen(adminFee);
+  document.getElementById("firstMonthFee").textContent=yen(firstMonth);
+
+  if(document.getElementById("secondMonthFee")){
+    document.getElementById("secondMonthFee").textContent=yen(secondMonthFee);
+  }
+
+  if(document.getElementById("secondMonthRow")){
+    document.getElementById("secondMonthRow").classList.toggle("hidden",!isAfter26);
+  }
+
+  if(document.getElementById("cycleNote")){
+    document.getElementById("cycleNote").classList.toggle("hidden",!isAfter26);
+  }
+
+  document.getElementById("dateRange").textContent=`${state.startDate.replaceAll("-","/")}〜${endOfMonthISO().replaceAll("-","/")}分（${remain}日/${dim}日）`;
+  document.getElementById("firstTotal").textContent=yen(total);
+  document.getElementById("bottomTotal").textContent=yen(total);
+
+  if(state.campaign){
+    document.getElementById("monthlyDiscountRow").classList.remove("hidden");
+    document.getElementById("monthlyDiscount").textContent=`毎月 ${yen(p.discount)} 値引き`;
+    document.getElementById("benefitSection").classList.remove("hidden");
+    document.getElementById("benefitText").textContent=state.benefit==="free2" ? `適用特典：2か月目会費無料（${yen(p.campaign)}相当）` : "適用特典：無料体験パーソナル60分";
+    document.getElementById("conditionText").innerHTML =
+      `<strong>キャンペーン条件</strong><br>
+       ※ 初期費用無料・月会費値引き・選べる特典は${campaignEnd}までの継続条件付き値引きです。<br>
+       ※ ${campaignEnd}より前に退会の場合、キャンペーン値引き分を退会時に精算されます。<br>
+       ※ 初期費用無料はWEB入会または見学当日入会のみ対象、見学後日のWEB入会は対象外です。<br>
+       ※ ${cancelableMonth}以降退会可能です。`;
+  }else{
+    document.getElementById("monthlyDiscountRow").classList.add("hidden");
+    document.getElementById("monthlyDiscount").textContent="";
+    document.getElementById("benefitSection").classList.add("hidden");
+    document.getElementById("benefitText").textContent="通常入会のためキャンペーン特典は適用されません。";
+    document.getElementById("conditionText").innerHTML =
+      `<strong>通常入会</strong><br>
+       ※ 入会金5,500円、事務手数料3,300円が発生します。<br>
+       ※ 月会費値引き・選べる特典は適用されません。`;
+  }
+}
+
+function showStep(step){
+  state.step=step;
+  document.getElementById("step1").classList.toggle("hidden",step!==1);
+  document.getElementById("step2").classList.toggle("hidden",step!==2);
+  document.getElementById("step1tab").classList.toggle("active",step===1);
+  document.getElementById("step2tab").classList.toggle("active",step===2);
+  document.getElementById("mainButton").textContent=step===1 ? "この内容で入会へ進む ＞" : "決済入力へ進む ＞";
+  document.getElementById("bottomLabel").textContent=step===1 ? "初回お支払い予定（税込）" : "選択中の初回お支払い予定";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function mainAction(){
+  if(state.step===1){
+    showStep(2);
+    return;
+  }
+  goPayment();
+}
+
+function validateMemberInfo(){
+
+  const lastName = document.getElementById("lastName").value.trim();
+  const firstName = document.getElementById("firstName").value.trim();
+
+  const lastKana = document.getElementById("lastKana").value.trim();
+  const firstKana = document.getElementById("firstKana").value.trim();
+
+  const birthYear = document.getElementById("birthYear").value;
+  const birthMonth = document.getElementById("birthMonth").value;
+  const birthDay = document.getElementById("birthDay").value;
+
+ const postal = document.getElementById("postalCode").value.trim();
+const address = document.getElementById("addressAuto").value.trim();
+const detail = document.getElementById("addressDetail").value.trim();
+
+const phone = document.getElementById("phone").value.trim();
+const email = document.getElementById("email").value.trim();
+
+const agree = document.getElementById("agreeRules").checked; 
+
+  if(!lastName || !firstName){
+    alert("氏名を入力してください。");
+    return false;
+  }
+
+  if(!lastKana || !firstKana){
+    alert("フリガナを入力してください。");
+    return false;
+  }
+
+  if(!birthYear || !birthMonth || !birthDay){
+    alert("生年月日を選択してください。");
+    return false;
+  }
+
+ if(!phone){
+  alert("電話番号を入力してください。");
+  return false;
+}
+
+if(!email){
+  alert("メールアドレスを入力してください。");
+  return false;
+}
+
+if(!/^[0-9\-]+$/.test(phone)){
+  alert("電話番号の形式が正しくありません。");
+  return false;
+}
+
+if(!/^\S+@\S+\.\S+$/.test(email)){
+  alert("メールアドレスの形式が正しくありません。");
+  return false;
+}
+
+if(!postal){
+    alert("郵便番号を入力してください。");
+    return false;
+  }
+
+  if(!address){
+    alert("住所を入力してください。");
+    return false;
+  }
+
+  if(!detail){
+    alert("番地・建物名・部屋番号を入力してください。");
+    return false;
+  }
+
+  if(!state.facePhotoSelected){
+    alert("顔写真をアップロードしてください。");
+    return false;
+  }
+
+  if(!agree){
+    alert("会則を最後まで確認し、同意チェックを入れてください。");
+    return false;
+  }
+
+  return true;
+}
+async function goPayment(){
+
+  if(!validateMemberInfo()){
+    return;
+  }
+
+  let paymentUrl="";
+
+  if(state.campaign){
+    if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17643";
+    else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17677";
+    else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17678";
+  }else{
+    if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17679";
+    else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17680";
+    else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17681";
+  }
+
+  const birthYear=document.getElementById("birthYear").value;
+  const birthMonth=document.getElementById("birthMonth").value;
+  const birthDay=document.getElementById("birthDay").value;
+
+  const payload={
+    lastName:document.getElementById("lastName").value.trim(),
+    firstName:document.getElementById("firstName").value.trim(),
+    lastKana:document.getElementById("lastKana").value.trim(),
+    firstKana:document.getElementById("firstKana").value.trim(),
+    birthDate:`${birthYear}-${birthMonth}-${birthDay}`,
+    phone:document.getElementById("phone").value.trim(),
+    email:document.getElementById("email").value.trim(),
+    postal:document.getElementById("postalCode").value.trim(),
+    address:document.getElementById("addressAuto").value.trim(),
+   addressDetail:document.getElementById("addressDetail").value.trim(),
+
+facePhotoUrl:state.facePhotoUrl,
+
+campaign:state.campaign ? "利用する" : "利用しない",
+    plan:currentPlan().name,
+    startDate:state.startDate,
+    benefit:state.benefit==="free2" ? "2か月目会費無料" : "無料パーソナル60分",
+    firstTotal:yen(state.firstTotal),
+    paymentUrl:paymentUrl
+  };
+
+
+   await fetch(
+  "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
+  {
+    method:"POST",
+    mode:"no-cors",
+    body:JSON.stringify(payload)
+  }
+);
+
+window.location.href=paymentUrl;
+
+}
+
+document.querySelectorAll("[data-campaign]").forEach(card=>{
+  card.addEventListener("click",()=>{
+    document.querySelectorAll("[data-campaign]").forEach(c=>c.classList.remove("active"));
+    card.classList.add("active");
+    state.campaign=card.dataset.campaign==="yes";
+    recalc();
+  });
+});
+
+document.querySelectorAll("[data-plan]").forEach(card=>{
+  card.addEventListener("click",()=>{
+    document.querySelectorAll("[data-plan]").forEach(c=>c.classList.remove("active"));
+    card.classList.add("active");
+    state.plan=card.dataset.plan;
+    recalc();
+  });
+});
+
+document.querySelectorAll("[data-benefit]").forEach(card=>{
+  card.addEventListener("click",()=>{
+    document.querySelectorAll("[data-benefit]").forEach(c=>c.classList.remove("active"));
+    card.classList.add("active");
+    state.benefit=card.dataset.benefit;
+    recalc();
+  });
+});
+
+document.getElementById("facePhoto").addEventListener("change", async e=>{
+
+  const file = e.target.files[0];
+  const preview = document.getElementById("photoPreview");
+
+  if(!file){
+    state.facePhotoSelected = false;
+    state.facePhotoUrl = "";
+    preview.style.display = "none";
+    preview.src = "";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "tfg_member_upload");
+  formData.append("folder", "tfg_member_faces");
+
+  try{
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/djr8c6czv/image/upload",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const json = await res.json();
+
+    state.facePhotoSelected = true;
+    state.facePhotoUrl = json.secure_url;
+
+    preview.src = json.secure_url;
+    preview.style.display = "block";
+
+  }catch(err){
+    state.facePhotoSelected = false;
+    state.facePhotoUrl = "";
+    alert("顔写真のアップロードに失敗しました。");
+  }
+});
+
+document.getElementById("rulesBox").addEventListener("scroll",e=>{
+  const box=e.target;
+  if(box.scrollTop + box.clientHeight >= box.scrollHeight - 8){
+    document.getElementById("agreeRules").disabled=false;
+    document.getElementById("agreeWrap").classList.remove("disabled");
+  }
+});
+
+(function init(){
+
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const today = now.getDate();
+
+  document.getElementById("startMonthLabel").textContent =
+    `${year}年${month}月`;
+
+  const select = document.getElementById("startDaySelect");
+
+  select.innerHTML = "";
+
+  const lastDay = new Date(year, month, 0).getDate();
+
+  const week = ["日","月","火","水","木","金","土"];
+
+  for(let day = today; day <= lastDay; day++){
+
+    const d = new Date(year, month - 1, day);
+
+    const yyyy = year;
+    const mm = String(month).padStart(2,"0");
+    const dd = String(day).padStart(2,"0");
+
+    const value = `${yyyy}-${mm}-${dd}`;
+
+    const option = document.createElement("option");
+
+    option.value = value;
+
+    option.textContent =
+      `${day}日（${week[d.getDay()]}）`;
+
+    select.appendChild(option);
+  }
+
+  state.startDate = select.value;
+
+  select.addEventListener("change",e=>{
+    state.startDate = e.target.value;
+    recalc();
+  });
+
+  initBirthdaySelects();
+
+  recalc();
+
+})();
+  
+function initBirthdaySelects(){
+
+  const y = document.getElementById("birthYear");
+  const m = document.getElementById("birthMonth");
+  const d = document.getElementById("birthDay");
+
+y.innerHTML = `<option value="">西暦</option>`;
+m.innerHTML = `<option value="">月</option>`;
+d.innerHTML = `<option value="">日</option>`;
+
+  const now = new Date().getFullYear();
+
+  for(let year = now - 15; year >= 1920; year--){
+    y.innerHTML += `<option value="${year}">${year}年</option>`;
+  }
+
+  for(let month = 1; month <= 12; month++){
+    const v = String(month).padStart(2,"0");
+
+    m.innerHTML += `<option value="${v}">${month}月</option>`;
+  }
+
+  for(let day = 1; day <= 31; day++){
+    const v = String(day).padStart(2,"0");
+
+    d.innerHTML += `<option value="${v}">${day}日</option>`;
+  }
+}
+  function toZenkakuKana(str){
+  return str.replace(/[ｦ-ﾟ]/g, function(s){
+    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+  }).replace(/ﾞ/g, "゛").replace(/ﾟ/g, "゜");
+}
+
+["lastKana", "firstKana"].forEach(id=>{
+  const el = document.getElementById(id);
+
+  el.addEventListener("blur", ()=>{
+    el.value = toZenkakuKana(el.value).trim();
+  });
+});
+  document.getElementById("phone").addEventListener("input", e=>{
+  e.target.value = e.target.value.replace(/[^0-9]/g,"");
+});
+</script>
+
+</body>
+</html>
