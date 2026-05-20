@@ -266,13 +266,19 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
     </section>
 
     <section class="section">
-      <div class="sec-title"><span class="num">3</span>利用開始日を選択 <span class="badge">必須</span></div>
-     <div class="field">
-  <label id="startMonthLabel"></label>
-  <select id="startDaySelect" class="selectbox"></select>
-</div>
-      <div class="terms">※ 本日から当月末まで選択可能です。<br>※ 初月会費は利用開始日を含めた残り日数で日割り計算します。</div>
-    </section>
+  <div class="sec-title"><span class="num">3</span>利用開始日を選択 <span class="badge">必須</span></div>
+
+  <div class="field">
+    <label id="startMonthLabel" class="month-label"></label>
+
+    <div id="startDayButtons" class="day-buttons"></div>
+  </div>
+
+  <div class="terms">
+    ※ 本日から当月末まで選択可能です。<br>
+    ※ 初月会費は利用開始日を含めた残り日数で日割り計算します。
+  </div>
+</section>
 
     <section class="section" id="benefitSection">
       <div class="sec-title"><span class="num">4</span>選べる特典を選択 <span class="badge">キャンペーン利用時のみ</span></div>
