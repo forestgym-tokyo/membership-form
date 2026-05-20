@@ -972,11 +972,6 @@ document.querySelectorAll("[data-benefit]").forEach(card=>{
   });
 });
 
-document.getElementById("startDate").addEventListener("change",e=>{
-  state.startDate=e.target.value;
-  recalc();
-});
-
 document.getElementById("facePhoto").addEventListener("change", async e=>{
 
   const file = e.target.files[0];
