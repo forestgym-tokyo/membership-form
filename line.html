@@ -1078,9 +1078,9 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
   document.getElementById("startMonthLabel").textContent =
     `${year}年${month}月`;
 
-  const select = document.getElementById("startDaySelect");
+  const wrap = document.getElementById("startDayButtons");
 
-  select.innerHTML = "";
+  wrap.innerHTML = "";
 
   const lastDay = new Date(year, month, 0).getDate();
 
@@ -1096,22 +1096,34 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
 
     const value = `${yyyy}-${mm}-${dd}`;
 
-    const option = document.createElement("option");
+    const btn = document.createElement("button");
 
-    option.value = value;
+    btn.type = "button";
 
-    option.textContent =
-      `${day}日（${week[d.getDay()]}）`;
+    btn.className = "day-btn";
 
-    select.appendChild(option);
+    if(day === today){
+      btn.classList.add("active");
+      state.startDate = value;
+    }
+
+    btn.innerHTML =
+      `${day}日<span class="week">(${week[d.getDay()]})</span>`;
+
+    btn.addEventListener("click",()=>{
+
+      document.querySelectorAll(".day-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+      btn.classList.add("active");
+
+      state.startDate = value;
+
+      recalc();
+    });
+
+    wrap.appendChild(btn);
   }
-
-  state.startDate = select.value;
-
-  select.addEventListener("change",e=>{
-    state.startDate = e.target.value;
-    recalc();
-  });
 
   initBirthdaySelects();
 
