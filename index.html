@@ -1039,7 +1039,12 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
   },0);
 
 })();
-
+document.getElementById("startDate").addEventListener("click", e=>{
+  if(e.target.showPicker){
+    e.target.showPicker();
+  }
+});
+  
 function initBirthdaySelects(){
 
   const y = document.getElementById("birthYear");
