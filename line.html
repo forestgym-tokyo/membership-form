@@ -858,10 +858,6 @@ function validateMemberInfo(){
   const lastKana = document.getElementById("lastKana").value.trim();
   const firstKana = document.getElementById("firstKana").value.trim();
 
-  const birthYear = document.getElementById("birthYear").value;
-  const birthMonth = document.getElementById("birthMonth").value;
-  const birthDay = document.getElementById("birthDay").value;
-
  const postal = document.getElementById("postalCode").value.trim();
 const address = document.getElementById("addressAuto").value.trim();
 const detail = document.getElementById("addressDetail").value.trim();
@@ -880,11 +876,12 @@ const agree = document.getElementById("agreeRules").checked;
     alert("フリガナを入力してください。");
     return false;
   }
+const birthDateText = document.getElementById("birthDateText").value.trim();
 
-  if(!birthYear || !birthMonth || !birthDay){
-    alert("生年月日を選択してください。");
-    return false;
-  }
+if(!/^\d{8}$/.test(birthDateText)){
+  alert("生年月日を8桁で入力してください。");
+  return false;
+}
 
  if(!phone){
   alert("電話番号を入力してください。");
@@ -950,10 +947,6 @@ async function goPayment(){
     else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17680";
     else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17681";
   }
-
-  const birthYear=document.getElementById("birthYear").value;
-  const birthMonth=document.getElementById("birthMonth").value;
-  const birthDay=document.getElementById("birthDay").value;
 
   const bd = document.getElementById("birthDateText").value.trim();
 
