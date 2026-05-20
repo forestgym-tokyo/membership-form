@@ -1029,28 +1029,55 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
 
 (function init(){
 
-  const input=document.getElementById("startDate");
+  const now = new Date();
 
-  const today=todayISO();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const today = now.getDate();
 
-  input.min=today;
-  input.max=endOfMonthISO();
-  input.value=today;
+  document.getElementById("startMonthLabel").textContent =
+    `${year}年${month}月`;
 
-  state.startDate=today;
+  const select = document.getElementById("startDaySelect");
+
+  select.innerHTML = "";
+
+  const lastDay = new Date(year, month, 0).getDate();
+
+  const week = ["日","月","火","水","木","金","土"];
+
+  for(let day = today; day <= lastDay; day++){
+
+    const d = new Date(year, month - 1, day);
+
+    const yyyy = year;
+    const mm = String(month).padStart(2,"0");
+    const dd = String(day).padStart(2,"0");
+
+    const value = `${yyyy}-${mm}-${dd}`;
+
+    const option = document.createElement("option");
+
+    option.value = value;
+
+    option.textContent =
+      `${day}日（${week[d.getDay()]}）`;
+
+    select.appendChild(option);
+  }
+
+  state.startDate = select.value;
+
+  select.addEventListener("change",e=>{
+    state.startDate = e.target.value;
+    recalc();
+  });
 
   initBirthdaySelects();
 
-  setTimeout(()=>{
-    recalc();
-  },0);
+  recalc();
 
 })();
-document.getElementById("startDate").addEventListener("click", e=>{
-  if(e.target.showPicker){
-    e.target.showPicker();
-  }
-});
   
 function initBirthdaySelects(){
 
