@@ -955,12 +955,21 @@ async function goPayment(){
   const birthMonth=document.getElementById("birthMonth").value;
   const birthDay=document.getElementById("birthDay").value;
 
+  const bd = document.getElementById("birthDateText").value.trim();
+
+if(!/^\d{8}$/.test(bd)){
+  alert("生年月日を8桁で入力してください");
+  return;
+}
+
+const birthDate =
+  `${bd.slice(0,4)}-${bd.slice(4,6)}-${bd.slice(6,8)}`;
   const payload={
     lastName:document.getElementById("lastName").value.trim(),
     firstName:document.getElementById("firstName").value.trim(),
     lastKana:document.getElementById("lastKana").value.trim(),
     firstKana:document.getElementById("firstKana").value.trim(),
-    birthDate:`${birthYear}-${birthMonth}-${birthDay}`,
+    birthDate: birthDate,
     phone:document.getElementById("phone").value.trim(),
     email:document.getElementById("email").value.trim(),
     postal:document.getElementById("postalCode").value.trim(),
