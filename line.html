@@ -50,6 +50,45 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
   width:100%;background:#151c1a;border:1px solid var(--line);color:#fff;
   font-size:18px;padding:16px;border-radius:10px;
 }
+  .month-label{
+  display:block;
+  margin-bottom:14px;
+  font-size:20px;
+  font-weight:700;
+  color:#d8ffe8;
+}
+
+.day-buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.day-btn{
+  border:1px solid #2d5f46;
+  background:#111;
+  color:#fff;
+  border-radius:12px;
+  padding:14px 8px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+  font-size:15px;
+}
+
+.day-btn.active{
+  background:#00c853;
+  border-color:#00c853;
+  color:#000;
+  font-weight:700;
+}
+
+.day-btn .week{
+  display:block;
+  font-size:12px;
+  opacity:.8;
+  margin-top:4px;
+}
 .field{margin-bottom:16px}.field label{display:block;font-weight:800;margin-bottom:8px;color:#e7eee9}
 .photo-box{border:1px dashed rgba(126,217,87,.65);border-radius:14px;padding:18px;background:rgba(255,255,255,.035)}
 .photo-box input{width:100%;color:#dce5e0;font-size:15px}
