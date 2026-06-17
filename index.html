@@ -786,14 +786,25 @@ function recalc(){
 }
 
 function showStep(step){
-  state.step=step;
-  document.getElementById("step1").classList.toggle("hidden",step!==1);
-  document.getElementById("step2").classList.toggle("hidden",step!==2);
-  document.getElementById("step1tab").classList.toggle("active",step===1);
-  document.getElementById("step2tab").classList.toggle("active",step===2);
-  document.getElementById("mainButton").textContent=step===1 ? "この内容で入会へ進む ＞" : "決済入力へ進む ＞";
-  document.getElementById("bottomLabel").textContent=step===1 ? "初回お支払い予定（税込）" : "選択中の初回お支払い予定";
-  window.scrollTo({top:0,behavior:"smooth"});
+  state.step = step;
+
+  document.getElementById("step1").classList.toggle("hidden", step !== 1);
+  document.getElementById("step2").classList.toggle("hidden", step !== 2);
+
+  document.getElementById("step1tab").classList.toggle("active", step === 1);
+  document.getElementById("step2tab").classList.toggle("active", step === 2);
+
+  document.getElementById("mainButton").textContent = "次へ ＞";
+
+  document.getElementById("bottomLabel").textContent =
+    step === 1
+      ? "初回お支払い予定（税込）"
+      : "選択中の初回お支払い予定";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 function mainAction(){
