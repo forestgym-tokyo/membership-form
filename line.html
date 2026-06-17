@@ -658,9 +658,17 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
 <div class="bottom">
   <div class="bottom-price">
     <div id="bottomLabel">初回お支払い予定（税込）</div>
+
+    <div class="paymentNotice" id="paymentNotice">
+      会員登録を確定して決済情報入力へ進みます
+    </div>
+
     <strong id="bottomTotal"></strong>
   </div>
-  <button class="btn" id="mainButton" onclick="mainAction()">この内容で入会へ進む ＞</button>
+
+  <button class="btn" id="mainButton" onclick="mainAction()">
+    次へ ＞
+  </button>
 </div>
 
 <script>
