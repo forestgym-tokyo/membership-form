@@ -811,10 +811,10 @@ function showStep(step){
 
   document.getElementById("mainButton").textContent = "次へ ＞";
 
-  document.getElementById("bottomLabel").textContent =
-    step === 1
-      ? "初回お支払い予定（税込）"
-      : "選択中の初回お支払い予定";
+  document.getElementById("bottomLabel").textContent = "初回お支払い予定（税込）";
+
+  document.getElementById("paymentNotice").style.display =
+    step === 2 ? "block" : "none";
 
   window.scrollTo({
     top: 0,
