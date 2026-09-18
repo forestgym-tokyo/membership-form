@@ -398,6 +398,12 @@
       box-shadow: 0 0 0 4px rgba(47, 127, 72, 0.11);
     }
 
+    .field input[readonly] {
+      color: #405746;
+      background: var(--panel-soft);
+      cursor: default;
+    }
+
     .form-error {
       display: none;
       margin: 18px 0 0;
@@ -695,7 +701,7 @@
           <div class="fields">
             <div class="field">
               <label for="applicationDate">お申込日 <span class="required" aria-hidden="true">*</span></label>
-              <input id="applicationDate" name="applicationDate" type="date" required>
+              <input id="applicationDate" name="applicationDate" type="date" required readonly aria-readonly="true">
             </div>
             <div class="field">
               <label for="name">お名前 <span class="required" aria-hidden="true">*</span></label>
@@ -739,6 +745,12 @@
       }).format(new Date());
 
       dateInput.value = todayInJapan;
+      dateInput.min = todayInJapan;
+      dateInput.max = todayInJapan;
+
+      dateInput.addEventListener("input", () => {
+        dateInput.value = todayInJapan;
+      });
 
       function showError(message, target) {
         error.textContent = message;
@@ -757,8 +769,9 @@
           return;
         }
 
-        if (!dateInput.value) {
-          showError("お申込日を入力してください。", dateInput);
+        if (dateInput.value !== todayInJapan) {
+          dateInput.value = todayInJapan;
+          showError("お申込日は本日の日付のみ有効です。", dateInput);
           return;
         }
 
