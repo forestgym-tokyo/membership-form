@@ -730,7 +730,9 @@
     (() => {
       "use strict";
 
+      const MAIL_API_URL = "https://script.google.com/macros/s/AKfycbz908YzXsONyFDps-bSHsFeVPLMDIaBjYaq2I7_U4n_fYRWpy6glxM6Ah50lJw3NWmV/exec";
       const PAYMENT_URL = "https://getsugaku-panda.jp/subscription/apply/5304";
+      const AGREEMENT_VERSION = "2026-09-18";
       const form = document.getElementById("applicationForm");
       const dateInput = document.getElementById("applicationDate");
       const agreement = document.getElementById("agreement");
@@ -759,7 +761,7 @@
         target?.scrollIntoView({ behavior: "smooth", block: "center" });
       }
 
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         error.textContent = "";
         error.classList.remove("visible");
@@ -789,7 +791,29 @@
 
         submitButton.disabled = true;
         submitButton.textContent = "送信中";
-        window.location.assign(PAYMENT_URL);
+
+        const payload = {
+          applicationDate: todayInJapan,
+          name: name.value.trim(),
+          email: email.value.trim(),
+          agreementAccepted: true,
+          agreementVersion: AGREEMENT_VERSION
+        };
+
+        try {
+          await fetch(MAIL_API_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(payload)
+          });
+
+          window.location.assign(PAYMENT_URL);
+        } catch (sendError) {
+          console.error(sendError);
+          submitButton.disabled = false;
+          submitButton.textContent = "送信";
+          showError("メール送信処理に接続できませんでした。通信環境をご確認のうえ、もう一度お試しください。", submitButton);
+        }
       });
     })();
   </script>
