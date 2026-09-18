@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#08120d">
+  <meta name="theme-color" content="#f4faf5">
   <title>ダイエットオンライン食事管理に関する同意書兼申込書 | The Forest Gym</title>
   <style>
     :root {
-      --bg: #06100b;
-      --bg-deep: #030805;
-      --panel: rgba(15, 29, 21, 0.9);
-      --panel-soft: rgba(255, 255, 255, 0.045);
-      --line: rgba(213, 236, 220, 0.14);
-      --line-strong: rgba(145, 213, 164, 0.32);
-      --green: #85d69a;
-      --green-bright: #a6ebb5;
-      --green-deep: #163e25;
-      --text: #f5f8f5;
-      --muted: #bdc9c0;
+      --bg: #edf6ef;
+      --bg-deep: #fbfdfb;
+      --panel: rgba(255, 255, 255, 0.96);
+      --panel-soft: #f3f8f4;
+      --line: rgba(39, 103, 58, 0.15);
+      --line-strong: rgba(45, 126, 69, 0.34);
+      --green: #2f7f48;
+      --green-bright: #3f9257;
+      --green-deep: #18532d;
+      --text: #17251b;
+      --muted: #657269;
       --gold: #e8c874;
-      --danger: #ffb4a9;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      --danger: #b42318;
+      --shadow: 0 18px 50px rgba(32, 72, 43, 0.1);
     }
 
     * {
@@ -36,8 +36,8 @@
       min-height: 100vh;
       color: var(--text);
       background:
-        radial-gradient(circle at 15% 0%, rgba(76, 145, 95, 0.2), transparent 34rem),
-        radial-gradient(circle at 90% 35%, rgba(46, 99, 62, 0.13), transparent 30rem),
+        radial-gradient(circle at 15% 0%, rgba(97, 176, 119, 0.2), transparent 34rem),
+        radial-gradient(circle at 90% 35%, rgba(128, 192, 145, 0.14), transparent 30rem),
         linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 75%);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", "Yu Gothic", sans-serif;
       line-height: 1.8;
@@ -49,8 +49,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.13;
-      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80L80 0' stroke='%23cfe9d6' stroke-opacity='.12'/%3E%3C/svg%3E");
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80L80 0' stroke='%232f7f48' stroke-opacity='.12'/%3E%3C/svg%3E");
       mask-image: linear-gradient(to bottom, black, transparent 70%);
     }
 
@@ -64,7 +64,7 @@
       top: 0;
       z-index: 20;
       border-bottom: 1px solid var(--line);
-      background: rgba(3, 8, 5, 0.82);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
@@ -84,7 +84,7 @@
       width: auto;
       height: 48px;
       object-fit: contain;
-      filter: drop-shadow(0 7px 18px rgba(0, 0, 0, 0.24));
+      filter: drop-shadow(0 6px 14px rgba(31, 84, 46, 0.12));
     }
 
     .header-mark {
@@ -92,7 +92,7 @@
       height: 10px;
       border-radius: 999px;
       background: var(--green);
-      box-shadow: 0 0 0 7px rgba(133, 214, 154, 0.09), 0 0 24px rgba(133, 214, 154, 0.7);
+      box-shadow: 0 0 0 7px rgba(47, 127, 72, 0.08), 0 0 18px rgba(47, 127, 72, 0.28);
     }
 
     .page-shell {
@@ -138,19 +138,13 @@
       text-wrap: balance;
     }
 
-    .hero-note {
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
     .hero-number {
       color: transparent;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(92px, 14vw, 150px);
       font-weight: 700;
       line-height: 0.78;
-      -webkit-text-stroke: 1px rgba(166, 235, 181, 0.16);
+      -webkit-text-stroke: 1px rgba(47, 127, 72, 0.18);
       user-select: none;
     }
 
@@ -163,7 +157,7 @@
       overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 22px;
-      background: linear-gradient(145deg, rgba(18, 34, 24, 0.94), rgba(8, 17, 11, 0.94));
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 247, 0.98));
       box-shadow: var(--shadow);
     }
 
@@ -174,7 +168,7 @@
       min-height: 88px;
       border-bottom: 1px solid var(--line);
       padding: 17px 28px;
-      background: linear-gradient(90deg, rgba(133, 214, 154, 0.08), transparent 60%);
+      background: linear-gradient(90deg, rgba(70, 155, 93, 0.12), transparent 70%);
     }
 
     .section-number {
@@ -208,7 +202,7 @@
     }
 
     .intro-copy {
-      color: #e8efe9;
+      color: #314b38;
     }
 
     .subhead {
@@ -232,9 +226,9 @@
       min-height: 58px;
       margin: 0;
       padding: 15px 18px 15px 60px;
-      border: 1px solid rgba(213, 236, 220, 0.09);
+      border: 1px solid rgba(39, 103, 58, 0.1);
       border-radius: 13px;
-      color: #dfe8e1;
+      color: #294331;
       background: var(--panel-soft);
     }
 
@@ -247,7 +241,7 @@
       height: 8px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 0 6px rgba(133, 214, 154, 0.08);
+      box-shadow: 0 0 0 6px rgba(47, 127, 72, 0.08);
     }
 
     .price-panel {
@@ -260,13 +254,13 @@
       border: 1px solid var(--line-strong);
       border-radius: 16px;
       background:
-        linear-gradient(135deg, rgba(133, 214, 154, 0.14), rgba(133, 214, 154, 0.025)),
-        rgba(255, 255, 255, 0.025);
+        linear-gradient(135deg, rgba(76, 164, 100, 0.14), rgba(76, 164, 100, 0.035)),
+        rgba(255, 255, 255, 0.7);
     }
 
     .price-label {
       margin: 0;
-      color: #e7efe9;
+      color: #2d4433;
     }
 
     .price {
@@ -289,12 +283,12 @@
 
     .application {
       margin-top: 18px;
-      border-color: rgba(133, 214, 154, 0.32);
+      border-color: rgba(47, 127, 72, 0.32);
     }
 
     .application .section-head {
       grid-template-columns: 1fr;
-      background: linear-gradient(90deg, rgba(133, 214, 154, 0.14), transparent 75%);
+      background: linear-gradient(90deg, rgba(70, 155, 93, 0.15), transparent 75%);
     }
 
     .agreement {
@@ -307,19 +301,19 @@
       padding: 20px;
       border: 1px solid var(--line-strong);
       border-radius: 15px;
-      color: #ecf3ed;
-      background: rgba(133, 214, 154, 0.07);
+      color: #203b28;
+      background: rgba(67, 151, 90, 0.08);
       cursor: pointer;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     .agreement:hover {
-      border-color: rgba(166, 235, 181, 0.58);
-      background: rgba(133, 214, 154, 0.1);
+      border-color: rgba(47, 127, 72, 0.58);
+      background: rgba(67, 151, 90, 0.12);
     }
 
     .agreement:focus-within {
-      outline: 3px solid rgba(133, 214, 154, 0.2);
+      outline: 3px solid rgba(47, 127, 72, 0.16);
       outline-offset: 3px;
     }
 
@@ -327,7 +321,7 @@
       width: 24px;
       height: 24px;
       margin: 3px 0 0;
-      accent-color: #77d78d;
+      accent-color: #2f7f48;
       cursor: pointer;
     }
 
@@ -351,7 +345,7 @@
       align-items: baseline;
       gap: 7px;
       margin-bottom: 8px;
-      color: #e7eee9;
+      color: #263d2d;
       font-size: 14px;
       font-weight: 800;
     }
@@ -368,22 +362,22 @@
       outline: none;
       padding: 14px 16px;
       color: var(--text);
-      background: rgba(2, 7, 4, 0.62);
+      background: #ffffff;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
     .field input::placeholder {
-      color: #77847b;
+      color: #879289;
     }
 
     .field input:hover {
-      border-color: rgba(213, 236, 220, 0.25);
+      border-color: rgba(47, 127, 72, 0.3);
     }
 
     .field input:focus {
       border-color: var(--green);
-      background: rgba(7, 18, 10, 0.9);
-      box-shadow: 0 0 0 4px rgba(133, 214, 154, 0.11);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(47, 127, 72, 0.11);
     }
 
     .form-error {
@@ -424,9 +418,9 @@
       border-radius: 13px;
       padding: 15px 26px;
       overflow: hidden;
-      color: #061009;
-      background: linear-gradient(135deg, var(--green-bright), #66c87d);
-      box-shadow: 0 14px 32px rgba(72, 167, 95, 0.2);
+      color: #ffffff;
+      background: linear-gradient(135deg, #358b50, #236e3d);
+      box-shadow: 0 14px 32px rgba(35, 110, 61, 0.22);
       font-size: 16px;
       font-weight: 900;
       letter-spacing: 0.08em;
@@ -444,7 +438,7 @@
 
     .submit-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 38px rgba(72, 167, 95, 0.28);
+      box-shadow: 0 18px 38px rgba(35, 110, 61, 0.3);
       filter: saturate(1.08);
     }
 
@@ -453,7 +447,7 @@
     }
 
     .submit-button:focus-visible {
-      outline: 3px solid rgba(166, 235, 181, 0.4);
+      outline: 3px solid rgba(47, 127, 72, 0.3);
       outline-offset: 4px;
     }
 
@@ -497,10 +491,6 @@
 
       .hero-number {
         display: none;
-      }
-
-      .hero-note {
-        font-size: 14px;
       }
 
       .section {
@@ -590,7 +580,6 @@
       <div>
         <div class="eyebrow">The Forest Gym</div>
         <h1 id="page-title">ダイエットオンライン食事管理に関する同意書兼申込書</h1>
-        <p class="hero-note">チェックボックスのある個所は、ご確認いただいた後✓をいれてください。</p>
       </div>
       <div class="hero-number" aria-hidden="true">01</div>
     </section>
