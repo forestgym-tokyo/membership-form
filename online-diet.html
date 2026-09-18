@@ -71,7 +71,7 @@
 
     .header-inner {
       width: min(100% - 32px, 960px);
-      min-height: 76px;
+      min-height: 112px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -79,12 +79,30 @@
       gap: 20px;
     }
 
+    .brand-lockup {
+      display: inline-flex;
+      width: min(340px, calc(100vw - 74px));
+      padding: 10px 0 9px;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
     .logo {
       display: block;
-      width: auto;
-      height: 48px;
+      width: 100%;
+      height: auto;
       object-fit: contain;
-      filter: brightness(0) saturate(100%) invert(27%) sepia(35%) saturate(1030%) hue-rotate(88deg) brightness(88%) contrast(91%) drop-shadow(0 6px 14px rgba(31, 84, 46, 0.12));
+      filter: drop-shadow(0 7px 16px rgba(31, 84, 46, 0.1));
+    }
+
+    .brand-byline {
+      margin-top: -4px;
+      padding-right: 4px;
+      color: var(--green-deep);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.13em;
     }
 
     .header-mark {
@@ -471,11 +489,17 @@
     @media (max-width: 720px) {
       .header-inner {
         width: min(100% - 28px, 960px);
-        min-height: 68px;
+        min-height: 96px;
       }
 
-      .logo {
-        height: 41px;
+      .brand-lockup {
+        width: min(270px, calc(100vw - 68px));
+        padding: 8px 0 7px;
+      }
+
+      .brand-byline {
+        margin-top: -3px;
+        font-size: 9px;
       }
 
       .page-shell {
@@ -570,7 +594,10 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <img class="logo" src="logo.png" alt="The Forest Gym 24h Fitness">
+      <div class="brand-lockup">
+        <img class="logo" src="meal-fit-logo.webp" alt="Meal Fit 正しく選んで、賢く変わる">
+        <span class="brand-byline">by The Forest Gym</span>
+      </div>
       <span class="header-mark" aria-hidden="true"></span>
     </div>
   </header>
