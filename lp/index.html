@@ -1,179 +1,309 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07110d">
-  <title>初めてでも、続けられるジム。｜The Forest Gym 八千代緑が丘</title>
-  <meta name="description" content="八千代緑が丘駅徒歩3分。365日24時間、月額4,950円。スタッフのトレーニングサポートは何回でも無料。見学予約・WEB入会受付中。">
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3E38WJLME"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-E3E38WJLME");
-  </script>
-  <style>
-    :root{
-      --bg:#050807;--panel:#0d1512;--panel2:#111c17;--line:#26352e;
-      --green:#7ed957;--green2:#a4ef7f;--text:#f5f8f6;--muted:#c0ccc6;--yellow:#ffd966;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(circle at top,#17261d 0,#050807 45%,#020302 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.7}
-    a{text-decoration:none}
-    .wrap{max-width:980px;margin:auto;padding:0 18px}
-    header{position:sticky;top:0;z-index:30;background:rgba(5,8,7,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-    .head{height:68px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .logo{height:44px;max-width:220px;object-fit:contain}
-    .mini{color:var(--muted);font-size:13px}
-    .hero{padding:58px 0 38px;text-align:center}
-    .eyebrow{color:var(--green);font-weight:900;letter-spacing:.08em;font-size:14px;margin-bottom:12px}
-    h1{font-size:clamp(34px,6vw,62px);line-height:1.15;margin:0 0 18px;letter-spacing:-.03em}
-    .lead{max-width:760px;margin:0 auto 24px;color:var(--muted);font-size:clamp(16px,2.3vw,20px)}
-    .price-line{display:flex;justify-content:center;gap:10px 18px;flex-wrap:wrap;margin:26px 0 30px}
-    .pill{border:1px solid rgba(126,217,87,.55);background:rgba(126,217,87,.08);color:#e9ffe0;border-radius:999px;padding:8px 14px;font-weight:800}
-    .cta-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px;margin:0 auto}
-    .cta{display:block;border-radius:13px;padding:17px 16px;font-size:18px;font-weight:900;text-align:center}
-    .cta.primary{background:linear-gradient(135deg,var(--green2),#5ecb34);color:#071008}
-    .cta.secondary{border:1px solid var(--green);color:var(--green2);background:#0b120f}
-    .subnote{margin-top:12px;color:#9eaaa4;font-size:12px}
-    section{padding:34px 0}
-    h2{font-size:clamp(27px,4vw,40px);line-height:1.25;margin:0 0 10px}
-    .section-lead{margin:0 0 24px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border-radius:16px;padding:22px}
-    .card strong{display:block;font-size:19px;margin-bottom:7px}
-    .card p{margin:0;color:var(--muted)}
-    .badge{display:inline-block;background:var(--green);color:#071008;font-weight:900;font-size:12px;padding:4px 9px;border-radius:999px;margin-bottom:10px}
-    .support{border:1px solid rgba(126,217,87,.42);background:linear-gradient(135deg,rgba(126,217,87,.12),rgba(255,255,255,.02));border-radius:20px;padding:28px}
-    .arrow{color:var(--green);font-weight:900}
-    .feature-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-    .feature{padding:18px 13px;background:var(--panel);border:1px solid var(--line);border-radius:14px;text-align:center;font-weight:800}
-    .feature b{display:block;color:var(--green);font-size:24px;margin-bottom:3px}
-    .campaign{border:1px solid rgba(255,217,102,.45);background:rgba(255,217,102,.055);border-radius:18px;padding:24px}
-    .campaign h3{margin:0 0 10px;color:var(--yellow);font-size:22px}
-    .campaign ul{margin:10px 0 0;padding-left:20px;color:var(--muted)}
-    .campaign li{margin:8px 0}
-    .bottom-cta{padding:42px 0 90px;text-align:center}
-    .sticky{display:none}
-    footer{border-top:1px solid var(--line);padding:25px 0 90px;color:#94a098;font-size:12px;text-align:center}
-    @media(max-width:720px){
-      .hero{padding-top:42px}
-      .grid{grid-template-columns:1fr}
-      .feature-list{grid-template-columns:1fr 1fr}
-      .cta-row{grid-template-columns:1fr}
-      .head .mini{display:none}
-      .sticky{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;z-index:50;left:0;right:0;bottom:0;padding:10px;background:rgba(5,8,7,.96);border-top:1px solid var(--line)}
-      .sticky .cta{font-size:15px;padding:13px 8px}
-      footer{padding-bottom:100px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>続けられるか不安な方へ。｜The Forest Gym 八千代緑が丘</title>
+<meta name="description" content="八千代緑が丘駅徒歩3分。365日24時間、月額4,950円。使い方・フォーム・メニューまでスタッフが何回でも無料サポート。見学予約・WEB入会受付中。">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E3E38WJLME"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag("js",new Date());
+gtag("config","G-E3E38WJLME");
+</script>
+<style>
+:root{
+  --ink:#111713;--muted:#617067;--green:#16823a;--green-dark:#0b5d29;
+  --green-soft:#eaf6ed;--green-pale:#f5faf6;--line:#dce8df;--warm:#f7f5f1;
+  --shadow:0 18px 50px rgba(21,55,35,.11);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;color:var(--ink);background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+.header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(16,23,19,.07)}
+.head{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{width:190px;max-height:48px;object-fit:contain;object-position:left center}
+.headinfo{font-size:13px;color:#66756b;font-weight:700;letter-spacing:.02em}
+.hero{padding:56px 0 30px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(420px,.96fr);align-items:center;gap:52px}
+.kicker{display:inline-flex;gap:8px;align-items:center;background:var(--green-soft);color:var(--green-dark);font-weight:900;font-size:13px;padding:7px 12px;border-radius:999px;margin-bottom:18px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+h1{font-size:clamp(44px,5.6vw,74px);line-height:1.05;letter-spacing:-.045em;margin:0 0 22px;font-weight:950}
+h1 .green{color:var(--green)}
+.hero-lead{font-size:clamp(17px,2vw,21px);color:#35443a;margin:0 0 18px;font-weight:700;line-height:1.85}
+.support-line{font-size:16px;color:var(--green-dark);font-weight:900;margin:0 0 24px}
+.proofs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.proof{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#fff;font-weight:800;font-size:13px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:58px;padding:0 24px;border-radius:12px;font-size:17px;font-weight:900;transition:.18s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--green);color:#fff;box-shadow:0 12px 28px rgba(22,130,58,.23)}
+.btn.secondary{border:1.5px solid #9fb5a5;background:#fff;color:#17311f}
+.hero-note{margin-top:11px;font-size:12px;color:#77847c}
+.hero-photo{position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1.12/1;background:#eef5ef}
+.hero-photo img{height:100%;object-fit:cover}
+.hero-tag{position:absolute;left:20px;bottom:20px;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.8);box-shadow:0 12px 28px rgba(0,0,0,.12);padding:14px 16px;border-radius:14px;font-weight:900;max-width:280px}
+.hero-tag small{display:block;color:var(--green);font-size:12px;margin-bottom:2px;letter-spacing:.08em}
+.quick{padding:24px 0 8px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff}
+.quick-item{padding:24px 26px}
+.quick-item+.quick-item{border-left:1px solid var(--line)}
+.quick-num{font-size:25px;font-weight:950;color:var(--green);line-height:1.2}
+.quick-title{font-weight:900;margin-top:4px}
+.quick-text{font-size:13px;color:var(--muted);margin-top:4px}
+section{padding:78px 0}
+.section-kicker{font-size:13px;letter-spacing:.12em;color:var(--green);font-weight:950;margin-bottom:10px}
+h2{font-size:clamp(32px,4.3vw,52px);line-height:1.2;letter-spacing:-.035em;margin:0 0 16px}
+.section-lead{font-size:17px;color:var(--muted);margin:0 0 32px;max-width:760px}
+.worry{background:var(--green-pale)}
+.worry-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:42px;align-items:center}
+.worry-photo{margin-top:26px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1.42/1;background:#eaf2ec}
+.worry-photo img{height:100%;object-fit:cover}
+.worry-list{display:grid;gap:12px}
+.worry-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.check{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--green-soft);color:var(--green);font-weight:950}
+.worry-card strong{display:block;font-size:17px}
+.worry-card span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.support-banner{background:linear-gradient(135deg,#0f6f31,#0b5628);color:#fff}
+.support-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
+.support-photo{border-radius:22px;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.2);aspect-ratio:1.3/1;background:#15391f}
+.support-photo img{height:100%;object-fit:cover}
+.support-banner .section-kicker{color:#bce6c7}
+.support-banner h2{color:#fff}
+.support-banner .section-lead{color:#e0f0e5}
+.support-points{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.support-point{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:14px 15px;border-radius:12px;font-size:14px;font-weight:800}
+.facility-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:28px}
+.facility-head .section-lead{margin:0;max-width:560px}
+.gallery{display:grid;grid-template-columns:1.15fr .85fr .85fr;grid-template-rows:260px 260px;gap:12px}
+.gcard{position:relative;overflow:hidden;border-radius:18px;background:#eef1ef}
+.gcard:first-child{grid-row:1/3}
+.gcard img{height:100%;object-fit:cover}
+.glabel{position:absolute;left:12px;bottom:12px;background:rgba(10,21,14,.82);color:#fff;padding:8px 11px;border-radius:9px;font-size:13px;font-weight:900;backdrop-filter:blur(8px)}
+.equipment{background:#111713;color:#fff}
+.equipment .section-kicker{color:#79d291}
+.equipment .section-lead{color:#becac2}
+.equip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+.equip{border:1px solid #314137;border-radius:16px;padding:24px 18px;background:#172019}
+.equip b{display:block;font-size:34px;line-height:1;color:#7dd495;margin-bottom:12px}
+.equip strong{display:block;font-size:17px;margin-bottom:4px}
+.equip span{color:#aebbb2;font-size:13px}
+.campaign{background:var(--warm)}
+.campaign-box{background:#fff;border-radius:26px;padding:38px;box-shadow:0 16px 48px rgba(32,43,35,.07);display:grid;grid-template-columns:1fr .95fr;gap:36px;align-items:center}
+.campaign-price{font-size:48px;font-weight:950;letter-spacing:-.04em;line-height:1.1;color:var(--green-dark)}
+.campaign-price small{font-size:15px;color:#526058;letter-spacing:0}
+.campaign-list{display:grid;gap:12px;margin-top:22px}
+.campaign-item{display:flex;gap:12px;align-items:flex-start}
+.campaign-item i{font-style:normal;color:var(--green);font-weight:950}
+.choice{border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--green-pale)}
+.choice strong{display:block;font-size:18px;margin-bottom:12px}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-card{background:#fff;border:1px solid var(--line);padding:18px;border-radius:14px;font-weight:900;text-align:center}
+.choice-card span{display:block;color:var(--green);font-size:22px;margin-bottom:4px}
+.final{padding:76px 0 108px}
+.final-box{border:2px solid var(--green);border-radius:28px;padding:42px;background:#fff;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+.final h2{margin-bottom:8px;font-size:clamp(30px,4vw,46px)}
+.final p{margin:0;color:var(--muted)}
+.sticky{display:none}
+footer{padding:28px 0 80px;border-top:1px solid var(--line);color:#78847c;font-size:12px;text-align:center}
+@media(max-width:900px){
+  .hero-grid,.worry-grid,.support-grid,.campaign-box{grid-template-columns:1fr}
+  .hero-grid{gap:28px}
+  .hero-photo{aspect-ratio:1.45/1}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:240px 210px 210px}
+  .gcard:first-child{grid-column:1/3;grid-row:auto}
+  .equip-grid{grid-template-columns:1fr 1fr}
+  .final-box{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .wrap{width:min(100% - 28px,1120px)}
+  .head{height:62px}.logo{width:155px}.headinfo{display:none}
+  .hero{padding:30px 0 18px}.hero-grid{display:flex;flex-direction:column}
+  .hero-copy{order:1}.hero-photo{order:2;width:100%;border-radius:18px;aspect-ratio:1.18/1}
+  h1{font-size:43px}.hero-lead{font-size:16px;line-height:1.8}
+  .proofs{gap:6px}.proof{font-size:12px;padding:7px 9px}
+  .cta-row{display:grid;grid-template-columns:1fr;width:100%}.btn{width:100%}
+  .quick{padding-top:16px}.quick-grid{grid-template-columns:1fr}
+  .quick-item+.quick-item{border-left:0;border-top:1px solid var(--line)}
+  section{padding:56px 0}
+  .worry-grid,.support-grid{gap:28px}
+  .support-points{grid-template-columns:1fr}
+  .facility-head{display:block}.facility-head .section-lead{margin-top:8px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:190px 170px 170px}
+  .equip-grid{grid-template-columns:1fr 1fr}.equip{padding:18px 14px}.equip b{font-size:28px}
+  .campaign-box{padding:24px 18px;border-radius:20px}.campaign-price{font-size:40px}
+  .choice-grid{grid-template-columns:1fr}
+  .final{padding-bottom:96px}.final-box{padding:28px 20px;border-radius:20px}
+  .sticky{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:80;padding:9px 10px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .sticky .btn{min-height:50px;padding:0 10px;font-size:14px;border-radius:10px}
+  footer{padding-bottom:100px}
+}
+</style>
 </head>
 <body>
-<header>
+<header class="header">
   <div class="wrap head">
     <img class="logo" src="../logo.png" alt="The Forest Gym">
-    <div class="mini">八千代緑が丘駅 徒歩3分｜365日24時間</div>
+    <div class="headinfo">八千代緑が丘駅 徒歩3分｜365日24時間</div>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="wrap">
-      <div class="eyebrow">THE FOREST GYM｜八千代緑が丘</div>
-      <h1>初めてでも、<br>続けられるジム。</h1>
-      <p class="lead">「入会しても続けられるか不安」を、無料サポートで解消。初心者・未経験者・女性・シニアも、自分のペースでトレーニングを続けられる環境です。</p>
-      <div class="price-line">
-        <span class="pill">月額4,950円</span>
-        <span class="pill">365日24時間</span>
-        <span class="pill">駅徒歩3分</span>
-        <span class="pill">スタッフサポート何回でも無料</span>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="kicker"><span class="dot"></span>初心者でも安心。本格的に鍛えたい方にも。</div>
+      <h1>続けられるか<br><span class="green">不安な方へ。</span></h1>
+      <p class="hero-lead">初めての方も、本格的に鍛えたい方も。<br>使い方やフォームはスタッフが<strong>何回でも無料サポート。</strong></p>
+      <p class="support-line">わからないままにしない。だから、続けやすい。</p>
+      <div class="proofs">
+        <span class="proof">月額4,950円</span>
+        <span class="proof">365日24時間</span>
+        <span class="proof">駅徒歩3分</span>
+        <span class="proof">無料サポート何回でも</span>
       </div>
       <div class="cta-row">
-        <a class="cta secondary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">まずは見学予約</a>
-        <a class="cta primary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会する</a>
+        <a class="btn primary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">無料見学を予約する</a>
+        <a class="btn secondary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会はこちら</a>
       </div>
-      <div class="subnote">見学してから決めたい方も、すぐ始めたい方もWEBで手続きできます。</div>
+      <div class="hero-note">見てから決めたい方も、すぐ始めたい方もWEBで手続きできます。</div>
     </div>
-  </section>
-
-  <section>
-    <div class="wrap support">
-      <div class="badge">継続サポート</div>
-      <h2>「何をすればいいか分からない」を、そのままにしません。</h2>
-      <p class="section-lead">入会後に迷って通わなくなることを防ぐため、スタッフがトレーニングを何回でも無料でサポートします。</p>
-      <div class="grid">
-        <div class="card"><strong>器具の使い方が不安</strong><p><span class="arrow">→</span> マシン・フリーウェイトの使い方をスタッフが案内します。</p></div>
-        <div class="card"><strong>フォームが合っているか不安</strong><p><span class="arrow">→</span> 基本フォームや動作を確認し、続けやすい形に整えます。</p></div>
-        <div class="card"><strong>メニューが分からない</strong><p><span class="arrow">→</span> 目的や経験に合わせてトレーニング内容を相談できます。</p></div>
-        <div class="card"><strong>一人だと挫折しそう</strong><p><span class="arrow">→</span> 困ったときは何回でも無料でスタッフに相談できます。</p></div>
-      </div>
+    <div class="hero-photo">
+      <img src="https://static.wixstatic.com/media/c9349e_ef6d37510f534a38917dccfe9b475768~mv2.png" alt="The Forest Gymのトレーニングイメージ">
+      <div class="hero-tag"><small>FREE SUPPORT</small>入会して終わりではありません。</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="wrap">
-      <div class="badge">設備も妥協しない</div>
-      <h2>初心者から、しっかり鍛えたい方まで。</h2>
-      <p class="section-lead">サポートだけでなく、慣れてからも物足りなくならない本格的なトレーニング環境を用意しています。</p>
-      <div class="feature-list">
-        <div class="feature"><b>4台</b>ケーブル・スミス・<br>バーベルラック</div>
-        <div class="feature"><b>30+</b>30種目以上に<br>対応</div>
-        <div class="feature"><b>40分</b>ラックを1枠<br>しっかり利用</div>
-        <div class="feature"><b>分単位</b>待ち時間表示＋<br>前倒し通知</div>
-      </div>
+<section class="quick">
+  <div class="wrap">
+    <div class="quick-grid">
+      <div class="quick-item"><div class="quick-num">何回でも無料</div><div class="quick-title">スタッフサポート</div><div class="quick-text">使い方・フォーム・メニューまで相談できます。</div></div>
+      <div class="quick-item"><div class="quick-num">4台</div><div class="quick-title">多機能ラック</div><div class="quick-text">初心者から本格トレーニングまで対応。</div></div>
+      <div class="quick-item"><div class="quick-num">徒歩3分</div><div class="quick-title">八千代緑が丘駅</div><div class="quick-text">365日24時間、自分のペースで通えます。</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="wrap campaign">
-      <h3>入会キャンペーン</h3>
-      <ul>
-        <li>WEB入会、または見学当日の入会で初期費用0円。</li>
-        <li>REGULARはキャンペーン月額4,950円。</li>
-        <li>選べる特典：2か月目会費無料 または 無料体験パーソナル60分。</li>
-        <li>無料体験パーソナルでは、初回の不安解消・フォーム確認・メニュー作成を専門家がサポートします。</li>
-      </ul>
+<section class="worry">
+  <div class="wrap worry-grid">
+    <div>
+      <div class="section-kicker">WHY FOREST GYM</div>
+      <h2>「何をすればいい？」を<br>そのままにしません。</h2>
+      <p class="section-lead">入会後に迷って通わなくなることを防ぐため、困ったときにスタッフへ何度でも相談できる環境を用意しています。</p>
+      <div class="worry-photo"><img src="https://static.wixstatic.com/media/c9349e_fb30ce4773384ad697d8228c432d9f3a~mv2.png" alt="The Forest Gymスタッフ"></div>
     </div>
-  </section>
+    <div class="worry-list">
+      <div class="worry-card"><div class="check">✓</div><div><strong>器具の使い方が不安</strong><span>マシン・フリーウェイトの使い方をスタッフが案内します。</span></div></div>
+      <div class="worry-card"><div class="check">✓</div><div><strong>フォームが合っているか不安</strong><span>基本フォームや動作を確認し、続けやすい形に整えます。</span></div></div>
+      <div class="worry-card"><div class="check">✓</div><div><strong>メニューが分からない</strong><span>目的や経験に合わせてトレーニング内容を相談できます。</span></div></div>
+      <div class="worry-card"><div class="check">✓</div><div><strong>一人だと挫折しそう</strong><span>困ったときは何回でも無料でスタッフに相談できます。</span></div></div>
+    </div>
+  </div>
+</section>
 
-  <section class="bottom-cta">
-    <div class="wrap">
-      <h2>「続けられそう」と思えるか、まず確かめてください。</h2>
-      <p class="section-lead">見学はWEBで簡単予約。見学なしでそのままWEB入会もできます。</p>
-      <div class="cta-row">
-        <a class="cta secondary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">見学を予約する</a>
-        <a class="cta primary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会する</a>
+<section class="support-banner">
+  <div class="wrap support-grid">
+    <div class="support-photo"><img src="https://static.wixstatic.com/media/c9349e_b3f749fd2f084eb59ff2ed0383ae62ed~mv2.png" alt="トレーニングサポート"></div>
+    <div>
+      <div class="section-kicker">FREE TRAINING SUPPORT</div>
+      <h2>ひとりで悩まない。<br>だから続けやすい。</h2>
+      <p class="section-lead">マシンの使い方、フォーム確認、トレーニングの進め方まで。初めての方も、本格的に鍛えたい方も、スタッフが何回でも無料でサポートします。</p>
+      <div class="support-points">
+        <div class="support-point">マシンの使い方</div>
+        <div class="support-point">フォーム確認</div>
+        <div class="support-point">メニュー相談</div>
+        <div class="support-point">トレーニング補助</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="facility-head">
+      <div><div class="section-kicker">FACILITY</div><h2>続けたくなる設備を、<br>しっかり揃えました。</h2></div>
+      <p class="section-lead">初心者向けのサポートと、本格的に鍛えられる設備を両立。トレーニング前後まで快適に使える環境です。</p>
+    </div>
+    <div class="gallery">
+      <div class="gcard"><img src="https://static.wixstatic.com/media/c9349e_32992046868c47a89635514ece285ca4~mv2.png" alt="The Forest Gymフロア"><div class="glabel">ジムフロア</div></div>
+      <div class="gcard"><img src="https://static.wixstatic.com/media/c9349e_1b7a569efb0d4ec9b9ff616a7568ddec~mv2.png" alt="多機能ラック"><div class="glabel">フリーウェイト</div></div>
+      <div class="gcard"><img src="https://static.wixstatic.com/media/c9349e_3372f631c3024a5283e049c166a68830~mv2.png" alt="トレーニング設備"><div class="glabel">マシンエリア</div></div>
+      <div class="gcard"><img src="https://static.wixstatic.com/media/c9349e_de424ebd6e924ef685787437c87566d5~mv2.png" alt="清潔な施設"><div class="glabel">清潔な館内</div></div>
+      <div class="gcard"><img src="https://static.wixstatic.com/media/c9349e_62e20f313b65476399d6eb35a5d72e64~mv2.png" alt="トレーニング環境"><div class="glabel">本格設備</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="equipment">
+  <div class="wrap">
+    <div class="section-kicker">TRAINING ENVIRONMENT</div>
+    <h2>慣れてからも、物足りなくならない。</h2>
+    <p class="section-lead">「初心者にやさしい」だけではありません。フリーウェイト中心に、本格的なトレーニングを続けたい方にも対応します。</p>
+    <div class="equip-grid">
+      <div class="equip"><b>4台</b><strong>多機能ラック</strong><span>ケーブル・スミス・バーベルに対応</span></div>
+      <div class="equip"><b>30+</b><strong>30種目以上</strong><span>1台で多彩なトレーニングが可能</span></div>
+      <div class="equip"><b>40分</b><strong>ラック利用</strong><span>1枠40分、落ち着いてトレーニング</span></div>
+      <div class="equip"><b>分単位</b><strong>待ち時間表示</strong><span>空きが早まれば前倒し通知</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="campaign">
+  <div class="wrap campaign-box">
+    <div>
+      <div class="section-kicker">CAMPAIGN</div>
+      <h2>始めるなら、今。</h2>
+      <div class="campaign-price">月額4,950円 <small>REGULAR キャンペーン</small></div>
+      <div class="campaign-list">
+        <div class="campaign-item"><i>✓</i><div><strong>初期費用0円</strong><br>WEB入会、または見学当日の入会が対象です。</div></div>
+        <div class="campaign-item"><i>✓</i><div><strong>365日24時間利用</strong><br>生活リズムに合わせて自分のペースで通えます。</div></div>
+        <div class="campaign-item"><i>✓</i><div><strong>スタッフサポート何回でも無料</strong><br>入会後もトレーニングを継続しやすい環境です。</div></div>
+      </div>
+    </div>
+    <div class="choice">
+      <strong>さらに、選べる入会特典</strong>
+      <div class="choice-grid">
+        <div class="choice-card"><span>01</span>2か月目<br>会費無料</div>
+        <div class="choice-card"><span>02</span>無料体験<br>パーソナル60分</div>
+      </div>
+      <div class="cta-row" style="margin-top:18px"><a class="btn primary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会する</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap final-box">
+    <div><div class="section-kicker">FIRST STEP</div><h2>続けられそうか、<br>まず見て確かめてください。</h2><p>設備・雰囲気・サポートを確認してから決められます。見学はWEBから簡単に予約できます。</p></div>
+    <div class="cta-row"><a class="btn primary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">無料見学を予約する</a><a class="btn secondary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会はこちら</a></div>
+  </div>
+</section>
 </main>
 
 <div class="sticky">
-  <a class="cta secondary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">見学予約</a>
-  <a class="cta primary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会</a>
+  <a class="btn secondary" data-cta="tour" href="https://forestgym-tokyo.github.io/anauts-os-reserve/tour/">見学予約</a>
+  <a class="btn primary" data-cta="join" href="https://forestgym-tokyo.github.io/membership-form/">WEB入会</a>
 </div>
 
-<footer>
-  <div class="wrap">The Forest Gym｜千葉県八千代市緑が丘西2-2-1 Residence八千代 3F</div>
-</footer>
+<footer><div class="wrap">The Forest Gym｜千葉県八千代市緑が丘西2-2-1 Residence八千代 3F</div></footer>
 
 <script>
-  const incomingParams = new URLSearchParams(window.location.search);
-  document.querySelectorAll("[data-cta]").forEach((link) => {
-    const target = new URL(link.href);
-    incomingParams.forEach((value, key) => target.searchParams.set(key, value));
-    link.href = target.toString();
-    link.addEventListener("click", () => {
-      if (typeof window.gtag !== "function") return;
-      const kind = link.dataset.cta;
-      window.gtag("event", kind === "tour" ? "tour_cta_click" : "web_join_cta_click", {
-        link_url: link.href
-      });
-    });
+const incomingParams=new URLSearchParams(window.location.search);
+document.querySelectorAll("[data-cta]").forEach((link)=>{
+  const target=new URL(link.href);
+  incomingParams.forEach((value,key)=>target.searchParams.set(key,value));
+  link.href=target.toString();
+  link.addEventListener("click",()=>{
+    if(typeof window.gtag!=="function")return;
+    const kind=link.dataset.cta;
+    window.gtag("event",kind==="tour"?"tour_cta_click":"web_join_cta_click",{link_url:link.href});
   });
+});
 </script>
 </body>
 </html>
