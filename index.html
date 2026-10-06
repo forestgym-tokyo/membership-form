@@ -660,6 +660,35 @@ const state = {
   facePhotoUrl:""
 };
 
+const ATTRIBUTION_KEYS = ["gclid","gbraid","wbraid","utm_source","utm_medium","utm_campaign","utm_term","utm_content"];
+const ATTRIBUTION_STORAGE_KEY = "tfg_ad_attribution";
+
+function getAttribution(){
+  const current = new URLSearchParams(window.location.search);
+  let saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(ATTRIBUTION_STORAGE_KEY) || "{}"); }catch(_){}
+
+  const merged = {...saved};
+  ATTRIBUTION_KEYS.forEach(key=>{
+    const value = current.get(key);
+    if(value) merged[key] = value;
+  });
+
+  if(Object.keys(merged).length){
+    merged.first_seen_at = merged.first_seen_at || new Date().toISOString();
+    merged.last_seen_at = new Date().toISOString();
+    merged.landing_path = merged.landing_path || window.location.pathname;
+    localStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(merged));
+  }
+  return merged;
+}
+
+function paymentUrlForLog(paymentUrl){
+  const attribution = getAttribution();
+  if(!Object.keys(attribution).length) return paymentUrl;
+  return paymentUrl + "#tfg_attribution=" + encodeURIComponent(JSON.stringify(attribution));
+}
+
 const yen = n => Number(n).toLocaleString("ja-JP") + "円";
 
 function parseLocalDate(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(y,m-1,d);}
@@ -989,6 +1018,11 @@ if (typeof window.gtag === "function") {
     plan: currentPlan().name,
     campaign_type: state.campaign ? "campaign" : "standard",
     selected_benefit: state.benefit,
+    traffic_source: getAttribution().utm_source || "",
+    traffic_medium: getAttribution().utm_medium || "",
+    traffic_campaign: getAttribution().utm_campaign || "",
+    traffic_content: getAttribution().utm_content || "",
+    has_google_click_id: Boolean(getAttribution().gclid || getAttribution().gbraid || getAttribution().wbraid),
     event_callback: redirectToPayment
   });
   window.setTimeout(redirectToPayment, 800);
