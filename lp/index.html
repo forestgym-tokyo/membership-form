@@ -161,7 +161,11 @@
 </footer>
 
 <script>
+  const incomingParams = new URLSearchParams(window.location.search);
   document.querySelectorAll("[data-cta]").forEach((link) => {
+    const target = new URL(link.href);
+    incomingParams.forEach((value, key) => target.searchParams.set(key, value));
+    link.href = target.toString();
     link.addEventListener("click", () => {
       if (typeof window.gtag !== "function") return;
       const kind = link.dataset.cta;
