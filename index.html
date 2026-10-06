@@ -4,6 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>THE FOREST GYM 会員登録フォーム</title>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3E38WJLME"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-E3E38WJLME");
+  </script>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js"></script>
 
 <style>
@@ -967,7 +975,26 @@ campaign:state.campaign ? "利用する" : "利用しない",
   }
 );
 
-window.location.href=paymentUrl;
+const redirectToPayment = (() => {
+  let done = false;
+  return () => {
+    if (done) return;
+    done = true;
+    window.location.href = paymentUrl;
+  };
+})();
+
+if (typeof window.gtag === "function") {
+  window.gtag("event", "web_join_payment_start", {
+    plan: currentPlan().name,
+    campaign_type: state.campaign ? "campaign" : "standard",
+    selected_benefit: state.benefit,
+    event_callback: redirectToPayment
+  });
+  window.setTimeout(redirectToPayment, 800);
+} else {
+  redirectToPayment();
+}
 
 }
 
