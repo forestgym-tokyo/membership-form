@@ -991,7 +991,9 @@ campaign:state.campaign ? "利用する" : "利用しない",
     startDate:state.startDate,
     benefit:state.benefit==="free2" ? "2か月目会費無料" : "無料パーソナル60分",
     firstTotal:yen(state.firstTotal),
-    paymentUrl:paymentUrl,
+    // Keep the payment redirect URL unchanged, but include attribution in
+    // the existing GAS paymentUrl field so current Apps Script persists it.
+    paymentUrl:paymentUrlForLog(paymentUrl),
     adAttribution: getAttribution()
   };
 
