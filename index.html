@@ -689,6 +689,91 @@ function paymentUrlForLog(paymentUrl){
   return paymentUrl + "#tfg_attribution=" + encodeURIComponent(JSON.stringify(attribution));
 }
 
+// Shared with the TFG_Membership_Form Apps Script deployment.
+const TFG_MEMBERSHIP_API_URL = "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec";
+const APPLICATION_ID_STORAGE_KEY = "tfg_membership_application_v1";
+let membershipSubmissionInProgress = false;
+
+// Retried POSTs retain their original applicationId, including a page refresh.
+// The applicant fingerprint is hashed before it is held in sessionStorage.
+async function applicationIdFor_(payload) {
+  const fingerprintInput = JSON.stringify([
+    payload.lastName, payload.firstName, payload.birthDate,
+    String(payload.email || "").trim().toLowerCase(), payload.phone,
+    payload.startDate, payload.plan
+  ]);
+  let hash = "";
+  if (window.crypto && crypto.subtle) {
+    const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(fingerprintInput));
+    hash = Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, "0")).join("");
+  } else {
+    // No applicant PII should be stored unencrypted in sessionStorage.
+    for (let i = 0; i < fingerprintInput.length; i++) {
+      hash = String((Math.imul(Number(hash || "2166136261"), 16777619) ^ fingerprintInput.charCodeAt(i)) >>> 0);
+    }
+  }
+  try {
+    const previous = JSON.parse(sessionStorage.getItem(APPLICATION_ID_STORAGE_KEY) || "null");
+    if (previous && previous.hash === hash && previous.createdAt &&
+        Date.now() - previous.createdAt < 24 * 60 * 60 * 1000) {
+      return previous.id;
+    }
+  } catch (_) {}
+  const id = (window.crypto && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : "tfg-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+  try {
+    sessionStorage.setItem(APPLICATION_ID_STORAGE_KEY,
+      JSON.stringify({id, hash, createdAt: Date.now()}));
+  } catch (_) {}
+  return id;
+}
+
+// Apps Script POST uses no-cors: never assume registration succeeded from fetch
+// alone. Poll the dedicated status endpoint before redirecting to payment.
+function waitForMembershipReceipt_(applicationId) {
+  return new Promise((resolve, reject) => {
+    let attempt = 0;
+    function poll() {
+      if (++attempt > 22) {
+        reject(new Error("受付結果を確認できませんでした。再送信せず、店舗へご連絡ください。"));
+        return;
+      }
+      const callback = "tfgJoinCb_" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      const script = document.createElement("script");
+      let finished = false;
+      let timer;
+      function cleanup() {
+        if (finished) return false;
+        finished = true;
+        clearTimeout(timer);
+        delete window[callback];
+        script.remove();
+        return true;
+      }
+      window[callback] = result => {
+        if (!cleanup()) return;
+        if (result && result.pending) setTimeout(poll, 800);
+        else if (result && typeof result.ok === "boolean") resolve(result);
+        else reject(new Error("入会申込み結果の形式が正しくありません。"));
+      };
+      script.onerror = () => {
+        if (cleanup()) setTimeout(poll, 800);
+      };
+      timer = setTimeout(() => {
+        if (cleanup()) setTimeout(poll, 800);
+      }, 4000);
+      const params = new URLSearchParams({
+        action: "submissionStatus", applicationId, callback,
+        t: String(Date.now())
+      });
+      script.src = TFG_MEMBERSHIP_API_URL + "?" + params.toString();
+      document.head.appendChild(script);
+    }
+    poll();
+  });
+}
+
 const yen = n => Number(n).toLocaleString("ja-JP") + "円";
 
 function parseLocalDate(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(y,m-1,d);}
@@ -951,11 +1036,14 @@ if(!postal){
   return true;
 }
 async function goPayment(){
-
-  if(!validateMemberInfo()){
-    return;
-  }
-
+  if (membershipSubmissionInProgress) return;
+  if (!validateMemberInfo()) return;
+  membershipSubmissionInProgress = true;
+  const submitButton = document.getElementById("mainButton");
+  const previousButtonText = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = "送信中…";
+  try {
   let paymentUrl="";
 
   if(state.campaign){
@@ -996,16 +1084,19 @@ campaign:state.campaign ? "利用する" : "利用しない",
     paymentUrl:paymentUrlForLog(paymentUrl),
     adAttribution: getAttribution()
   };
+  payload.applicationId = await applicationIdFor_(payload);
 
-
-   await fetch(
-  "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec",
-  {
-    method:"POST",
-    mode:"no-cors",
-    body:JSON.stringify(payload)
+  await fetch(TFG_MEMBERSHIP_API_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify(payload)
+  });
+  const receipt = await waitForMembershipReceipt_(payload.applicationId);
+  if (!receipt.ok) {
+    throw new Error(receipt.code === "ACTIVE_MEMBER_EXISTS"
+      ? "すでに有効な会員登録があります。新しい会員番号は発行されていません。店舗へお問い合わせください。"
+      : "お申込みを確定できませんでした。再送信せず、店舗へお問い合わせください。");
   }
-);
 
 const redirectToPayment = (() => {
   let done = false;
@@ -1032,7 +1123,12 @@ if (typeof window.gtag === "function") {
 } else {
   redirectToPayment();
 }
-
+  } catch (error) {
+    membershipSubmissionInProgress = false;
+    submitButton.disabled = false;
+    submitButton.textContent = previousButtonText;
+    alert(error.message || "通信エラーが発生しました。再送信せず、店舗へご連絡ください。");
+  }
 }
 
 document.querySelectorAll("[data-campaign]").forEach(card=>{
