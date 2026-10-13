@@ -690,7 +690,7 @@ function paymentUrlForLog(paymentUrl){
 }
 
 // Shared with the TFG_Membership_Form Apps Script deployment.
-const TFG_MEMBERSHIP_API_URL = "https://script.google.com/macros/s/AKfycbynTLgYkJCjz2cyE9wgNhRF5yyBlccfsGt-3lFm6sHgrrSiASeZeEzoZzSzkYA3u8mzoA/exec";
+const TFG_MEMBERSHIP_API_URL = "https://script.google.com/macros/s/AKfycbyvpQRxRpMRfpaQHtBar77dViCqPl-hdFW-2yMdozhN8RHtwcrFiNEM9cvEbny4x9q0/exec";
 const APPLICATION_ID_STORAGE_KEY = "tfg_membership_application_v1";
 let membershipSubmissionInProgress = false;
 
@@ -764,7 +764,7 @@ function waitForMembershipReceipt_(applicationId) {
         if (cleanup()) setTimeout(poll, 800);
       }, 4000);
       const params = new URLSearchParams({
-        action: "submissionStatus", applicationId, callback,
+        action: "tfgWebJoinStatus", applicationId, callback,
         t: String(Date.now())
       });
       script.src = TFG_MEMBERSHIP_API_URL + "?" + params.toString();
@@ -1085,6 +1085,8 @@ campaign:state.campaign ? "利用する" : "利用しない",
     adAttribution: getAttribution()
   };
   payload.applicationId = await applicationIdFor_(payload);
+  // A-nauts OS is the sole member-number allocator for WEB and tour joins.
+  payload.action = "submitTfgWebMembership";
 
   await fetch(TFG_MEMBERSHIP_API_URL, {
     method: "POST",
