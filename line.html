@@ -739,7 +739,7 @@ async function applicationIdFor_(payload) {
   const fingerprintInput = JSON.stringify([
     payload.lastName, payload.firstName, payload.birthDate,
     String(payload.email || "").trim().toLowerCase(), payload.phone,
-    payload.startDate, payload.plan
+    payload.startDate, payload.plan, payload.campaign, payload.benefit
   ]);
   let hash = "";
   if (window.crypto && crypto.subtle) {
@@ -1124,6 +1124,12 @@ campaign:state.campaign ? "利用する" : "利用しない",
     body:JSON.stringify(payload)
   });
   const receipt = await waitForMembershipReceipt_(payload.applicationId);
+  if (!receipt.ok && receipt.code === "WITHDRAWN_APPLICATION_ID") {
+    // A withdrawn membership must be re-enrolled with a fresh ID, not
+    // with the old member number from a previous request.
+    try { sessionStorage.removeItem(APPLICATION_ID_STORAGE_KEY); } catch (_) {}
+    throw new Error("以前の退会済み申込みは再利用できません。再度「決済入力へ進む」を押してください。");
+  }
   if (!receipt.ok) {
     throw new Error(receipt.code === "ACTIVE_MEMBER_EXISTS"
       ? "在籍中の会員登録があります。新しい会員番号は発行されていません。店舗へお問い合わせください。"
