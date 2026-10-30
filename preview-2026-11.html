@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>THE FOREST GYM 会員登録フォーム</title>
-<!-- preview has no GA4 tracking -->
+<!-- preview: Google Analytics disabled -->
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js"></script>
 
 <style>
@@ -211,6 +211,7 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
 </head>
 
 <body>
+<div style="background:#ffe8a3;color:#201800;text-align:center;padding:10px 12px;font-weight:800">確認用：11月1日版。会員登録・決済・顔写真送信は行われません。</div>
 
 <header class="header">
   <img src="logo.png" alt="THE FOREST GYM" class="logo-img">
@@ -634,8 +635,7 @@ h1{font-size:29px;margin:0 0 8px}.lead{color:#d5ddd9;margin:0 0 22px;font-size:1
 </div>
 
 <script>
-window.TFG_NOVEMBER_PREVIEW = true;
-function tfgOfferNow(){return window.TFG_NOVEMBER_PREVIEW ? new Date("2026-11-01T00:00:00+09:00") : new Date();}
+function tfgPreviewDate(){return new Date("2026-11-01T00:00:00+09:00");}
 const PLANS = {
   regular:{name:"REGULAR",normal:7480,campaign:4950,platinum:5940,discount:2530},
   day:{name:"平日DAY",normal:6050,campaign:4180,platinum:4510,discount:1870},
@@ -688,14 +688,14 @@ const yen = n => Number(n).toLocaleString("ja-JP") + "円";
 
 function parseLocalDate(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(y,m-1,d);}
 function toISODateLocal(date){const y=date.getFullYear();const m=String(date.getMonth()+1).padStart(2,"0");const d=String(date.getDate()).padStart(2,"0");return `${y}-${m}-${d}`;}
-function todayISO(){return toISODateLocal(tfgOfferNow());}
-function endOfMonthISO(){const d=tfgOfferNow();return toISODateLocal(new Date(d.getFullYear(),d.getMonth()+1,0));}
+function todayISO(){return toISODateLocal(new Date());}
+function endOfMonthISO(){const d=tfgPreviewDate();return toISODateLocal(new Date(d.getFullYear(),d.getMonth()+1,0));}
 function daysInMonth(date){return new Date(date.getFullYear(),date.getMonth()+1,0).getDate();}
 function remainingDaysIncludingStart(date){return daysInMonth(date)-date.getDate()+1;}
 function calcProrated(monthly,date){return Math.floor(monthly*remainingDaysIncludingStart(date)/daysInMonth(date));}
 function currentPlan(){return PLANS[state.plan];}
 function currentMonthly(){const p=currentPlan();return state.campaign?p.campaign:p.normal;}
-function getEnrollmentDate(){return tfgOfferNow();}
+function getEnrollmentDate(){return tfgPreviewDate();}
 function addMonthsFromEnrollment(months){const d=getEnrollmentDate();return new Date(d.getFullYear(),d.getMonth()+months,1);}
 function ymLabel(date){return `${date.getFullYear()}年${date.getMonth()+1}月`;}
 function getCampaignEndMonthLabel(){return ymLabel(addMonthsFromEnrollment(12));}
@@ -771,7 +771,7 @@ function recalc(){
   const adminFee=state.campaign?0:3300;
   const firstMonth=calcProrated(monthly,date);
 
-  const today=tfgOfferNow();
+  const today=tfgPreviewDate();
   const isAfter26=today.getDate()>=26;
 
   let secondMonthFee=0;
@@ -946,7 +946,7 @@ if(!postal){
   return true;
 }
 async function goPayment(){
-  if(window.TFG_NOVEMBER_PREVIEW){alert('確認用フォームのため、登録や決済は行いません。');return;}
+  alert('確認用ページです。実際の入会・決済はできません。');return;
 
   if(!validateMemberInfo()){
     return;
@@ -985,8 +985,7 @@ facePhotoUrl:state.facePhotoUrl,
 campaign:state.campaign ? "利用する" : "利用しない",
     plan:currentPlan().name,
     startDate:state.startDate,
-    benefit:state.novemberOffer && state.enrollmentPath==="after_tour" ? "特典なし" : (state.benefit==="free2" ? "2か月目会費無料" : "無料パーソナル60分"),
-    enrollmentPath:state.novemberOffer ? state.enrollmentPath : "",
+    benefit:state.benefit==="free2" ? "2か月目会費無料" : "無料パーソナル60分",
     firstTotal:yen(state.firstTotal),
     // Keep the payment redirect URL unchanged, but include attribution in
     // the existing GAS paymentUrl field so current Apps Script persists it.
@@ -1060,7 +1059,7 @@ document.querySelectorAll("[data-benefit]").forEach(card=>{
 });
 
 document.getElementById("facePhoto").addEventListener("change", async e=>{
-  if(window.TFG_NOVEMBER_PREVIEW){e.target.value="";alert("確認用フォームでは顔写真を送信できません。");return;}
+  e.target.value="";alert("確認用ページでは顔写真をアップロードできません。");return;
 
   const file = e.target.files[0];
   const preview = document.getElementById("photoPreview");
@@ -1112,7 +1111,7 @@ document.getElementById("rulesBox").addEventListener("scroll",e=>{
 
 (function init(){
 
-  const now = tfgOfferNow();
+  const now = tfgPreviewDate();
 
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
@@ -1208,130 +1207,49 @@ d.innerHTML = `<option value="">日</option>`;
 });
 </script>
 
+<script>window.TFG_NOVEMBER_PREVIEW=true;</script>
 <script>
-(function enhanceNovemberForm(){
+// 2026年11月キャンペーンの文言のみ切り替え。既存フォームのレイアウトや入会処理は変更しません。
+(function updateNovemberCampaignTerms(){
+  const SWITCH_AT=Date.parse("2026-10-31T15:00:00Z"); // JST 11/1 00:00
   const PREVIEW=Boolean(window.TFG_NOVEMBER_PREVIEW);
-  const SWITCH_AT=Date.parse("2026-10-31T15:00:00Z");
-  state.novemberOffer=false;
-  state.enrollmentPath="";
-  const firstSection=document.querySelector('[data-campaign="yes"]').closest("section");
-  const benefitSection=document.getElementById("benefitSection");
-  const summary=document.getElementById("campaignHeadText");
-  const campaignTerms=document.getElementById("campaignTerms");
-  const lead=document.querySelector("#step1 .lead");
-  const headerTitle=document.querySelector(".campaign-head strong");
-  firstSection.insertAdjacentHTML("afterend",`
-    <section class="section hidden" id="novemberFixedOffer">
-      <div class="sec-title"><span class="num">1</span>11月入会特典 <span class="badge">全員対象</span></div>
-      <div class="note">
-        <strong style="color:var(--green)">初期費用8,800円 → 0円</strong><br>
-        入会金5,500円・事務手数料3,300円は、入会方法を問わず無料です。<br>
-        さらに月会費1年間値引きも、入会方法を問わず適用されます。
-      </div>
-    </section>
-  `);
-  benefitSection.insertAdjacentHTML("beforebegin",`
-    <section class="section hidden" id="novemberEnrollmentSection">
-      <div class="sec-title"><span class="num">4</span>見学・WEB入会の状況 <span class="badge">必須</span></div>
-      <div class="note" style="margin-bottom:12px">以下は「選べる特典」の対象確認です。初期費用無料・月会費値引きは、どなたにも適用されます。</div>
-      <div class="grid">
-        <label class="card" data-enrollment-path="web">
-          <span class="radio"></span><h3>見学せずにWEB入会する</h3>
-          <p>選べる特典の対象です。</p>
-        </label>
-        <label class="card" data-enrollment-path="same_day">
-          <span class="radio"></span><h3>見学した当日に入会する</h3>
-          <p>選べる特典の対象です。</p>
-        </label>
-        <label class="card" data-enrollment-path="after_tour">
-          <span class="radio"></span><h3>見学した日より後にWEB入会する</h3>
-          <p>初期費用無料・月会費値引きは対象です。選べる特典のみ対象外です。</p>
-        </label>
-      </div>
-      <div class="terms hidden" id="novemberIneligibleNotice">見学後日のWEB入会のため、選べる特典は対象外です。初期費用無料・月会費値引きは適用されます。</div>
-    </section>
-  `);
-  const fixed=document.getElementById("novemberFixedOffer");
-  const selector=document.getElementById("novemberEnrollmentSection");
-  const ineligible=document.getElementById("novemberIneligibleNotice");
-  function eligible(){return state.enrollmentPath==="web" || state.enrollmentPath==="same_day";}
-  function refreshNov(){
-    if(!state.novemberOffer)return;
+  const originalRecalc=recalc;
+  let applied=false;
+  function isActive(){return PREVIEW || Date.now()>=SWITCH_AT;}
+  function applyCopy(){
+    if(!isActive())return;
     const end=getCampaignEndMonthLabel();
     const cancel=getCancelableMonthLabel();
-    const p=currentPlan();
-    summary.innerHTML="1．初期費用（通常8,800円 → 0円）【全員対象】<br>"+
+    document.querySelector(".campaign-head strong").textContent="11月キャンペーン実施中";
+    document.getElementById("campaignHeadText").innerHTML=
+      "1．初期費用（通常8,800円 → 0円）【全員対象】<br>"+
       "2．月会費（REGULAR：通常7,480円 → 4,950円）【全員対象】<br>"+
-      "　 "+end+"分会費まで値引き<br>"+
+      "&nbsp;&nbsp;&nbsp;&nbsp;"+end+"分会費まで値引き<br>"+
       "3．選べる特典（2か月目無料／パーソナル1回無料）【対象者のみ】";
-    campaignTerms.innerHTML="<strong>11月からの特典適用条件</strong><br>"+
-      "※ 初期費用無料・月会費値引きは入会方法を問わず適用します。<br>"+
-      "※ 選べる特典は見学していない方のWEB入会、または見学当日の入会のみ対象です。見学後日のWEB入会は対象外です。<br>"+
+    document.getElementById("campaignTerms").innerHTML=
+      "<strong>キャンペーン適用条件</strong><br>"+
+      "※ 初期費用無料は入会方法を問わず適用します。<br>"+
+      "※ 選べる特典はWEB入会または見学当日入会のみ対象です。ただし、見学後日のWEB入会には適用されません。<br>"+
       "※ "+cancel+"以降退会可能です。<br>"+
-      "※ "+end+"より前の退会時は、キャンペーン値引き分の精算が発生します。";
-    const hasBenefit=eligible();
-    benefitSection.classList.toggle("hidden",!hasBenefit);
-    ineligible.classList.toggle("hidden",state.enrollmentPath!=="after_tour");
-    if(!hasBenefit){
-      document.getElementById("benefitText").textContent = state.enrollmentPath==="after_tour"
-        ? "選べる特典：対象外（見学後日のWEB入会）"
-        : "選べる特典：入会状況を選択してください";
-    }else{
-      document.getElementById("benefitText").textContent = state.benefit==="free2"
-        ? "適用特典：2か月目会費無料（"+yen(p.campaign)+"相当）"
-        : "適用特典：無料パーソナル60分";
+      "※ "+end+"より前に退会の場合、キャンペーン値引き分を退会時に精算します。";
+    if(state.campaign){
+      document.getElementById("conditionText").innerHTML=
+        "<strong>キャンペーン条件</strong><br>"+
+        "※ 初期費用無料・月会費値引きは入会方法を問わず適用します。<br>"+
+        "※ 選べる特典（2か月目無料／パーソナル1回無料）はWEB入会または見学当日入会のみ対象です。見学後日のWEB入会は対象外です。<br>"+
+        "※ "+end+"より前に退会の場合、キャンペーン値引き分を退会時に精算します。<br>"+
+        "※ "+cancel+"以降退会可能です。";
     }
-    document.getElementById("conditionText").innerHTML="<strong>11月入会特典の条件</strong><br>"+
-      "※ 初期費用無料・月会費値引きは入会方法を問わず適用します。<br>"+
-      "※ 選べる特典は見学前のWEB入会または見学当日入会のみです。見学後日のWEB入会には適用されません。<br>"+
-      "※ "+end+"より前の退会時はキャンペーン値引き分の精算が発生します。<br>"+
-      "※ "+cancel+"以降退会可能です。";
+    applied=true;
   }
-  function activateNov(){
-    if(state.novemberOffer || (!PREVIEW && Date.now()<SWITCH_AT))return;
-    state.novemberOffer=true;
-    state.campaign=true;
-    firstSection.classList.add("hidden");
-    fixed.classList.remove("hidden");
-    selector.classList.remove("hidden");
-    lead.textContent="会員種別・利用開始日・見学状況を選択すると、料金がリアルタイムで更新されます。";
-    headerTitle.textContent="11月からの入会特典";
-    benefitSection.querySelector(".sec-title").innerHTML='<span class="num">5</span>選べる特典を選択 <span class="badge">対象の方のみ</span>';
-  }
-  document.querySelectorAll("[data-enrollment-path]").forEach(card=>card.addEventListener("click",()=>{
-    if(!state.novemberOffer)return;
-    document.querySelectorAll("[data-enrollment-path]").forEach(x=>x.classList.remove("active"));
-    card.classList.add("active");
-    state.enrollmentPath=card.dataset.enrollmentPath;
-    state.benefit=eligible() ? "personal" : "none";
-    document.querySelectorAll("[data-benefit]").forEach(x=>x.classList.toggle("active",x.dataset.benefit==="personal"));
-    recalc();
-  }));
-  const oldRecalc=recalc, oldMainAction=mainAction, oldGoPayment=goPayment;
-  recalc=function(){activateNov();oldRecalc();refreshNov();};
-  mainAction=function(){
-    activateNov();
-    if(state.novemberOffer && state.step===1 && !state.enrollmentPath){
-      alert("見学・WEB入会の状況を選択してください。");return;
-    }
-    return oldMainAction();
-  };
-  goPayment=async function(){
-    activateNov();
-    if(PREVIEW){alert("確認用フォームのため、登録・決済は行いません。");return;}
-    if(state.novemberOffer && !state.enrollmentPath){showStep(1);alert("見学・WEB入会の状況を選択してください。");return;}
-    return oldGoPayment();
-  };
-  if(PREVIEW){
-    document.body.insertAdjacentHTML("afterbegin",'<div style="background:#ffe8a3;color:#201800;text-align:center;padding:10px 12px;font-weight:800">確認用：2026年11月1日版。入会登録・決済・顔写真送信はできません。</div>');
-  }
-  activateNov();recalc();
-  window.setInterval(()=>{
-    if(!PREVIEW && !state.novemberOffer && Date.now()>=SWITCH_AT){
-      // 0時をまたいで開きっぱなしの場合、利用開始日の選択も更新します。
+  recalc=function(){originalRecalc();applyCopy();};
+  applyCopy();
+  window.setInterval(function(){
+    if(!applied && isActive()){
+      // 開きっぱなしのフォームは新条件に切替、当月の日付も更新
       window.location.reload();
     }
-  },1000);
+  },15000);
 })();
 </script>
 </body>
