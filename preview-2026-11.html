@@ -955,9 +955,18 @@ async function goPayment(){
   let paymentUrl="";
 
   if(state.campaign){
-    if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17643";
-    else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17677";
-    else if(state.plan==="night") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17678";
+    // 日本時間2026年11月1日00:00にキャンペーンの決済URLのみ切り替える。
+    // 10月31日にフォームを開いたままでも、決済への遷移時点で判定する。
+    const useNovemberPaymentLinks = Date.now() >= Date.parse("2026-10-31T15:00:00Z") || Boolean(window.TFG_NOVEMBER_PREVIEW);
+    if(state.plan==="regular") paymentUrl=useNovemberPaymentLinks
+      ? "https://getsugaku-panda.jp/subscription/apply/30649"
+      : "https://getsugaku-panda.jp/subscription/apply/17643";
+    else if(state.plan==="day") paymentUrl=useNovemberPaymentLinks
+      ? "https://getsugaku-panda.jp/subscription/apply/30651"
+      : "https://getsugaku-panda.jp/subscription/apply/17677";
+    else if(state.plan==="night") paymentUrl=useNovemberPaymentLinks
+      ? "https://getsugaku-panda.jp/subscription/apply/30652"
+      : "https://getsugaku-panda.jp/subscription/apply/17678";
   }else{
     if(state.plan==="regular") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17679";
     else if(state.plan==="day") paymentUrl="https://getsugaku-panda.jp/subscription/apply/17680";
