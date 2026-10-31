@@ -312,9 +312,9 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   c.querySelector(".guarantee-intro").textContent="さらに超得プラスな特典あり！";
   const cards=c.querySelectorAll(".campaign-benefit");
   cards[0].setAttribute("aria-label","特典1 初期費用8,800円が0円");
-  cards[1].setAttribute("aria-label","特典2 REGULAR月会費7,480円が4,950円 2027年10月まで");
-  cards[1].querySelector(".benefit-emphasis").textContent="2027年10月まで毎月2,530円OFF！";
-  cards[1].querySelector(".benefit-detail").textContent="REGULAR会員。2027年11月以降は5,940円/月（長期継続割引）";
+  cards[1].setAttribute("aria-label","特典2 REGULAR月会費7,480円が4,950円 2027年11月まで");
+  cards[1].querySelector(".benefit-emphasis").textContent="2027年11月まで毎月2,530円OFF！";
+  cards[1].querySelector(".benefit-detail").textContent="REGULAR会員。2027年12月以降は5,940円/月（長期継続割引）";
   const choice=c.querySelector(".campaign-choice-panel");
   choice.querySelector(".choice-heading .benefit-label").innerHTML="さらにお得 <b>3</b>";
   choice.querySelector(".choice-heading h3").textContent="さらに、プラス！入会特典";
@@ -322,7 +322,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   choice.querySelector(".choice-card:last-child strong").innerHTML="パーソナル<br>トレーニング1回無料";
   choice.querySelector(".choice-card:last-child small").textContent="60分・通常6,600円相当";
   c.querySelector('.campaign-cta [data-cta="join"]').textContent="WEB入会";
-  c.querySelector(".offer-terms").textContent="※REGULAR会員の月会費は2027年10月まで4,950円、2027年11月以降は5,940円（長期継続割引）です。キャンペーン条件の未達時は退会時にキャンペーン差額等の精算が発生します。さらにプラス！特典はWEB入会または見学当日の入会が対象です。";
+  c.querySelector(".offer-terms").textContent="※REGULAR会員の月会費は2027年11月まで4,950円、2027年12月以降は5,940円（長期継続割引）です。キャンペーン条件の未達時は退会時にキャンペーン差額等の精算が発生します。さらにプラス！特典はWEB入会または見学当日の入会が対象です。";
  }
  const remaining=SWITCH_AT-Date.now();
  if(new URLSearchParams(window.location.search).get("preview")==="nov2026" || remaining<=0)applyNovember();
