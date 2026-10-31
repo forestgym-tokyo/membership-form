@@ -325,11 +325,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   c.querySelector(".offer-terms").textContent="※REGULAR会員の月会費は2027年10月まで4,950円、2027年11月以降は5,940円（長期継続割引）です。キャンペーン条件の未達時は退会時にキャンペーン差額等の精算が発生します。さらにプラス！特典はWEB入会または見学当日の入会が対象です。";
  }
  const remaining=SWITCH_AT-Date.now();
- if(new URLSearchParams(window.location.search).get("preview")==="nov2026"){
-  window.location.replace(new URL("./november-preview.html",window.location.href).toString());
-  return;
- }
- if(remaining<=0)applyNovember();
+ if(new URLSearchParams(window.location.search).get("preview")==="nov2026" || remaining<=0)applyNovember();
  else window.setTimeout(applyNovember,remaining);
 })();
 </script>
