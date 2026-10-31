@@ -304,11 +304,11 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   if(!c || c.classList.contains("november-campaign"))return;
   c.classList.add("november-campaign");
   const meta=document.querySelector('meta[name="description"]');
-  if(meta)meta.content="The Forest Gym 八千代緑が丘｜秋の超得プラスキャンペーン。初期費用8,800円が0円、月会費は2027年11月まで最大13か月間値引き。見学なしWEB入会・見学当日入会ならさらに選べる特典。";
+  if(meta)meta.content="The Forest Gym 八千代緑が丘｜秋の超得プラスキャンペーン。初期費用8,800円が0円、月会費は2027年11月まで最大13か月間値引き。WEB入会・見学当日入会ならさらにプラス！入会特典。";
   c.querySelector(".promo-eyebrow").textContent="THE FOREST GYM | 2026 NOVEMBER";
   c.querySelector(".promo-subhead").textContent="秋の超得プラスキャンペーン";
   c.querySelector(".promo-deadlines").innerHTML='<span class="promo-date">初期費用 <s>8,800円</s> <strong>→ 0円</strong></span><span class="promo-limit">月会費が <strong>2027年11月まで最大13か月間値引き</strong></span>';
-  c.querySelector(".promo-lead").textContent="初期費用0円と月会費値引き。さらに選べる特典も！";
+  c.querySelector(".promo-lead").textContent="初期費用0円と月会費値引き。さらにプラス！入会特典も！";
   c.querySelector(".guarantee-intro").textContent="さらに超得プラスな特典あり！";
   const cards=c.querySelectorAll(".campaign-benefit");
   cards[0].setAttribute("aria-label","特典1 初期費用8,800円が0円");
@@ -318,14 +318,18 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
   const choice=c.querySelector(".campaign-choice-panel");
   choice.querySelector(".choice-heading .benefit-label").innerHTML="さらにお得 <b>3</b>";
   choice.querySelector(".choice-heading h3").textContent="さらに、プラス！入会特典";
-  choice.querySelector(".choice-heading p").textContent="見学せずにWEB入会、または見学当日に入会された方限定。どちらか1つをお選びいただけます。";
+  choice.querySelector(".choice-heading p").textContent="WEB入会、または見学当日に入会された方限定。どちらか1つをお選びいただけます。";
   choice.querySelector(".choice-card:last-child strong").innerHTML="パーソナル<br>トレーニング1回無料";
   choice.querySelector(".choice-card:last-child small").textContent="60分・通常6,600円相当";
   c.querySelector('.campaign-cta [data-cta="join"]').textContent="WEB入会";
   c.querySelector(".offer-terms").textContent="※REGULAR会員の月会費は2027年10月まで4,950円、2027年11月以降は5,940円（長期継続割引）です。キャンペーン条件の未達時は退会時にキャンペーン差額等の精算が発生します。さらにプラス！特典はWEB入会または見学当日の入会が対象です。";
  }
  const remaining=SWITCH_AT-Date.now();
- if(new URLSearchParams(window.location.search).get("preview")==="nov2026" || remaining<=0)applyNovember();
+ if(new URLSearchParams(window.location.search).get("preview")==="nov2026"){
+  window.location.replace(new URL("./november-preview.html",window.location.href).toString());
+  return;
+ }
+ if(remaining<=0)applyNovember();
  else window.setTimeout(applyNovember,remaining);
 })();
 </script>
